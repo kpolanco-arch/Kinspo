@@ -13,11 +13,11 @@ export const logoutCurrentUser = () => ({
 });
 
 export const signup = user => dispatch => (
-    APIUtil.postUser(user).then(user => (dispatch(receiveCurrentUser(user))))
+    APIUtil.postUser(user).then(currentUser => (dispatch(receiveCurrentUser(currentUser))))
 );
 
 export const login = user => dispatch => (
-    APIUtil.postSession(user).then(user => (dispatch(receiveCurrentUser(user))))
+    APIUtil.postSession(user).then(currentUser => (dispatch(receiveCurrentUser(currentUser))))
 );
 
 export const logout = () => dispatch => (

@@ -19,7 +19,7 @@ class Signup extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.createNewUser(this.state)
-            .then(() => this.props.history.push('/pins'));
+            // .then(() => this.props.history.push('/pins'));
     }
 
     // renderErrors() {
@@ -38,6 +38,7 @@ class Signup extends React.Component {
         return (
             <div className="session-form">
                 <form onSubmit={this.handleSubmit}>
+                    <button onClick={() => {this.props.closeModal();}} className="close-button">X</button>
                     Welcome to Kinspo
                     <br />
                     <h4>Find new ideas to try</h4>
@@ -45,7 +46,7 @@ class Signup extends React.Component {
                     {/* {this.renderErrors()} */}
                     <div className="login-form">
                         <br />
-                        <label>Email:
+                        <label htmlFor= "Email">Email:
                             <input type="text"
                                 value={this.state.email}
                                 onChange={this.update('email')}
@@ -58,7 +59,7 @@ class Signup extends React.Component {
                                 onChange={this.update('password')}                            />
                         </label>
                         <br />
-                        <input className="session-submit" type="submit" value={this.props.formType} />
+                        <input className="session-submit" type="submit" value= "Sign Up" />
                     </div>
                 </form>
             </div>

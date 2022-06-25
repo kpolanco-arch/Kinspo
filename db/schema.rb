@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_21_212616) do
+ActiveRecord::Schema.define(version: 2022_06_24_152038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,17 +25,28 @@ ActiveRecord::Schema.define(version: 2022_06_21_212616) do
     t.index ["creator_id"], name: "index_boards_on_creator_id"
   end
 
+  create_table "pins", force: :cascade do |t|
+    t.string "title", null: false
+    t.string "image_url"
+    t.integer "creator_id", null: false
+    t.text "description"
+    t.integer "board_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["board_id"], name: "index_pins_on_board_id"
+    t.index ["creator_id"], name: "index_pins_on_creator_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
-    t.string "username", null: false
     t.string "session_token", null: false
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["session_token"], name: "index_users_on_session_token", unique: true
-    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end

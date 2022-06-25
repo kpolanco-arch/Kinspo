@@ -4,11 +4,13 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: '',
+            email: '',
             password: '',
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleDemoUser = this.handleDemoUser.bind(this);
+        this.handleOpenModal = this.handleOpenModal.bind(this);    
     }
 
     handleInput(type) {
@@ -19,21 +21,33 @@ class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.login(this.state)
-            .then(() => this.props.history.push('/chirps'));
+        this.props.processForm(this.state)
+            // .then(() => this.props.history.push('/pins'));
+    }
+
+    handleDemoUser(e){
+        e.preventDefault();
+        const demoUser = {email: "DEMO@gmail.com", password: "password"}
+        this.props.processForm(demoUser).then(this.props.closeModal)
+    }
+
+    handleOpenModal(e) {
+        e.preventDefault();
+        this.props.openModal()
     }
 
     render() {
         // console.log(this.props);
         return (
             <div className="session-form">
-                <h2>Log In!</h2>
                 <form>
-                    <label>Username:
+                    Welcome to Kinspo
+                    <br />
+                    <label htmlFor="email">Email:
                         <input
                             type="text"
-                            value={this.state.username}
-                            onChange={this.handleInput('username')}
+                            value={this.state.email}
+                            onChange={this.handleInput('email')}
                         />
                     </label>
 
@@ -45,6 +59,10 @@ class Login extends React.Component {
                         />
                         <button onClick={this.handleSubmit}>Log In!</button>
                     </label>
+                    OR
+                    <button onClick={this.handleDemoUser}>DemoUser</button>
+                    Don't have an account?
+                    <button onClick={this.handleOpenModal}>Sign Up</button>
                 </form>
             </div>
         );
