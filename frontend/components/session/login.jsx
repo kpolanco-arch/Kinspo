@@ -1,4 +1,7 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { open, close } from '../../actions/modal';
 
 class Login extends React.Component {
     constructor(props) {
@@ -10,7 +13,7 @@ class Login extends React.Component {
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleDemoUser = this.handleDemoUser.bind(this);
-        this.handleOpenModal = this.handleOpenModal.bind(this);    
+        // this.handleOpenModal = this.handleOpenModal.bind(this);    
     }
 
     handleInput(type) {
@@ -21,8 +24,23 @@ class Login extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.processForm(this.state)
+        // const user = Object.assign({}, this.state);
+        // this.props.processForm(user).then(this.props.closeModal);
+        this.props.processForm(this.state).then(this.props.closeModal);
+
             // .then(() => this.props.history.push('/pins'));
+    }
+
+    renderErrors() {
+        return (
+            <ul>
+                {this.props.errors.map((error, i) => (
+                    <li key={`error-${i}`}>
+                        {error}
+                    </li>
+                ))}
+            </ul>
+        );
     }
 
     handleDemoUser(e){
@@ -31,16 +49,17 @@ class Login extends React.Component {
         this.props.processForm(demoUser).then(this.props.closeModal)
     }
 
-    handleOpenModal(e) {
-        e.preventDefault();
-        this.props.openModal()
-    }
+    // handleOpenModal(e) {
+    //     e.preventDefault();
+    //     this.props.openModal('signup')
+    // }
 
     render() {
-        // console.log(this.props);
         return (
             <div className="session-form">
-                <form>
+                <form onSubmit={this.handleSubmit} >
+                    <br />                
+                    <div onClick={() => { this.props.closeModal(); }} className="close-button">X</div>
                     Welcome to Kinspo
                     <br />
                     <label htmlFor="email">Email:
@@ -50,23 +69,27 @@ class Login extends React.Component {
                             onChange={this.handleInput('email')}
                         />
                     </label>
-
+                    <br />
                     <label>Password:
                         <input
                             type="password"
                             value={this.state.password}
                             onChange={this.handleInput('password')}
                         />
-                        <button onClick={this.handleSubmit}>Log In!</button>
                     </label>
+                    <button type="submit" value="">Log In!</button>    
+                    {/* <input type="submit" value = "Log In!" />    */}
                     OR
                     <button onClick={this.handleDemoUser}>DemoUser</button>
                     Don't have an account?
-                    <button onClick={this.handleOpenModal}>Sign Up</button>
+                    {this.props.otherForm}
+                    {this.renderErrors()}
+                    {/* <button onClick={() => open('signup')}>Sign Up</button> */}
+                    {/* <Link className="btn" to="/signup">Sign Up</Link> */}
                 </form>
             </div>
         );
     }
 }
 
-export default Login;
+export default withRouter(Login);

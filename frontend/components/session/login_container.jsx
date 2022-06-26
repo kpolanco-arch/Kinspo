@@ -4,11 +4,12 @@ import { Link } from 'react-router-dom';
 import { login } from '../../actions/session';
 import Login from './login';
 import { open, close } from '../../actions/modal';
+import errors from '../../reducers/errors';
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({errors}) => {
     return {
-        formtype: "Log In",
-        // loginErrors: state.errors.loginErrorSession
+        formtype: "login",
+        errors: errors.session
     }
 }
 
@@ -16,8 +17,13 @@ const mapDispatchToProps = dispatch => {
     return {
        
         processForm: (formuser) => dispatch(login(formuser)),
-        openModal: () => dispatch(open('signup')),
-        closeModal: () => dispatch(close())
+        otherForm: (
+            <button onClick={() => dispatch(open('signup'))}>
+                Signup
+            </button>
+        ),
+        closeModal: () => dispatch(close()),
+        openModal: (modal) => dispatch(open(modal))
     };
 };
 

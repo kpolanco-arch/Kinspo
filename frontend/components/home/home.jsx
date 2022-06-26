@@ -4,12 +4,11 @@ import LogInFormContainer from '../session/login_container';
 import NavBarContainer from '../nav_bar/nav_bar_container';
 
 const Home = ({ currentUser, logout, openModal }) => {
-    const login = () => (
+    const sessionlink = () => (
         <div> 
+
             <NavBarContainer/>
-            <h1>Welcome this is Home</h1>
-            <LogInFormContainer />
-           
+            <h3>Welcome this is Home Container</h3>
         </div>
     )
 
@@ -23,7 +22,7 @@ const Home = ({ currentUser, logout, openModal }) => {
     return (
         currentUser ?
             userGreeting(currentUser, logout) :
-            login()
+            sessionlink()
     );
 }
 

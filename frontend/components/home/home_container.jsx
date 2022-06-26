@@ -8,6 +8,7 @@ import Home from './home';
 
 const mapStateToProps = (state) => ({
     currentUser: state.entities.users[state.session.id]
+    // currentUser: session.currentUser
 })
 
 const mapDispatchToProps = dispatch => {

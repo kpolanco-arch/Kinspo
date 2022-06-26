@@ -4,12 +4,15 @@ import { connect } from "react-redux";
 import LogInFormContainer from '../session/login_container';
 import SignUpFormContainer from '../session/signup_form_container';
 
-function Modal(modal, close) {
+function Modal({ modal, closeModal }) {
     if (!modal) {
         return null;
     }
     let component;
     switch (modal) {
+        case 'login':
+            component = <LogInFormContainer />;
+            break;
         case 'signup':
             component = <SignUpFormContainer />;
             break;
@@ -18,7 +21,7 @@ function Modal(modal, close) {
 
     }
     return (
-        <div className="modal-back">
+        <div className="modal-background" onClick={closeModal}>
             <div className="modal-child" onClick={e => e.stopPropagation()}>
                 {component}
             </div>
@@ -28,7 +31,7 @@ function Modal(modal, close) {
 
 const mapStateToProps = state => {
     return {
-        modal: state.modal
+        modal: state.ui.modal
     };
 };
 

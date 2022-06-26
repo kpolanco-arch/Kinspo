@@ -1,4 +1,6 @@
 import React from "react";
+import { withRouter } from 'react-router-dom';
+
 
 class Signup extends React.Component {
     constructor(props) {
@@ -18,32 +20,30 @@ class Signup extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.createNewUser(this.state)
+        this.props.createNewUser(this.state).then(this.props.closeModal);
             // .then(() => this.props.history.push('/pins'));
     }
 
-    // renderErrors() {
-    //     return (
-    //         <ul>
-    //             {this.props.errors.map((error, i) => (
-    //                 <li key={`error-${i}`}>
-    //                     {error}
-    //                 </li>
-    //             ))}
-    //         </ul>
-    //     );
-    // }
+    renderErrors() {
+        return (
+            <ul>
+                {this.props.errors.map((error, i) => (
+                    <li key={`error-${i}`}>
+                        {error}
+                    </li>
+                ))}
+            </ul>
+        );
+    }
 
     render() {
         return (
             <div className="session-form">
                 <form onSubmit={this.handleSubmit}>
-                    <button onClick={() => {this.props.closeModal();}} className="close-button">X</button>
+                    <div onClick={() => {this.props.closeModal();}} className="close-button">X</div>
                     Welcome to Kinspo
                     <br />
                     <h4>Find new ideas to try</h4>
-                    Please {this.props.formType} or {this.props.navLink}
-                    {/* {this.renderErrors()} */}
                     <div className="login-form">
                         <br />
                         <label htmlFor= "Email">Email:
@@ -59,7 +59,10 @@ class Signup extends React.Component {
                                 onChange={this.update('password')}                            />
                         </label>
                         <br />
-                        <input className="session-submit" type="submit" value= "Sign Up" />
+                        <button type="submit">Sign Up!</button>
+                        Please {this.props.formType} or {this.props.otherForm}
+                        
+                        {this.renderErrors()}
                     </div>
                 </form>
             </div>
@@ -67,4 +70,4 @@ class Signup extends React.Component {
     }
 }
 
-export default Signup;
+export default withRouter(Signup);

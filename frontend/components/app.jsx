@@ -6,14 +6,17 @@ import NavBarContainer from './nav_bar/nav_bar_container';
 import HomeContainer from './home/home_container';
 import { AuthRoute } from '../util/route_utils';
 import { ProtectedRoute } from '../util/route_utils';
+import Modal from './home/modal';
 
 
 export default () => (
     <div>
+        
         <Route path="/" component={HomeContainer} />
+        <Modal />
         {/* <Route path="/" component={NavBarContainer} /> */}
-        <AuthRoute path="/signup" component={SignUpFormContainer} />
-        <Route path="/login" component={LogInFormContainer } />
+        {/* <AuthRoute path="/signup" component={SignUpFormContainer} />
+        <Route path="/login" component={LogInFormContainer } /> */}
         {/* <ProtectedRoute path="/pins" component={} /> */}
     </div>
 );

@@ -3,19 +3,24 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { signup } from '../../actions/session';
 import Signup from './signup';
-import { close } from '../../actions/modal';
+import { close, open } from '../../actions/modal';
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({ errors }) => {
     return {
         formType: 'Sign Up',
-        // signupErrors: state.errors.signupErrorSession,
+        errors: errors.session
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         createNewUser: (formuser) => dispatch(signup(formuser)),
+        otherForm: (
+            <button onClick={() => dispatch(open('login'))}>
+                Login
+            </button>
+        ),
         closeModal: () => dispatch(close())
     };
 };
