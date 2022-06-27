@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
-import sessionReducer from './session';
+import UsersReducer from './user';
+import PinsReducer from './pins';
 
 
 const entitiesReducer = combineReducers({
-    users: sessionReducer
+    users: UsersReducer,
+    pins: PinsReducer
 })
 
 

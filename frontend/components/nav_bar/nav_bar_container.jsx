@@ -7,8 +7,7 @@ import { open } from '../../actions/modal';
 const mapStateToProps = state => ({
     // debugger
     // console.log(state)
-  
-    currentUser: state.session.currentUser
+  currentUser: state.entities.users[state.session.id]
 });
 
 const mapDispatchToProps = dispatch => ({

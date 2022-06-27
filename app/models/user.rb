@@ -18,6 +18,7 @@ attr_reader :password
   class_name: :Board
 
   def self.find_by_credentials(email, password)
+    # debugger
     user = User.find_by(email: email)
     return nil unless user
     user.is_password?(password) ? user : nil

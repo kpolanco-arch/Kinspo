@@ -46,6 +46,7 @@ class Login extends React.Component {
     handleDemoUser(e){
         e.preventDefault();
         const demoUser = {email: "DEMO@gmail.com", password: "password"}
+        this.setState(demoUser);
         this.props.processForm(demoUser).then(this.props.closeModal)
     }
 
@@ -62,7 +63,7 @@ class Login extends React.Component {
                     <div onClick={() => { this.props.closeModal(); }} className="close-button">X</div>
                     Welcome to Kinspo
                     <br />
-                    <label htmlFor="email">Email:
+                    <label >Email:
                         <input
                             type="text"
                             value={this.state.email}
@@ -80,7 +81,7 @@ class Login extends React.Component {
                     <button type="submit" value="">Log In!</button>    
                     {/* <input type="submit" value = "Log In!" />    */}
                     OR
-                    <button onClick={this.handleDemoUser}>DemoUser</button>
+                    <button onClick={e => this.handleDemoUser(e)}>DemoUser</button>
                     Don't have an account?
                     {this.props.otherForm}
                     {this.renderErrors()}
@@ -93,3 +94,4 @@ class Login extends React.Component {
 }
 
 export default withRouter(Login);
+
