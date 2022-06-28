@@ -1,0 +1,104 @@
+// .indexpage {
+
+// }
+
+.gallery {
+    display: grid;
+    // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 20px;
+    // grid-column: 6;
+    grid-template-columns: repeat(auto-fit, 250px);
+    grid-auto-flow: dense;
+    grid-auto-rows: auto;
+    grid-row-end: span 315;
+    border: 10px;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+.grid-images {
+    // width: 1765px;
+    min-height: 100px;
+    column-fill: balance;
+    text-align: center;
+    margin-bottom: 30px;
+
+        &:nth-child(n) {
+                grid-row-end: span 20;
+            }
+        
+            &:nth-child(2n) {
+                grid-row-end: span 25;
+            }
+        
+            &:nth-child(5n) {
+                grid-row-end: span 33;
+            }
+        
+            &:nth-child(4n) {
+                grid-row-end: span 40;
+            }
+        
+            &:nth-child(3n) {
+                grid-row-end: span 38;
+            }
+}
+
+
+
+.pin-index-container {
+    // width: 260px;
+    background-color: transparent;
+    border-radius: 18px;
+    align-items: center;
+}
+
+.pin-index-img {
+    display: flex;
+    width: 250px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 18px;
+    margin-bottom: 30px;
+        
+}
+
+:hover .pin-index-img {
+    z-index: -1;
+    filter: brightness(70%)
+}
+
+//save button
+
+.save-button {
+
+    color: white;
+    background-color: #e60023;
+    width: 70px;
+    height: 45px;
+    border-radius: 30px;
+    border: none;
+    font-size: 17px;
+    cursor: pointer;
+    &:hover {
+            filter: brightness(95%);
+        }
+
+        
+}
+
+.create-pin-button {
+    border: none;
+    color: grey;
+    background-color: white;
+    width: 80px;
+    border-radius: 100px;
+    font-size: 40px;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    width: 55px;
+    height: 55px;
+    z-index: 999;
+    cursor: pointer;
+}

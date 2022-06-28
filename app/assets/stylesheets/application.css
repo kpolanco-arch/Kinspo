@@ -18,3 +18,5 @@
 /* @import url(app/assets/stylesheets/api/app.scss);
 @import url(app/assets/stylesheets/api/nav_bar.scss); */
 /* @import url(app/assets/stylesheets/api/test.scss); */
+ @import url(app/assets/stylesheets/api/pin_index.scss);
+@import url(app/assets/stylesheets/api/pin_show.scss);

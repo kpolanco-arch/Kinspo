@@ -20,11 +20,12 @@ this.props.fetchPins();
         return (
             <div>
                 <h2>Pins</h2>
-                <ul className="Pin-list">
+                <div className="gallery">
                     {pins.map(pin => <PinItem key={pin.title} pin={pin} />)}
                      {/* <PinItem pin={pin} />
                      {pin.title} */}
-                </ul>
+                </div>
+                <button type="submit" className='create-pin-button'>+</button>
                 {/* <Route path="/pins/:pinId" component={pin_index_item_container} /> */}
             </div>
         )

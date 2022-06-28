@@ -17,11 +17,16 @@ componentDidMount() {
 
 
         return (
-            <div>
-                
-                <h1>{pin.title}</h1>
-                <textarea name="" id="" cols="30" rows="10">{pin.description}</textarea>
-                <h3>{pin.creator_id}</h3>
+            <div className="show-container">   
+                <div className="show-pin-wrapper">
+                    
+                    <h1>{pin.title}</h1>
+                    <label className="pin-img-container">
+                        <img src={pin.image_url} alt={pin.title} className="pin-img" />
+                    </label>    
+                    <textarea name="" id="" cols="30" rows="10">{pin.description}</textarea>
+                    <h3>{pin.creator_id}</h3>
+                </div>
             </div>
         )
     }

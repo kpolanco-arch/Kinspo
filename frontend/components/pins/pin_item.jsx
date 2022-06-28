@@ -2,11 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 const PinItem = ({pin}) => (
-    <li>
-        <Link to={`pins/${pin.id}`} >
-            <img src={pin.image_url} alt={pin.title} className="Pin-Image" />
+    <div className='grid-images'>
+        <button type="submit" className='save-button'>Save</button>
+        <Link to={`pins/${pin.id}`} className="pin-index-container" >
+            <img src={pin.image_url} alt={pin.title} className="pin-index-img" />
         </Link>
         {pin.title}
-    </li>
+    </div>
 )
 export default PinItem

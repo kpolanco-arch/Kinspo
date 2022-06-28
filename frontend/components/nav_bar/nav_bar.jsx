@@ -5,7 +5,15 @@ export default ({ currentUser, logout, openModal }) => {
     const display = currentUser? (
         <div>
             <p>Hello, {currentUser.email}</p>
+            <button type="submit">{currentUser.email}</button>
             <button onClick = {logout}>Log out</button>
+        <br />
+            <div className='search-bar-container'>
+                <input className="search-bar"
+                    type="text"
+                    placeholder='Search'
+                />
+            </div>
         </div>
     ):(
             <nav className="login-signup">
