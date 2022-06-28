@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import PinIndexItem from "./pin_index_item";
+import PinShowItem from "./pin_show_item";
 import { withRouter } from "react-router-dom";
 import { fetchPin } from "../../actions/pin_actions";
 
@@ -13,4 +13,4 @@ const mapDispatchToProps = dispatch => ({
 
 })
 
-export default connect(mapStateToProps,mapDispatchToProps)(PinIndexItem)
+export default connect(mapStateToProps,mapDispatchToProps)(PinShowItem)

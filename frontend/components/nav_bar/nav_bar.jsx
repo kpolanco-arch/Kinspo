@@ -1,11 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-export default ({ currentUser, logout, openModal }) => {
+class NavBar extends React.Component {
+    constructor(props){
+        super(props)
+    }
+
+componentDidMount () {
+    // this.props.fetchUser(this.props.match.params.userId);
+}
+
+render(){
+const { currentUser, logout, openModal } = this.props;
     const display = currentUser? (
         <div>
             <p>Hello, {currentUser.email}</p>
-            <button type="submit">{currentUser.email}</button>
+            {/* <Link to={`users/${this.props.match.params.userId}`} > */}
+            <Link to={`users/${currentUser.id}`} >
+               <button type="submit">{currentUser.email}</button>
+            </Link>
             <button onClick = {logout}>Log out</button>
         <br />
             <div className='search-bar-container'>
@@ -35,4 +48,6 @@ export default ({ currentUser, logout, openModal }) => {
             </div>
         </header>
     );
-};
+}};
+
+export default NavBar;

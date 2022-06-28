@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PinItem from './pin_item';
-import pin_index_item_container from './pin_index_item_container';
 
-class PinShow extends React.Component {
+class PinIndex extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -34,4 +33,4 @@ this.props.fetchPins();
 
 }
 
-export default PinShow;
+export default PinIndex;

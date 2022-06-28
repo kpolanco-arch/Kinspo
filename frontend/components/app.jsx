@@ -9,8 +9,8 @@ import HomeContainer from './home/home_container';
 import { AuthRoute } from '../util/route_utils';
 import { ProtectedRoute } from '../util/route_utils';
 import Modal from './home/modal';
-import PinShowContainer from './pins/pin_show_container';
-import pin_index_item_container from './pins/pin_index_item_container';
+import pin_show_item_container from './pins/pin_show_item_container';
+import UserShowContainer from './users/user_show_container';
 
 
 export default () => (
@@ -18,7 +18,8 @@ export default () => (
         <NavBarContainer />
          <Modal />
         <Switch>
-            <Route path="/pins/:pinId" component={pin_index_item_container} />
+            <Route path="/users/:userId" component={UserShowContainer} />
+            <Route path="/pins/:pinId" component={pin_show_item_container} />
             <Route path="/" component={HomeContainer} />
         </Switch>
         {/* <Route path="/" component={NavBarContainer} /> */}
