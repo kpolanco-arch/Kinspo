@@ -675,8 +675,7 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var pins = this.props.pins; // const { pin} = this.props;
-
+      var pins = this.props.pins;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Pins"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "gallery"
       }, pins.map(function (pin) {
@@ -1348,6 +1347,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _user_show_pins__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./user_show_pins */ "./frontend/components/users/user_show_pins.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1371,6 +1371,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
+ // import PinItem from '../pins/pin_item';
+
 
 
 var UserShow = /*#__PURE__*/function (_React$Component) {
@@ -1387,21 +1389,31 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
   _createClass(UserShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      this.props.fetchUser(this.props.match.params.userId); // this.props.fetchPins();
+      this.props.fetchUser(this.props.match.params.userId);
+      this.props.fetchPins();
     }
   }, {
     key: "render",
     value: function render() {
+      var pins = this.props.pins;
       var user = this.props.user;
 
       if (!user) {
         return null;
       } // this.props.pins.map(pin =>pin={pin})
-      // const display = (this.props.user.id == this.props.pin.creator_id)? 
-      // this.props.pin : null
+      // display = (this.props.user.id == pin.creator_id)? 
+      // pin : null
 
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Username: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Email: ", this.props.user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Pins"));
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Username: "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Email: ", this.props.user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "My Pins"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "gallery"
+      }, pins.map(function (pin) {
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_user_show_pins__WEBPACK_IMPORTED_MODULE_1__["default"], {
+          key: pin.title,
+          pin: pin,
+          user: user
+        });
+      })));
     }
   }]);
 
@@ -1428,7 +1440,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
 /* harmony import */ var _user_show__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./user_show */ "./frontend/components/users/user_show.jsx");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/pin_actions */ "./frontend/actions/pin_actions.js");
+
 
 
 
@@ -1439,8 +1453,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     user: state.entities.users[ownProps.match.params.userId],
     // user: state.entities.users,
-    currentUser: state.entities.users[state.session.id] // pins: Object.values(state.entities.pins)
-
+    currentUser: state.entities.users[state.session.id],
+    pins: Object.values(state.entities.pins)
   };
 };
 
@@ -1448,12 +1462,53 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchUser: function fetchUser(userId) {
       return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__.fetchUser)(userId));
-    } // fetchPins: () => dispatch(fetchPins())
-
+    },
+    fetchPins: function fetchPins() {
+      return dispatch((0,_actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__.fetchPins)());
+    }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_4__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_user_show__WEBPACK_IMPORTED_MODULE_3__["default"])));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_1__.connect)(mapStateToProps, mapDispatchToProps)(_user_show__WEBPACK_IMPORTED_MODULE_3__["default"])));
+
+/***/ }),
+
+/***/ "./frontend/components/users/user_show_pins.jsx":
+/*!******************************************************!*\
+  !*** ./frontend/components/users/user_show_pins.jsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+
+
+
+var UserShowPin = function UserShowPin(_ref) {
+  var pin = _ref.pin,
+      user = _ref.user;
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: "grid-images"
+  }, pin.creator_id === user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    type: "submit",
+    className: "save-button"
+  }, "Save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+    to: "pins/".concat(pin.id),
+    className: "pin-index-container"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+    src: pin.image_url,
+    alt: pin.title,
+    className: "pin-index-img"
+  })), pin.title) : null);
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (UserShowPin);
 
 /***/ }),
 
