@@ -5,11 +5,11 @@ export const fetchSaved = () => (
     })
 )
 
-export const createSaved = (saved) => (
+export const createSaved = (savepin) => (
     $.ajax({
         url: "api/savepins",
         method: "POST",
-        data: {saved}
+        data: {savepin}
     })
 )
 

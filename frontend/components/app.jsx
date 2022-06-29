@@ -11,6 +11,7 @@ import { ProtectedRoute } from '../util/route_utils';
 import Modal from './home/modal';
 import pin_show_item_container from './pins/pin_show_item_container';
 import UserShowContainer from './users/user_show_container';
+import PinCreateContainer from './pins/pin_create_container';
 
 
 export default () => (
@@ -18,6 +19,7 @@ export default () => (
         <NavBarContainer />
          <Modal />
         <Switch>
+            <Route path="/pins/new" component={PinCreateContainer}/>
             <Route path="/users/:userId" component={UserShowContainer} />
             <Route path="/pins/:pinId" component={pin_show_item_container} />
             <Route path="/" component={HomeContainer} />

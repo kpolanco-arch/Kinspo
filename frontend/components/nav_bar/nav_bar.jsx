@@ -38,7 +38,9 @@ const { currentUser, logout, openModal } = this.props;
 
     return (
         <header className="nav-bar">
-            <h1 className="logo">KINSPO</h1>
+            <Link to="/" >
+                <h1 className="logo">KINSPO</h1>
+            </Link>
             <div>
                 {display}
                  {/* <div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PinItem from './pin_item';
+import { Link } from 'react-router-dom';
 
 class PinIndex extends React.Component {
     constructor(props) {
@@ -22,7 +23,9 @@ this.props.fetchPins();
                 <div className="gallery">
                     {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} />)}
                 </div>
-                <button type="submit" className='create-pin-button'>+</button>
+                <Link to= "pins/new" >
+                    <button type="submit" className='create-pin-button'>+</button>
+                </Link>
                 {/* <Route path="/pins/:pinId" component={pin_index_item_container} /> */}
             </div>
         )

@@ -8,10 +8,11 @@ class Api::SavepinsController < ApplicationController
         # debugger
         # p "hello"
         @savepin = Savepin.new(savepin_params)
-        # debugger
+        
         if @savepin.save
           render :show
         else
+        # debugger  
            render json: @savepin.errors.full_messages, status: 401
         end
     end
@@ -40,6 +41,7 @@ class Api::SavepinsController < ApplicationController
     private 
 
     def savepin_params 
+        # debugger
         params.require(:savepin).permit(:pin_id, :user_id)
     end
     
