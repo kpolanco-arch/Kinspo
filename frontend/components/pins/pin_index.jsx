@@ -9,17 +9,18 @@ class PinIndex extends React.Component {
 
 componentDidMount(){
 // this.props.fetchPin(this.props.match.params.pinId)
-this.props.fetchPins(); 
+this.props.fetchPins();
+// this.props.createSaved();
 // this.props.fetchUsers();
 }
 
     render() {
-        const { pins } = this.props;
+        const { pins, createSaved } = this.props;
         return (
             <div>
                 <h2>Pins</h2>
                 <div className="gallery">
-                    {pins.map(pin => <PinItem key={pin.title} pin={pin} />)}
+                    {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} />)}
                 </div>
                 <button type="submit" className='create-pin-button'>+</button>
                 {/* <Route path="/pins/:pinId" component={pin_index_item_container} /> */}

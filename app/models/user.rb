@@ -17,6 +17,16 @@ attr_reader :password
   foreign_key: :creator_id, 
   class_name: :Board
 
+  has_many :saved,
+  primary_key: :id, 
+  foreign_key: :creator_id, 
+  class_name: :Savepin
+
+  has_many :saved,
+  primary_key: :id, 
+  foreign_key: :user_id, 
+  class_name: :Savepin
+
   def self.find_by_credentials(email, password)
     # debugger
     user = User.find_by(email: email)

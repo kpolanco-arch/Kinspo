@@ -14,4 +14,9 @@ class Board < ApplicationRecord
     # primary_key: :id, 
     # foreign_key: :pin_ids, 
     # class_name: :Pin
+
+    has_many :saved,
+    primary_key: :id, 
+    foreign_key: :board_id, 
+    class_name: :Savepin
 end

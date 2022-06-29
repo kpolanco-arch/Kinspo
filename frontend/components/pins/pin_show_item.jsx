@@ -2,7 +2,7 @@ import React from "react";
 import { fetchPin } from "../../actions/pin_actions";
 // import pin_index_item_container from "./pin_index_item_container";
 
-class PinIndexItem extends React.Component {
+class PinShowItem extends React.Component {
     constructor(props){
         super(props)
     }
@@ -34,4 +34,4 @@ componentDidMount() {
 
 }
 
-export default PinIndexItem;
+export default PinShowItem;
