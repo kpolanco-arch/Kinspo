@@ -1,20 +1,34 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import SavedShowPin from "../saved/saved_pins_container";
 
 class BoardItem extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props)
     }
 
-    render() {
-        const {board, pins} = this.props;
+    componentDidMount() {
+        this.props.fetchBoards();
+        this.props.fetchPins();
+        this.props.fetchSaved();
+    }
 
+    render() {
+        const { board, pins, saved } = this.props;
+        if (!board) {
+            return null
+        }
+        if (!pins) {
+            return null
+        }
+
+        let pinsonBoard = saved.filter(savedpin => savedpin.board_id === board.id)
+        //board show
+        //board cover and link to pinitem with the appropiate boards
         return (
             <div>
-                <div className="board-container">
-                    <Link to={`/boards/${board.id}`}>
-                    </Link>
-                    <div className="board-label">{board.title}</div>
+                <div>
+                    {pinsonBoard.map(pin => <SavedShowPin key={pin.title} pin={pin}/>)}
                 </div>
             </div>
         )

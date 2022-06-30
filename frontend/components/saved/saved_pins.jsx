@@ -26,13 +26,13 @@ class SavedShowPin extends React.Component {
                 <button type="submit" className='save-button' onClick={() => createSaved({pin_id: pin.id, user_id: currentUser.id })} >Save</button> */}
                 <div className='grid-images'>
                     {/* {saved.pin_id === pin.id ? <div> */}
-                        {saved.user_id === user.id ? <div>
+                        {/* {saved.user_id === user.id ? <div> */}
 
                         {/* <button type="submit" className='save-button'>Save</button> */}
                         <Link to={`pins/${pin.id}`} className="pin-index-container" >
                             <img src={pin.image_url} alt={pin.title} className="pin-index-img" />
                         </Link>
-                    </div> : null}
+                    {/* </div> : null} */}
 
                 </div>
             </div>
