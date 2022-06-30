@@ -48,7 +48,7 @@ render () {
             <h2>My Pins</h2>
             <div className="gallery">
                 {/* <button type="submit" onClick={() => deletePin(pin.id)} >Delete */}
-                    {/* {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} deletePin= {deletePin}/>)} */}
+                    {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} deletePin= {deletePin}/>)}
                 {/* </button> */}
             </div>    
                 <BoardIndexContainer pins = {pins} user = {user} boards = {boards} saved ={saved}/>

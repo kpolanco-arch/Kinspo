@@ -11,17 +11,19 @@ class PinIndex extends React.Component {
 componentDidMount(){
 // this.props.fetchPin(this.props.match.params.pinId)
 this.props.fetchPins();
+this.props.fetchBoards()
 // this.props.createSaved();
 // this.props.fetchUsers();
 }
 
     render() {
-        const { pins, createSaved, deleteSaved } = this.props;
+        const { pins, createSaved, deleteSaved, boards} = this.props;
+        // console.log(boards)
         return (
             <div>
-                <h2>Pins</h2>
+                <h2> Home Pins</h2>
                 <div className="gallery">
-                    {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} />)}
+                    {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards ={boards} />)}
                 </div>
                 <Link to= "pins/new" >
                     <button type="submit" className='create-pin-button'>+</button>

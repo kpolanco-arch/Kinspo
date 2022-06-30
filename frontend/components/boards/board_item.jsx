@@ -21,6 +21,9 @@ class BoardItem extends React.Component {
         if (!pins) {
             return null
         }
+        if (!saved) {
+            return null
+        }
 
         let pinsonBoard = saved.filter(savedpin => savedpin.board_id === board.id)
         //board show
@@ -28,6 +31,8 @@ class BoardItem extends React.Component {
         return (
             <div>
                 <div>
+                    <h1>Pins on the selected board - {board.name}</h1>
+                    {pinsonBoard.length}
                     {pinsonBoard.map(pin => <SavedShowPin key={pin.title} pin={pin}/>)}
                 </div>
             </div>

@@ -12,6 +12,8 @@ import Modal from './home/modal';
 import pin_show_item_container from './pins/pin_show_item_container';
 import UserShowContainer from './users/user_show_container';
 import PinCreateContainer from './pins/pin_create_container';
+import BoardItem from './boards/board_item_container';
+import user_show_container from './users/user_show_container';
 
 
 export default () => (
@@ -19,6 +21,8 @@ export default () => (
         <NavBarContainer />
          <Modal />
         <Switch>
+            <Route path="/users/pins/:pinId" component={user_show_container}/>
+            <Route path="/boards/:boardId" component={BoardItem} />
             <Route path="/pins/new" component={PinCreateContainer}/>
             <Route path="/users/:userId" component={UserShowContainer} />
             <Route path="/pins/:pinId" component={pin_show_item_container} />

@@ -16,7 +16,7 @@ const { currentUser, logout, openModal } = this.props;
         <div>
             <p>Hello, {currentUser.email}</p>
             {/* <Link to={`users/${this.props.match.params.userId}`} > */}
-            <Link to={`users/${currentUser.id}`} >
+            <Link to={`/users/${currentUser.id}`} >
                <button type="submit">{currentUser.email}</button>
             </Link>
             <button onClick = {logout}>Log out</button>
