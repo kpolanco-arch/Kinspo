@@ -1,1 +1,1 @@
-json.extract! @savepin, :id, :creator_id, :user_id, :pin_id
+json.extract! @savepin, :id, :creator_id, :user_id, :pin_id, :board_id

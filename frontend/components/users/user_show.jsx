@@ -17,7 +17,7 @@ componentDidMount() {
 }
 
 render () {
-    const { pins, createSaved, fetchSaved } = this.props;
+    const { pins, createSaved, fetchSaved, saved } = this.props;
     let user = this.props.user
     if (!user) {
         return null
@@ -34,8 +34,8 @@ render () {
             <h2>Email: {this.props.user.email}</h2>
             <h2>My Pins</h2>
             <div className="gallery">
-                {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} />)}
-                {pins.map(pin => <SavedShowPin key={pin.title} pin={pin} user={user} fetchSaved={fetchSaved} />)}
+                {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} />)},
+                {pins.map(pin => <SavedShowPin key={pin.title} pin={pin} user={user} fetchSaved={fetchSaved} saved={saved} />)}
 
             </div>
         </div>

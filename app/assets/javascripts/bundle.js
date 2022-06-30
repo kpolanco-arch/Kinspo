@@ -1037,7 +1037,8 @@ var PinItem = function PinItem(_ref) {
     onClick: function onClick() {
       return createSaved({
         pin_id: pin.id,
-        user_id: currentUser.id
+        user_id: currentUser.id,
+        board_id: "1"
       });
     }
   }, "Save"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
@@ -1269,7 +1270,6 @@ var SavedShowPin = /*#__PURE__*/function (_React$Component) {
   _createClass(SavedShowPin, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      // debugger
       this.props.fetchSaved();
     }
   }, {
@@ -1279,11 +1279,10 @@ var SavedShowPin = /*#__PURE__*/function (_React$Component) {
           saved = _this$props.saved,
           pin = _this$props.pin,
           user = _this$props.user,
-          currentUser = _this$props.currentUser;
-
-      if (!saved) {
-        return null;
-      }
+          currentUser = _this$props.currentUser; // debugger
+      // if (!saved) {
+      //     return null
+      // }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "grid-images"
@@ -1294,7 +1293,7 @@ var SavedShowPin = /*#__PURE__*/function (_React$Component) {
         src: pin.image_url,
         alt: pin.title,
         className: "pin-index-img"
-      })), pin.title) : null));
+      }))) : null));
     }
   }]);
 
@@ -1750,7 +1749,8 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           pins = _this$props.pins,
           createSaved = _this$props.createSaved,
-          fetchSaved = _this$props.fetchSaved;
+          fetchSaved = _this$props.fetchSaved,
+          saved = _this$props.saved;
       var user = this.props.user;
 
       if (!user) {
@@ -1768,12 +1768,13 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
           pin: pin,
           user: user
         });
-      }), pins.map(function (pin) {
+      }), ",", pins.map(function (pin) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_saved_saved_pins__WEBPACK_IMPORTED_MODULE_2__["default"], {
           key: pin.title,
           pin: pin,
           user: user,
-          fetchSaved: fetchSaved
+          fetchSaved: fetchSaved,
+          saved: saved
         });
       })));
     }
@@ -1818,7 +1819,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     user: state.entities.users[ownProps.match.params.userId],
     // user: state.entities.users,
     currentUser: state.entities.users[state.session.id],
-    pins: Object.values(state.entities.pins)
+    pins: Object.values(state.entities.pins),
+    saved: Object.values(state.entities.saved)
   };
 };
 
