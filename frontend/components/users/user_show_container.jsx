@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { fetchUser } from '../../actions/user_actions';
 import UserShow from './user_show';
 import { withRouter } from "react-router-dom";
-import { fetchPins } from '../../actions/pin_actions';
+import { fetchPins, deletePin } from '../../actions/pin_actions';
 import { createSaved, fetchSaved } from '../../actions/save_action';
 
 const mapStateToProps = (state, ownProps) => {
@@ -21,7 +21,8 @@ const mapDispatchToProps = (dispatch) => {
         fetchUser: (userId) => dispatch(fetchUser(userId)),
         fetchPins: () => dispatch(fetchPins()),
         createSaved: (saved) => dispatch(createSaved(saved)),
-        fetchSaved: () => dispatch(fetchSaved())
+        fetchSaved: () => dispatch(fetchSaved()),
+        deletePin: (pinId) => dispatch(deletePin(pinId))
 
     }
 }

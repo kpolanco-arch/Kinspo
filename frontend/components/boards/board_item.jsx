@@ -11,7 +11,11 @@ class BoardItem extends React.Component {
 
         return (
             <div>
-
+                <div className="board-container">
+                    <Link to={`/boards/${board.id}`}>
+                    </Link>
+                    <div className="board-label">{board.title}</div>
+                </div>
             </div>
         )
     }

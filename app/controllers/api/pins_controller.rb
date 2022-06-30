@@ -30,11 +30,12 @@ class Api::PinsController < ApplicationController
 
 
     def destroy
-        @pin = Pin.find(id: params[:id])
+        @pin = Pin.find(params[:id])
         if @pin && @pin.destroy
             flash[:success] = 'Object was successfully deleted.'
         else
-            flash[:error] = 'Something went wrong'
+            debugger
+             render json: @pin.errors.full_messages, status: 401
         end
     end
     

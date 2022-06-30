@@ -16,12 +16,12 @@ this.props.fetchPins();
 }
 
     render() {
-        const { pins, createSaved } = this.props;
+        const { pins, createSaved, deleteSaved } = this.props;
         return (
             <div>
                 <h2>Pins</h2>
                 <div className="gallery">
-                    {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} />)}
+                    {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} />)}
                 </div>
                 <Link to= "pins/new" >
                     <button type="submit" className='create-pin-button'>+</button>

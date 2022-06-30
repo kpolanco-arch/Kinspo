@@ -5,7 +5,7 @@ import { fetchPins, fetchPin } from "../../actions/pin_actions";
 import { fetchUsers, fetchUser } from "../../actions/user_actions";
 import { useParams } from "react-router-dom";
 import { withRouter } from "react-router-dom";
-import { createSaved } from "../../actions/save_action";
+import { createSaved, deleteSaved } from "../../actions/save_action";
 
 
 const mapStateToProps = (state, ownProps) => {
@@ -27,8 +27,8 @@ const mapDispatchToProps = dispatch => ({
     fetchPin: pinId => dispatch(fetchPin(pinId)),
     fetchUsers: () => dispatch(fetchUsers()),
     fetchUser: userId => dispatch(fetchUser(userId)),
-    createSaved: (saved) => dispatch(createSaved(saved))
-
+    createSaved: (saved) => dispatch(createSaved(saved)),
+    deleteSaved: (savedId) => dispatch(deleteSaved(savedId))
 })
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(PinIndex))

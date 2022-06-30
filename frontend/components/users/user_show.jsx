@@ -3,21 +3,31 @@ import { Link } from 'react-router-dom';
 // import PinItem from '../pins/pin_item';
 import UserShowPin from './user_show_pins';
 import SavedShowPin from '../saved/saved_pins';
+import { deletePin } from '../../util/pins_util';
 
 class UserShow extends React.Component {
     constructor(props){
         super(props)
+
+    this.handleSubmit = this.handleSubmit.bind(this);
     }
 
 componentDidMount() {
     this.props.fetchUser(this.props.match.params.userId);
     this.props.fetchPins();
     this.props.fetchSaved();
+    // this.props.deletePin();
 
 }
 
+handleSubmit(e){
+    e.preventDefault();
+    // const pinId = Object.assign({}, this.state)
+    // this.props.deletePin(pinId)
+}
+
 render () {
-    const { pins, createSaved, fetchSaved, saved } = this.props;
+    const { pins, deletePin, createSaved, fetchSaved, saved } = this.props;
     let user = this.props.user
     if (!user) {
         return null
@@ -34,7 +44,9 @@ render () {
             <h2>Email: {this.props.user.email}</h2>
             <h2>My Pins</h2>
             <div className="gallery">
-                {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} />)},
+                {/* <button type="submit" onClick={() => deletePin(pin.id)} >Delete */}
+                    {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} deletePin= {deletePin}/>)}
+                {/* </button> */}
                 {pins.map(pin => <SavedShowPin key={pin.title} pin={pin} user={user} fetchSaved={fetchSaved} saved={saved} />)}
 
             </div>
