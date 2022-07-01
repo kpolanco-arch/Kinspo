@@ -9,15 +9,16 @@ const Home = ({ currentUser, logout, openModal }) => {
         <div> 
 
             {/* <NavBarContainer/> */}
-            <h3>Welcome this is Home Container</h3>
+            <h1 className='splash-body'>Get your next</h1>
+            <h2 className='splash'>home decor idea</h2>
         </div>
     )
 
     const userGreeting = () => (
         <div>
             {/* <NavBarContainer /> */}
-            <h1>Hi, {currentUser.email}</h1>
-            <button className="logout-button" onClick={logout}>Log Out</button>
+            {/* <h1>Hi, {currentUser.email}</h1>
+            <button className="logout-button" onClick={logout}>Log Out</button> */}
             <PinIndexContainer/>
         </div>
     );

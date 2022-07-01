@@ -14,6 +14,7 @@ import UserShowContainer from './users/user_show_container';
 import PinCreateContainer from './pins/pin_create_container';
 import BoardItem from './boards/board_item_container';
 import user_show_container from './users/user_show_container';
+import SavedPinsContainer from './saved/saved_pins_container';
 
 
 export default () => (

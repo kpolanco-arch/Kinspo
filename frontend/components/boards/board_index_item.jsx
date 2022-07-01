@@ -25,8 +25,9 @@ class BoardIndexItem extends React.Component {
                 <div className="board-container">
                     <Link to={`/boards/${board.id}`}>
                         <h1>Board(Board_index_Item)</h1>
+                     </Link>       
                         <BoardItem pins={pins} board={board} saved={saved} />
-                    </Link>   
+                   
                         
                     
                     <div className="board-label">{board.name}</div>

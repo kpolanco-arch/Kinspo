@@ -58,33 +58,37 @@ class Login extends React.Component {
     render() {
         return (
             <div className="session-form">
-                <form onSubmit={this.handleSubmit} >
+                <form  onSubmit={this.handleSubmit} >
                     <br />                
                     <div onClick={() => { this.props.closeModal(); }} className="close-button">X</div>
-                    Welcome to Kinspo
+                    <div className='login-message'> Welcome to Kinspo </div>
                     <br />
-                    <label >Email:
-                        <input
+                    <label className='text-box'>
+                        <input 
                             type="text"
                             value={this.state.email}
                             onChange={this.handleInput('email')}
+                            placeholder='Email'
                         />
                     </label>
                     <br />
-                    <label>Password:
+                    <label className='text-box'>
                         <input
                             type="password"
                             value={this.state.password}
                             onChange={this.handleInput('password')}
+                            placeholder='Password'
                         />
                     </label>
-                    <button type="submit" value="">Log In!</button>    
+                    <button className='login-button' type="submit" value="">Log In</button>    
                     {/* <input type="submit" value = "Log In!" />    */}
                     OR
-                    <button onClick={e => this.handleDemoUser(e)}>DemoUser</button>
+                    <button className='second-button' onClick={e => this.handleDemoUser(e)}>DemoUser</button>
                     Don't have an account?
                     {this.props.otherForm}
-                    {this.renderErrors()}
+                    {this.renderErrors()} 
+                   
+                    
                     {/* <button onClick={() => open('signup')}>Sign Up</button> */}
                     {/* <Link className="btn" to="/signup">Sign Up</Link> */}
                 </form>

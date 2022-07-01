@@ -14,32 +14,42 @@ render(){
 const { currentUser, logout, openModal } = this.props;
     const display = currentUser? (
         <div>
-            <p>Hello, {currentUser.email}</p>
-            {/* <Link to={`users/${this.props.match.params.userId}`} > */}
-            <Link to={`/users/${currentUser.id}`} >
-               <button type="submit">{currentUser.email}</button>
-            </Link>
-            <button onClick = {logout}>Log out</button>
-        <br />
+            <button type="submit">Home</button>
             <div className='search-bar-container'>
-                <input className="search-bar"
+                <input className="search"
                     type="text"
                     placeholder='Search'
                 />
             </div>
+            {/* <p>Hello, {currentUser.email}</p> */}
+            <Link to={`/users/${currentUser.id}`} >
+               <button type="submit">{currentUser.email}</button>
+            </Link>
+            <button onClick = {logout}>Log out</button>
+            <br />
+            
         </div>
     ):(
-            <nav className="login-signup">
-                <button className= "btn" onClick={() => openModal('login')}>Log In</button>
+            <nav className='personal-links'>
+                <div className="nav-bar">
+                    <a href="https://github.com/kpolanco-arch/Kinspo">Github</a>
+                </div>
+                <div className="nav-bar">
+                    <a href="https://www.arch.columbia.edu/student-work?student_name_contains=Karen%20Polanco">Portfolio</a>
+                </div>
+                <div className="nav-bar">
+                    <a href="http://linkedin.com/in/karen-polanco-374721180/">LinkedIn</a>
+                </div>
+                <button className= "btnleft" onClick={() => openModal('login')}>Log In</button>
                 &nbsp;&nbsp;
-                <button className="btn" onClick={() => openModal('signup')}>Sign Up</button>
+                <button className="btnright" onClick={() => openModal('signup')}>Sign Up</button>
             </nav>
     );
 
     return (
         <header className="nav-bar">
             <Link to="/" >
-                <h1 className="logo">KINSPO</h1>
+                <h1 className="logo">Kinspo</h1>
             </Link>
             <div>
                 {display}

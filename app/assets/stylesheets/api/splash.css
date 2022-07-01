@@ -1,0 +1,21 @@
+.splash-body {
+        display: flex;
+        position: absolute;
+        top: 18%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 60px;
+        font-weight: 600;
+        justify-content: center;
+      
+}
+
+.splash {
+    position: absolute;
+    top: 26%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 60px;
+    font-weight: 600;
+    color: #e60023;
+}

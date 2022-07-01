@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createSaved } from '../../util/save_util';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 
 class SavedShowPin extends React.Component {
@@ -17,7 +18,7 @@ class SavedShowPin extends React.Component {
 
     render() {
         
-        const { pins, pin, user, currentUser, rpin } = this.props;
+        const { pins, pin, user, deleteSaved } = this.props;
         // debugger
         // if (!saved) {
         //     return null
@@ -33,11 +34,11 @@ class SavedShowPin extends React.Component {
                 <div className='grid-images'>
                     {pins.map((saved) => 
                     saved.id === pin.pin_id ? <div>
-                        {/* {saved.user_id === user.id ? <div> */}
                         <h1>this is the pin</h1>
                         <Link to={`/pins/${saved.id}`} className="pin-index-container" >
                             <img src={saved.image_url} alt={saved.title} className="pin-index-img" />
                         </Link>
+                        <button type="submit" className='unsave-button' onClick={() => deleteSaved(saved.id)} >Unsave</button>
                     </div> : null)}
 
                 </div>

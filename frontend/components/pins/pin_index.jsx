@@ -21,7 +21,7 @@ this.props.fetchBoards()
         // console.log(boards)
         return (
             <div>
-                <h2> Home Pins</h2>
+                {/* <h2> Home Pins</h2> */}
                 <div className="gallery">
                     {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards ={boards} />)}
                 </div>

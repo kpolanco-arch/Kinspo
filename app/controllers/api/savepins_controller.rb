@@ -31,7 +31,7 @@ class Api::SavepinsController < ApplicationController
     def destroy
         @savepin = Savepin.find_by(id: params[:id])
         if @savepin && @savepin.destroy
-            flash[:success] = 'Object was successfully deleted.'
+            render :show
         else
             flash[:error] = 'Something went wrong'
         end
@@ -41,7 +41,6 @@ class Api::SavepinsController < ApplicationController
     private 
 
     def savepin_params 
-        # debugger
         params.require(:savepin).permit(:pin_id, :user_id, :board_id)
     end
     
