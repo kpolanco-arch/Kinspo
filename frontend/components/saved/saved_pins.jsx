@@ -34,11 +34,14 @@ class SavedShowPin extends React.Component {
                 <div className='grid-images'>
                     {pins.map((saved) => 
                     saved.id === pin.pin_id ? <div>
-                        <h1>this is the pin</h1>
+                        {/* <h1>this is the pin</h1> */}
                         <Link to={`/pins/${saved.id}`} className="pin-index-container" >
                             <img src={saved.image_url} alt={saved.title} className="pin-index-img" />
                         </Link>
-                        <button type="submit" className='unsave-button' onClick={() => deleteSaved(saved.id)} >Unsave</button>
+                        <div className='gllery'>
+                            <button className='unsave-button' type="submit" onClick={() => deleteSaved(saved.id)} >Saved</button>
+                        </div>
+                            
                     </div> : null)}
 
                 </div>

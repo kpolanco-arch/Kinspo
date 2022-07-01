@@ -43,16 +43,21 @@ render () {
 
     return (
         <div>
-            <h1>Username: </h1>
-            <h2>Email: {this.props.user.email}</h2>
-            <h2>My Pins</h2>
+            <div className='user-profile-info'>
+                <h1>{this.props.user.username}</h1>
+                <h2>{this.props.user.email}</h2>
+                <h2>My Created Pins</h2>
+            </div>
+            
             <div className="gallery">
                 {/* <button type="submit" onClick={() => deletePin(pin.id)} >Delete */}
                     {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} deletePin= {deletePin}/>)}
                 {/* </button> */}
             </div>    
                 <BoardIndexContainer pins = {pins} user = {user} boards = {boards} saved ={saved}/>
-                
+            <Link to="/boards/new" >
+                <button type="submit" className='create-pin-button'>+</button>
+            </Link>   
                 {/* {pins.map(pin => <SavedShowPin key={pin.title} pin={pin} user={user} fetchSaved={fetchSaved} saved={saved} />)} */}
 
             

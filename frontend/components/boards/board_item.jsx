@@ -31,7 +31,7 @@ class BoardItem extends React.Component {
         return (
             <div>
                 <div>
-                    <h1>Pins on the selected board - {board.name}</h1>
+                    <h2>{board.name}</h2>
                     {pinsonBoard.length}
                     {pinsonBoard.map(pin => <SavedShowPin key={pin.title} pin={pin}/>)}
                 </div>

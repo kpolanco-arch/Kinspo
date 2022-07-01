@@ -13,19 +13,21 @@ componentDidMount () {
 render(){
 const { currentUser, logout, openModal } = this.props;
     const display = currentUser? (
-        <div>
-            <button type="submit">Home</button>
+        <div className='nav-bar'>
+            <Link to="/" >
+            <button className='home-button' type="submit">Home</button>
+            </Link>
             <div className='search-bar-container'>
                 <input className="search"
                     type="text"
                     placeholder='Search'
-                />
+                /> 
             </div>
             {/* <p>Hello, {currentUser.email}</p> */}
             <Link to={`/users/${currentUser.id}`} >
                <button type="submit">{currentUser.email}</button>
             </Link>
-            <button onClick = {logout}>Log out</button>
+            <button onClick = {logout}>Log Out</button>
             <br />
             
         </div>

@@ -13,7 +13,7 @@ Savepin.destroy_all
 
 user1 = User.create(email: 'hi@gmail.com', password: 'password')
 user2 = User.create(email: 'natalie@gmail.com', password: 'password')
-user3 = User.create(email: 'DEMO@gmail.com', password: 'password')
+user3 = User.create(email: 'DEMO@gmail.com', password: 'password', username: 'demo_user')
 
 board1 = Board.create(name: "All the Dogs", creator_id: user3.id)
 board2 = Board.create(name: "All the Cats", creator_id: user3.id)
