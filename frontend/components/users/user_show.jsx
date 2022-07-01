@@ -55,9 +55,15 @@ render () {
                 {/* </button> */}
             </div>    
                 <BoardIndexContainer pins = {pins} user = {user} boards = {boards} saved ={saved}/>
-            <Link to="/boards/new" >
+            <div className="dropdown">
                 <button type="submit" className='create-pin-button'>+</button>
-            </Link>   
+                <div className="dropdown-create" >  
+                    <ul><Link to="/boards/new" >Create Board </Link></ul>
+                    <ul><Link to="/pins/new" >Create Pin </Link> </ul>
+                </div>
+            </div>
+                
+             
                 {/* {pins.map(pin => <SavedShowPin key={pin.title} pin={pin} user={user} fetchSaved={fetchSaved} saved={saved} />)} */}
 
             
