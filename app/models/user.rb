@@ -31,8 +31,11 @@ attr_reader :password
   def self.find_by_credentials(email, password)
     # debugger
     user = User.find_by(email: email)
-    return nil unless user
-    user.is_password?(password) ? user : nil
+    if user && user.is_password?(password)
+        user
+    else
+        nil
+    end
   end
 
   def password=(password)
