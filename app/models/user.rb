@@ -39,8 +39,9 @@ attr_reader :password
   end
 
   def password=(password)
-    self.password_digest = BCrypt::Password.create(password)
     @password = password
+    self.password_digest = BCrypt::Password.create(password)
+    
 
   end
 
