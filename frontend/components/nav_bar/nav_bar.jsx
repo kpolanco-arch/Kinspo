@@ -20,8 +20,7 @@ const { currentUser, logout, openModal } = this.props;
             <div className='search-bar-container'>
                 <input className="search"
                     type="text"
-                    placeholder='Search'
-                /> 
+                    placeholder= "Search" />
             </div>
             {/* <p>Hello, {currentUser.email}</p> */}
             <Link to={`/users/${currentUser.id}`} >
