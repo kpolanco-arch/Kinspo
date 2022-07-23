@@ -60,7 +60,12 @@ class Login extends React.Component {
             <div className="session-form">
                 <form  onSubmit={this.handleSubmit} >
                     <br />                
-                    <div onClick={() => { this.props.closeModal(); }} className="close-button">X</div>
+                    <div onClick={() => { this.props.closeModal(); }} >
+                        <span class="material-symbols-outlined">
+                            close
+                        </span>
+                    // className="close-button"X
+                    </div>
                     <div className='login-message'> Welcome to Kinspo </div>
                     <br />
                     <label className='text-box'>
