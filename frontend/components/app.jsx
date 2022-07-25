@@ -24,12 +24,15 @@ export default () => (
          <Modal />
         <Switch>
             <Route path="/boards/new" component={BoardCreateContainer} />
+
             <Route path="/users/pins/:pinId" component={user_show_container}/>
-            <Route path="/boards/:boardId" component={BoardItem} />
             {/* <Route path="/boards/new" component={BoardCreateContainer} /> */}
             <Route path="/pins/new" component={PinCreateContainer}/>
             <Route path="/users/:userId" component={UserShowContainer} />
+            <Route path="/boards/:boardId" component={BoardItem} />
+
             <Route path="/pins/:pinId" component={pin_show_item_container} />
+            
             <Route path="/" component={HomeContainer} />
         </Switch>
         {/* <Route path="/" component={NavBarContainer} /> */}

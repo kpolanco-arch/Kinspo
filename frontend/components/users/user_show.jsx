@@ -44,22 +44,43 @@ render () {
     return (
         <div>
             <div className='user-profile-info'>
-                <h1>{this.props.user.username}</h1>
+                <div className='user-profile-image-container'></div>
+                <h1>{this.props.user.username} User Profile</h1>
                 <h2>{this.props.user.email}</h2>
-                <h2>My Created Pins</h2>
+                <div className='user-profile-followers'>
+                    <h2>followers</h2>
+                    <h2>following</h2>
+                </div>
+                <div className='type-board-container'>
+                    <div className='type-board-text'>Created
+                        <div className='type-board-underline'></div>
+                    </div>
+                    <div className='type-board-text'>Saved</div>
+                </div>
+                
+
             </div>
             
             <div className="gallery">
                 {/* <button type="submit" onClick={() => deletePin(pin.id)} >Delete */}
                     {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} deletePin= {deletePin}/>)}
                 {/* </button> */}
+                <div className='pin-cover-container'>
+                    <div className='pin-cover-single'>
+
+                    </div>
+                </div>
             </div>    
                 <BoardIndexContainer pins = {pins} user = {user} boards = {boards} saved ={saved}/>
             <div className="dropdown">
                 <button type="submit" className='create-pin-button'>+</button>
-                <div className="dropdown-create" >  
-                    <ul><Link to="/boards/new" >Create Board </Link></ul>
-                    <ul><Link to="/pins/new" >Create Pin </Link> </ul>
+                <div className="dropdown-create" >
+                    <ul>Create</ul>
+                    <div className="create-button-options">
+                        <ul><Link to="/boards/new" >Board </Link></ul>
+                        <ul><Link to="/pins/new" >Pin </Link> </ul>
+                    </div>  
+                    
                 </div>
             </div>
                 

@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import { fetchBoards } from "../../actions/board_actions";
 import { fetchPins } from "../../actions/pin_actions";
 import { fetchSaved } from "../../actions/save_action";
+import { withRouter } from "react-router-dom";
 import BoardItem from "./board_item";
 
 const mapStateToProps = state => ({
@@ -14,4 +15,4 @@ const mapDispatchToProps = dispatch => ({
     fetchSaved: () => dispatch(fetchSaved())
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(BoardItem);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(BoardItem));

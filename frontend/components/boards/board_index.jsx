@@ -25,7 +25,7 @@ class BoardIndex extends React.Component {
         return (
             <div className="board-container">
                 <h1>My Boards</h1>
-                {personalBoards.map(board => <BoardIndexItem pins = {pins} board ={board} saved = {saved}/>)}
+                {personalBoards.map(board => <BoardIndexItem key={board.title} pins = {pins} board ={board} saved = {saved}/>)}
             </div>
         )
     }
