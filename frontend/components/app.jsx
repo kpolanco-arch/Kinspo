@@ -13,7 +13,7 @@ import pin_show_item_container from './pins/pin_show_item_container';
 import UserShowContainer from './users/user_show_container';
 import PinCreateContainer from './pins/pin_create_container';
 import BoardItem from './boards/board_item_container';
-import user_show_container from './users/user_show_container';
+import UserShowPin from './users/user_show_pins_container';
 import SavedPinsContainer from './saved/saved_pins_container';
 import BoardCreateContainer from './boards/board_create_container';
 
@@ -23,10 +23,10 @@ export default () => (
         <NavBarContainer />
          <Modal />
         <Switch>
-            <Route path="/boards/new" component={BoardCreateContainer} />
+            <Route path="/users/:userId/pins" component={UserShowPin}/>
 
-            <Route path="/users/pins/:pinId" component={user_show_container}/>
-            {/* <Route path="/boards/new" component={BoardCreateContainer} /> */}
+            <Route path="/boards/new" component={BoardCreateContainer} />
+            
             <Route path="/pins/new" component={PinCreateContainer}/>
             <Route path="/users/:userId" component={UserShowContainer} />
             <Route path="/boards/:boardId" component={BoardItem} />

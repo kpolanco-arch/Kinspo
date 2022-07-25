@@ -62,16 +62,15 @@ render () {
             </div>
             
             <div className="gallery">
-                {/* <button type="submit" onClick={() => deletePin(pin.id)} >Delete */}
-                    {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} deletePin= {deletePin}/>)}
-                {/* </button> */}
+                    {/* {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} deletePin= {deletePin}/>)} */}
+                <Link to={`/users/${user.id}/pins`}>
                 <div className='pin-cover-container'>
                     <div className='pin-cover-single'>
-
                     </div>
                 </div>
+                </Link>
             </div>    
-                <BoardIndexContainer pins = {pins} user = {user} boards = {boards} saved ={saved}/>
+            <BoardIndexContainer key={user.username} pins = {pins} user = {user} boards = {boards} saved ={saved}/>
             <div className="dropdown">
                 <button type="submit" className='create-pin-button'>+</button>
                 <div className="dropdown-create" >
