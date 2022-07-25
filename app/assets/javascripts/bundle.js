@@ -836,6 +836,7 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
           board = _this$props.board,
           pins = _this$props.pins,
           saved = _this$props.saved;
+      console.log(saved);
 
       if (!board) {
         return null;
@@ -913,14 +914,17 @@ var BoardItem = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, BoardItem);
 
     return _super.call(this, props);
-  } // componentDidMount() {
-  //     this.props.fetchBoards();
-  //     this.props.fetchPins();
-  //     this.props.fetchSaved();
-  // }
-
+  }
 
   _createClass(BoardItem, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchBoard(this.props.match.params.boardId); // this.props.fetchBoards();
+
+      this.props.fetchPins();
+      this.props.fetchSaved();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -931,16 +935,18 @@ var BoardItem = /*#__PURE__*/function (_React$Component) {
 
       if (!board) {
         return null;
-      } // if (!pins) {
-      //     return null
-      // }
+      }
 
+      if (!pins) {
+        return null;
+      }
 
       if (!saved) {
         return null;
       }
 
-      var pinsonBoard = saved.filter(function (savedpin) {
+      var savedArr = Object.values(saved);
+      var pinsonBoard = savedArr.filter(function (savedpin) {
         return savedpin.board_id === board.id;
       }); //board show
       //board cover and link to pinitem with the appropiate boards
@@ -985,14 +991,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    pins: Object.values(state.entities.pins)
+    pins: Object.values(state.entities.pins),
+    board: state.entities.boards[ownProps.match.params.boardId],
+    saved: state.entities.saved
   };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
+    fetchBoard: function fetchBoard(boardId) {
+      return dispatch((0,_actions_board_actions__WEBPACK_IMPORTED_MODULE_1__.fetchBoard)(boardId));
+    },
     fetchBoards: function fetchBoards() {
       return dispatch((0,_actions_board_actions__WEBPACK_IMPORTED_MODULE_1__.fetchBoards)());
     },

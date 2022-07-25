@@ -9,6 +9,7 @@ class BoardIndexItem extends React.Component {
 
     render() {
         const {board, pins, saved} = this.props;
+        console.log(saved)
         if (!board) {
             return null
         }

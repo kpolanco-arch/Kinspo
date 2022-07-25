@@ -7,11 +7,12 @@ class BoardItem extends React.Component {
         super(props)
     }
 
-    // componentDidMount() {
-    //     this.props.fetchBoards();
-    //     this.props.fetchPins();
-    //     this.props.fetchSaved();
-    // }
+    componentDidMount() {
+        this.props.fetchBoard(this.props.match.params.boardId)
+        // this.props.fetchBoards();
+        this.props.fetchPins();
+        this.props.fetchSaved();
+    }
 
     render() {
         const { board, pins, saved } = this.props;
@@ -19,14 +20,14 @@ class BoardItem extends React.Component {
         if (!board) {
             return null
         }
-        // if (!pins) {
-        //     return null
-        // }
+        if (!pins) {
+            return null
+        }
         if (!saved) {
             return null
         }
-
-        let pinsonBoard = saved.filter(savedpin => savedpin.board_id === board.id)
+        let savedArr = Object.values(saved)
+        let pinsonBoard = savedArr.filter(savedpin => savedpin.board_id === board.id)
         
         //board show
         //board cover and link to pinitem with the appropiate boards
