@@ -708,8 +708,8 @@ var BoardIndex = /*#__PURE__*/function (_React$Component) {
         return board.creator_id === user.id;
       });
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "board-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "My Boards"), personalBoards.map(function (board) {
+        className: "gallery-boards"
+      }, personalBoards.map(function (board) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_board_index_item__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: board.title,
           pins: pins,
@@ -851,11 +851,23 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "board-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/boards/".concat(board.id)
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "Cover to be placed .."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, board.id))));
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-cover-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-cover-single"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "first-cover"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "cover-column-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "second-cover"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "third-cover"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-cover-title"
+      }, board.name))));
     }
   }]);
 
@@ -952,12 +964,24 @@ var BoardItem = /*#__PURE__*/function (_React$Component) {
       }); //board show
       //board cover and link to pinitem with the appropiate boards
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, board.name), pinsonBoard.length, pinsonBoard.map(function (pin) {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-item-layout-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-head-title"
+      }, board.name, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        "class": "material-symbols-outlined"
+      }, "more_horiz"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "user-profile-small-container"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-description-text"
+      }, board.description, "description")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "pins-length-text"
+      }, " ", pinsonBoard.length, " ", pinsonBoard.length > 1 ? "Pins" : "Pin"), pinsonBoard.map(function (pin) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_saved_saved_pins_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: pin.title,
           pin: pin
         });
-      })));
+      }));
     }
   }]);
 
@@ -2635,10 +2659,33 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
 
       if (!user) {
         return null;
-      } // this.props.pins.map(pin =>pin={pin})
-      // display = (this.props.user.id == pin.creator_id)? 
-      // pin : null
+      }
 
+      if (!saved) {
+        return null;
+      }
+
+      var cover1;
+      var savedArr = Object.values(saved); // console.log(saved[0].pin_id )
+      // cover1 = pins.map(pin => pin.id === saved[0].pin_id ? pin.image_url : null)
+      // if (!cover1 === null){
+      //     cover11 = cover1}
+      // console.log(cover11)
+      // if (savedArr.length < 1) {
+      //     cover1 = null
+      // } else {
+      //     cover1 = pins[savedArr[0].pin_id].image_url
+      // }
+      // if (savedArr.length < 2) {
+      //     cover2 = null
+      // } else {
+      //     cover2 = pins[savedArr[1].pin_id].image_url
+      // }
+      // if (savedArr.length < 3) {
+      //     cover3 = null
+      // } else {
+      //     cover3 = pins[savedArr[2].pin_id].image_url
+      // }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "user-profile-info"
@@ -2655,14 +2702,22 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "type-board-text"
       }, "Saved"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "gallery"
+        className: "gallery-user-profile"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
         to: "/users/".concat(user.id, "/pins")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "pin-cover-container"
+        className: "board-cover-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "pin-cover-single"
-      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_boards_board_index_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        className: "board-cover-single"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "first-cover-pin"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "second-cover-pin"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "third-cover-pin"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-cover-title"
+      }, "All Pins"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_boards_board_index_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         key: user.username,
         pins: pins,
         user: user,
@@ -2681,7 +2736,7 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
         to: "/boards/new"
       }, "Board ")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
         to: "/pins/new"
-      }, "Pin "), " ")))));
+      }, "Pin "), " "))))));
     }
   }]);
 
@@ -2833,7 +2888,9 @@ var UserShowPin = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
+        className: "all-pin-title"
+      }, "All Pins"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "gallery"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "grid-images"
@@ -2852,7 +2909,7 @@ var UserShowPin = /*#__PURE__*/function (_React$Component) {
             return deletePin(pin.id);
           }
         }, "Delete")) : null;
-      })));
+      }))));
     }
   }]);
 

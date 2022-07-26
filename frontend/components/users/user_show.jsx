@@ -35,10 +35,40 @@ render () {
         return null
     }
 
-    // this.props.pins.map(pin =>pin={pin})
+    if (!saved) {
+        return null
+    }
 
-    // display = (this.props.user.id == pin.creator_id)? 
-    // pin : null
+    let cover1
+   
+
+    
+    let savedArr= Object.values(saved) 
+            // console.log(saved[0].pin_id )
+            // cover1 = pins.map(pin => pin.id === saved[0].pin_id ? pin.image_url : null)
+            // if (!cover1 === null){
+            //     cover11 = cover1}
+
+            // console.log(cover11)
+    // if (savedArr.length < 1) {
+    //     cover1 = null
+
+    // } else {
+    //     cover1 = pins[savedArr[0].pin_id].image_url
+    // }
+    
+    // if (savedArr.length < 2) {
+    //     cover2 = null
+    // } else {
+    //     cover2 = pins[savedArr[1].pin_id].image_url
+    // }
+
+    // if (savedArr.length < 3) {
+    //     cover3 = null
+    // } else {
+    //     cover3 = pins[savedArr[2].pin_id].image_url
+    // }
+
 
 
     return (
@@ -61,25 +91,28 @@ render () {
 
             </div>
             
-            <div className="gallery">
-                    {/* {pins.map(pin => <UserShowPin key={pin.title} pin={pin} user={user} deletePin= {deletePin}/>)} */}
+            <div className="gallery-user-profile">
                 <Link to={`/users/${user.id}/pins`}>
-                <div className='pin-cover-container'>
-                    <div className='pin-cover-single'>
-                    </div>
-                </div>
+                    <div className='board-cover-container'>
+                        <div className='board-cover-single'>
+                            <div className="first-cover-pin"></div>
+                                        <div className="second-cover-pin"></div>
+                                        <div className="third-cover-pin"></div>
+                        </div>
+                        <div className="board-cover-title">All Pins</div>
+                    </div>    
                 </Link>
-            </div>    
-            <BoardIndexContainer key={user.username} pins = {pins} user = {user} boards = {boards} saved ={saved}/>
-            <div className="dropdown">
-                <button type="submit" className='create-pin-button'>+</button>
-                <div className="dropdown-create" >
-                    <ul>Create</ul>
-                    <div className="create-button-options">
-                        <ul><Link to="/boards/new" >Board </Link></ul>
-                        <ul><Link to="/pins/new" >Pin </Link> </ul>
+                   
+                <BoardIndexContainer key={user.username} pins = {pins} user = {user} boards = {boards} saved ={saved}/>
+                <div className="dropdown">
+                    <button type="submit" className='create-pin-button'>+</button>
+                    <div className="dropdown-create" >
+                        <ul>Create</ul>
+                        <div className="create-button-options">
+                            <ul><Link to="/boards/new" >Board </Link></ul>
+                            <ul><Link to="/pins/new" >Pin </Link> </ul>
+                        </div>  
                     </div>  
-                    
                 </div>
             </div>
                 

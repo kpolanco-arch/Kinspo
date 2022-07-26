@@ -23,17 +23,26 @@ class BoardIndexItem extends React.Component {
 
         return (
             <div>
-                <div className="board-container">
                     <Link to={`/boards/${board.id}`}>
-                        <h3 >Cover to be placed ..</h3>
-                        <h3>{board.id}</h3>
+                        <div className='board-cover-container'>
+                            <div className='board-cover-single'>
+                                <div className="first-cover"></div>
+                                <div className="cover-column-container" >
+                                    <div className="second-cover"></div>
+                                    <div className="third-cover"></div>
+                                </div>
+                                
+                            </div>
+                            <div className="board-cover-title">{board.name}</div>
+                            {/* <div>{board.id.length}</div> */}
+                        </div>
+                        
                         {/* <BoardItem pins={pins} board={board} saved={saved} /> */}
                      </Link>       
                    
                         
                     
                     {/* <div className="board-label">{board.name}</div> */}
-                </div>
             </div>
         )
     }

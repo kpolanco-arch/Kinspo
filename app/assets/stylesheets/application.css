@@ -14,9 +14,10 @@
  *= require_self
  */
 
-@import url(app/assets/stylesheets/api/splash.css);
-/* @import url(app/assets/stylesheets/api/app.scss);
-@import url(app/assets/stylesheets/api/nav_bar.scss); */
-/* @import url(app/assets/stylesheets/api/test.scss); */
- @import url(app/assets/stylesheets/api/pin_index.scss);
-@import url(app/assets/stylesheets/api/pin_show.scss);
+@import url(app/assets/stylesheets/splash.css);
+@import url(app/assets/stylesheets/app.scss);
+@import url(app/assets/stylesheets/nav_bar.scss); 
+@import url(app/assets/stylesheets/test.scss); 
+@import url(app/assets/stylesheets/pin_index.scss);
+@import url(app/assets/stylesheets/pin_show.scss);
+@import url(app/assets/stylesheets/users.scss);

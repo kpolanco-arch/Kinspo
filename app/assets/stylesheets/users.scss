@@ -1,0 +1,142 @@
+// Place all the styles related to the api/users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.gallery-user-profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+.gallery-boards {
+    display: flex;
+    flex-direction: row;
+}
+
+.board-cover-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: black;
+    padding: 8px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.app body {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.board-cover-container {
+    padding: 8px;
+    height: 100%;
+    border-radius: 8px;
+    width: 236px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 157px;
+}
+
+.board-cover-single {
+    border-radius: 16px;
+    transform: translateX(0%);
+    z-index: 0;
+    border: 1px solid white;
+    background-color: rgb(239, 239, 239);
+    display: flex;
+    flex-direction: row;
+}
+
+.first-cover {
+        height: 157px;
+        width: 157px;
+        background-image: url(https://i.pinimg.com/222x/d2/cc/07/d2cc078….jpg);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        min-height: 100%;
+        // background-color: red;
+        position: relative;
+        overflow: hidden;
+        border-radius: 8px;
+}
+
+.cover-column-container {
+        display: flex;
+        flex-direction: column;
+}
+
+.second-cover {
+        height: 50%;
+        border-color: white;
+        border-style: solid;
+        border-width: 0px 0px 1px 1px;
+        box-sizing: border-box;
+        display: flex;
+        width: 62px;
+}
+
+.third-cover {
+    height: 50%;
+    border-color: white;
+    border-style: solid;
+    border-width: 1px 0px 0px 1px;
+    box-sizing: border-box;
+    display: flex;
+    width: 62px;
+}
+
+.pin-cover-container {
+    padding: 8px;
+    height: 100%;
+    border-radius: 8px;
+    width: 236px;
+    display: flex;
+    flex-direction: column;
+}
+
+.pin-cover-single {
+    padding-bottom: 133%;
+    border-radius: 16px;
+    transform: translateX(0%);
+    z-index: 0;
+    // height: 157px;
+    // width: 100%;
+    border: 1px solid white;
+    background-color: rgb(239, 239, 239)
+
+}
+
+.first-cover-pin {
+    height: 157px;
+    width: 137px;
+    background-image: url(https://i.pinimg.com/222x/d2/cc/07/d2cc078….jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 100%;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.second-cover-pin {
+    height: 100%;
+    border-color: white;
+    border-style: solid;
+    border-width: 0px 0px 0px 1px;
+    box-sizing: border-box;
+    display: flex;
+    width: 62px;
+}
+
+.third-cover-pin {
+    height: 100%;
+    border-color: white;
+    border-style: solid;
+    border-width: 0px 0px 0px 1px;
+    box-sizing: border-box;
+    display: flex;
+    width: 62px;
+}

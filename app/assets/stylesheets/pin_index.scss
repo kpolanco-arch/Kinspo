@@ -242,27 +242,6 @@ ul a {
     background-color: #efefef;
 }
 
-.pin-cover-container {
-    padding: 8px;
-    height: 100%;
-    border-radius: 8px;
-    width: 236px;
-   
-    display: flex;
-    flex-direction: row;
-}
-
-.pin-cover-single {
-    padding-bottom: 133%;
-    border-radius: 16px;
-    transform: translateX(0%);
-    z-index: 0;
-    height: 157px;
-    width: 100%;
-    border: 1px solid white; 
-    background-color: grey;
-}
-
 .user-profile-info {
     display: flex;
     flex-direction: column;

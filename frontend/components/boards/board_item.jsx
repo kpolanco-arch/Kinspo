@@ -33,11 +33,18 @@ class BoardItem extends React.Component {
         //board cover and link to pinitem with the appropiate boards
         return (
             <div>
-                <div>
-                    <h2>{board.name}</h2>
-                    {pinsonBoard.length}
+                <div className="board-item-layout-container">
+                    <div className="board-head-title">{board.name}
+                        <div><span class="material-symbols-outlined">
+                            more_horiz
+                        </span></div>
+                    </div>
+                    <div className="user-profile-small-container"></div>
+                    <div className="board-description-text">{board.description}description</div>
+                </div>    
+                   <div className="pins-length-text"> {pinsonBoard.length} {(pinsonBoard.length > 1)? "Pins" : "Pin"}</div>
                     {pinsonBoard.map(pin => <SavedShowPin key={pin.title} pin={pin}/>)}
-                </div>
+                
             </div>
         )
     }

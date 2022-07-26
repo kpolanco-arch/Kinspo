@@ -23,8 +23,8 @@ class BoardIndex extends React.Component {
         // console.log(saved)
         let personalBoards = boardArr.filter(board => board.creator_id === user.id)
         return (
-            <div className="board-container">
-                <h1>My Boards</h1>
+            <div className="gallery-boards">
+                {/* <h1>My Boards</h1> */}
                 {personalBoards.map(board => <BoardIndexItem key={board.title} pins = {pins} board ={board} saved = {saved}/>)}
             </div>
         )
