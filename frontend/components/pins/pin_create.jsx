@@ -39,13 +39,13 @@ class PinCreate extends React.Component {
         return (
             <div className="background-pin-create">
                 <div className="back-arrow">
-                    <button onClick={this.navigateback}><span class="material-symbols-outlined">arrow_back</span></button>
+                    <button onClick={this.navigateback}><span className="material-symbols-outlined">arrow_back</span></button>
                 </div>
                 <div className="show-container">   
                     <div className="create-pin-wrapper">
                         <div className="create-pin-template">
                             <div className="create-pin-container">
-                                <span class="material-symbols-outlined">
+                                <span className="material-symbols-outlined">
                                     arrow_upward
                                 </span>
                                 <div className="upload-text">Drag and drop or click to upload</div>
@@ -56,7 +56,7 @@ class PinCreate extends React.Component {
                             <div className="pin-header-container"> 
                             {/* <SavePin key={pin.title} pin={pin} createSaved={createSaved} currentUser={currentUser} deleteSaved={deleteSaved} boards={boards} saved={saved} /> */}
                                 <div>
-                                    <span class="material-symbols-outlined">
+                                    <span className="material-symbols-outlined">
                                         expand_more
                                     </span>
             

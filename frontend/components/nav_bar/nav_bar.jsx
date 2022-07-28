@@ -22,7 +22,19 @@ const { currentUser, logout, openModal } = this.props;
                     type="text"
                     placeholder= "Search" />
             </div>
-            {/* <p>Hello, {currentUser.email}</p> */}
+            <div className='icon-navbar'>
+                <a href="http://linkedin.com/in/karen-polanco-374721180/">
+                <i className="fa fa-linkedin-square"></i></a>
+            </div>
+            <div className='icon-navbar'>
+                
+                <a href="https://github.com/kpolanco-arch/Kinspo">
+                    <i className="fa fa-github"></i>
+                </a>
+            </div>
+            <div className='icon-navbar'><span className="material-symbols-outlined">
+                location_home
+            </span></div>
             <Link to={`/users/${currentUser.id}`} >
                <button type="submit">{currentUser.email}</button>
             </Link>
