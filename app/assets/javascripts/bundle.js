@@ -2093,6 +2093,12 @@ var SavePin = /*#__PURE__*/function (_React$Component) {
           deleteSaved = _this$props.deleteSaved,
           boards = _this$props.boards,
           saved = _this$props.saved;
+      var userboards = boards.filter(function (board) {
+        return board.creator_id === currentUser.id;
+      });
+      var pinonBoards = saved.filter(function (pinsaved) {
+        return pin.id === pinsaved.pin_id;
+      });
 
       var dropdownMenu = function dropdownMenu() {
         var userboards = boards.filter(function (board) {
@@ -2171,7 +2177,11 @@ var SavePin = /*#__PURE__*/function (_React$Component) {
         className: "open-menu-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "All Boards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
         "class": "material-symbols-outlined"
-      }, "expand_more"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      }, "expand_more"), pinonBoards.map(function (saved) {
+        return saved.pin_id === pin.id;
+      }).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "unsave-button"
+      }, "Saved") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "save-button"
       }, "Save")), this.state.showMenu ? dropdownMenu() : null);
     }

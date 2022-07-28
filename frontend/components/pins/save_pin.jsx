@@ -31,11 +31,15 @@ class SavePin extends React.Component {
 
     render() {
         const { pin, currentUser, pins, createSaved, deleteSaved, boards, saved } = this.props;
+        let userboards = boards.filter(board => board.creator_id === currentUser.id)
+        let pinonBoards = saved.filter(pinsaved => pin.id === pinsaved.pin_id)
 
         const dropdownMenu = () => {
             let userboards = boards.filter(board => board.creator_id === currentUser.id)
             let pinonBoards = saved.filter(pinsaved => pin.id === pinsaved.pin_id)
             let pinonBoardArr = Object.values(saved)
+
+           
 
             const saveStatus = (board) => {
                 for (let i = 0; i < pinonBoards.length; i++) {
@@ -84,13 +88,17 @@ class SavePin extends React.Component {
             )
         }
         return (
+            
             <div className='open-menu'>
                 <div onClick={this.showMenu} className = "open-menu-container">
                     <div>All Boards</div>
                     <span class="material-symbols-outlined">
                         expand_more
                     </span>
-                    <button className='save-button'>Save</button>
+                    {pinonBoards.map(saved => saved.pin_id === pin.id).length > 0 ?
+                        <button className="unsave-button">Saved</button> :
+                <button className="save-button" >Save</button>}
+                    {/* <button className='save-button'>Save</button> */}
                 </div>
                 {this.state.showMenu ? dropdownMenu() : null}
             </div>
