@@ -11,15 +11,14 @@ import { fetchSaved } from "../../actions/save_action";
 
 
 const mapStateToProps = (state, ownProps) => {
-    // const { pinId } = useParams();
-    // const pins_selected = state.entities.pins[ownProps.match.params.pinId];
+    
     return {
+        // pin: state.entities.pins[ownProps.match.params.pinId],
         pins: Object.values(state.entities.pins),
         boards: Object.values(state.entities.boards),
-        saved: Object.values(state.entities.saved)
-   
-    // pins_selected,
-    // pins: selectPinItems(state, pins_selected )
+        saved: Object.values(state.entities.saved),
+        currentUser: state.entities.users[state.session.id],
+ 
     }
 }
 

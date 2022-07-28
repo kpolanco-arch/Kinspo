@@ -257,7 +257,7 @@ var createSaved = function createSaved(saved) {
 var deleteSaved = function deleteSaved(savedId) {
   return function (dispatch) {
     return _util_save_util__WEBPACK_IMPORTED_MODULE_0__.deleteSaved(savedId).then(function () {
-      return dispatch(removedSaved());
+      return dispatch(removedSaved(savedId));
     });
   };
 };
@@ -1656,7 +1656,8 @@ var PinIndex = /*#__PURE__*/function (_React$Component) {
       // this.props.fetchPin(this.props.match.params.pinId)
       this.props.fetchPins();
       this.props.fetchBoards();
-      this.props.fetchSaved(); // this.props.createSaved();
+      this.props.fetchSaved();
+      this.props.deleteSaved(); // this.props.createSaved();
       // this.props.fetchUsers();
     }
   }, {
@@ -1727,14 +1728,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  // const { pinId } = useParams();
-  // const pins_selected = state.entities.pins[ownProps.match.params.pinId];
   return {
+    // pin: state.entities.pins[ownProps.match.params.pinId],
     pins: Object.values(state.entities.pins),
     boards: Object.values(state.entities.boards),
-    saved: Object.values(state.entities.saved) // pins_selected,
-    // pins: selectPinItems(state, pins_selected )
-
+    saved: Object.values(state.entities.saved),
+    currentUser: state.entities.users[state.session.id]
   };
 };
 
@@ -1784,52 +1783,77 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var _save_pin__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./save_pin */ "./frontend/components/pins/save_pin.jsx");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
 
-var PinItem = function PinItem(_ref) {
-  var pin = _ref.pin,
-      createSaved = _ref.createSaved,
-      deleteSaved = _ref.deleteSaved,
-      board = _ref.board,
-      boards = _ref.boards,
-      saved = _ref.saved;
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: "grid-images"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-    to: "pins/".concat(pin.id),
-    className: "pin-index-container"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-    src: pin.image_url,
-    alt: pin.title,
-    className: "pin-index-img"
-  })), saved.map(function (save) {
-    return pin.id === save.pin_id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-      type: "submit",
-      className: "unsave-button",
-      onClick: function onClick() {
-        return deleteSaved(pin.id);
-      }
-    }, "Saved") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, boards.map(function (board) {
+
+
+var PinItem = /*#__PURE__*/function (_React$Component) {
+  _inherits(PinItem, _React$Component);
+
+  var _super = _createSuper(PinItem);
+
+  function PinItem(props) {
+    _classCallCheck(this, PinItem);
+
+    return _super.call(this, props);
+  }
+
+  _createClass(PinItem, [{
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          pin = _this$props.pin,
+          createSaved = _this$props.createSaved,
+          deleteSaved = _this$props.deleteSaved,
+          board = _this$props.board,
+          boards = _this$props.boards,
+          saved = _this$props.saved;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "dropdown"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        type: "submit",
-        className: "save-button"
-      }, "Save "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "dropdown-content",
-        onClick: function onClick() {
-          return createSaved({
-            pin_id: pin.id,
-            user_id: currentUser.id,
-            board_id: board.id
-          });
-        }
-      }, board.name));
-    }));
-  }));
-};
+        className: "grid-images"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        to: "pins/".concat(pin.id),
+        className: "pin-index-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_save_pin__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        key: pin.title,
+        pin: pin,
+        createSaved: createSaved,
+        deleteSaved: deleteSaved,
+        boards: boards,
+        saved: saved
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: pin.image_url,
+        alt: pin.title,
+        className: "pin-index-img"
+      })));
+    }
+  }]);
+
+  return PinItem;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (PinItem);
 
@@ -1978,6 +2002,196 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_pin_show_item__WEBPACK_IMPORTED_MODULE_1__["default"]));
+
+/***/ }),
+
+/***/ "./frontend/components/pins/save_pin.jsx":
+/*!***********************************************!*\
+  !*** ./frontend/components/pins/save_pin.jsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _pin_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pin_item */ "./frontend/components/pins/pin_item.jsx");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+
+
+
+
+
+
+var SavePin = /*#__PURE__*/function (_React$Component) {
+  _inherits(SavePin, _React$Component);
+
+  var _super = _createSuper(SavePin);
+
+  function SavePin(props) {
+    var _this;
+
+    _classCallCheck(this, SavePin);
+
+    _this = _super.call(this, props);
+    _this.state = {
+      showMenu: false
+    };
+    _this.showMenu = _this.showMenu.bind(_assertThisInitialized(_this));
+    return _this;
+  }
+
+  _createClass(SavePin, [{
+    key: "showMenu",
+    value: function showMenu(e) {
+      e.preventDefault();
+      this.setState({
+        showMenu: !this.state.showMenu
+      });
+    } // componentDidMount() {
+    //     // this.props.fetchPin(this.props.match.params.pinId)
+    //     this.props.fetchPins();
+    //     this.props.fetchBoards();
+    //     this.props.fetchSaved();
+    //     this.props.createSaved();
+    //     // this.props.fetchUsers();
+    // }
+
+  }, {
+    key: "render",
+    value: function render() {
+      var _this$props = this.props,
+          pin = _this$props.pin,
+          currentUser = _this$props.currentUser,
+          pins = _this$props.pins,
+          createSaved = _this$props.createSaved,
+          deleteSaved = _this$props.deleteSaved,
+          boards = _this$props.boards,
+          saved = _this$props.saved;
+
+      var dropdownMenu = function dropdownMenu() {
+        var userboards = boards.filter(function (board) {
+          return board.creator_id === currentUser.id;
+        });
+        var pinonBoards = saved.filter(function (pinsaved) {
+          return pin.id === pinsaved.pin_id;
+        });
+        var pinonBoardArr = Object.values(saved);
+
+        var saveStatus = function saveStatus(board) {
+          for (var i = 0; i < pinonBoards.length; i++) {
+            var pinonBoard = pinonBoards[i];
+
+            if (pinonBoard.board_id === board.id) {
+              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+                className: "board-list-item"
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+                className: "unsave-button",
+                onClick: function onClick() {
+                  return deleteSaved(pin.id);
+                }
+              }, "Saved"));
+            }
+          }
+
+          var selectedPin;
+
+          for (var _i = 0; _i < pinonBoardArr.length; _i++) {
+            if (pinonBoardArr[_i].board_id === board.id) {
+              selectedPin = pinonBoardArr[_i];
+              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+                className: "board-list-item"
+              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+                className: "save-button",
+                onClick: function onClick() {
+                  return createSaved({
+                    pin_id: pin.id,
+                    user_id: currentUser.id,
+                    board_id: board.id
+                  });
+                }
+              }, "Save"));
+            }
+          }
+
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            className: "board-list-item"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+            className: "save-button",
+            onClick: function onClick() {
+              return createSaved({
+                pin_id: pin.id,
+                user_id: currentUser.id,
+                board_id: board.id
+              });
+            }
+          }, "Save"));
+        };
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "board-list-background"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "board-list-title"
+        }, "Save to board"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "board-list-title-h2"
+        }, "All boards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, userboards.map(function (board, i) {
+          return saveStatus(board, i);
+        })));
+      };
+
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "open-menu"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        onClick: this.showMenu,
+        className: "open-menu-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "All Boards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        "class": "material-symbols-outlined"
+      }, "expand_more"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "save-button"
+      }, "Save")), this.state.showMenu ? dropdownMenu() : null);
+    }
+  }]);
+
+  return SavePin;
+}((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
+
+var mSTP = function mSTP(state) {
+  return {
+    currentUser: state.entities.users[state.session.id]
+  };
+};
+
+var mDTP = function mDTP(dispatch) {
+  return {// fetchBoards: () => dispatch(fetchBoards())
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mSTP, mDTP)(SavePin));
 
 /***/ }),
 
@@ -2666,8 +2880,9 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       }
 
       var cover1;
+      var cover11;
       var savedArr = Object.values(saved); // console.log(saved[0].pin_id )
-      // cover1 = pins.map(pin => pin.id === saved[0].pin_id ? pin.image_url : null)
+      // cover1 = pins.map(pin => pin.id === (saved[0]).pin_id ? pin.image_url : null)
       // if (!cover1 === null){
       //     cover11 = cover1}
       // console.log(cover11)
@@ -2711,7 +2926,9 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
         className: "board-cover-single"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "first-cover-pin"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: "#"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "second-cover-pin"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "third-cover-pin"

@@ -57,14 +57,14 @@
     z-index: 10;
     display: flex;
     width: 250px;
-    height: 100%;
+    // height: 100%;
     object-fit: cover;
     border-radius: 18px;
     margin-bottom: 30px;
         
 }
 
-:hover .pin-index-img {
+.pin-index-img:hover  {
     z-index: -1;
     filter: brightness(70%)
 }
@@ -135,7 +135,7 @@
 // }
 
 .dropdown-content {
-    display: none;
+    // display: none;
     position: absolute;
     background-color: #f9f9f9;
     min-width: 160px;
@@ -311,4 +311,76 @@ ul a {
     color: black;
     background-color: black;
     bottom: -3px;
+}
+
+.open-menu-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+}
+
+.open-menu {
+        position: absolute;
+        z-index: 10;
+        width: 257px;
+        font-size: 16px;
+        color: white;
+        font-weight: 500;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.open-menu-container span.material-symbols-outlined {
+    border-radius: 50%;
+    padding: 5px;
+    mix-blend-mode: multiply;
+    color: white;
+    background-color: transparent;
+}
+
+.board-list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 9px;
+    justify-content: space-between;
+}
+.board-list-item:hover {
+    background-color: #efefef;
+    border-radius: 12px;
+    
+}
+
+.board-list-item .unsave-button {
+    margin: 5px;
+}
+
+button.board-list-item  {
+    width: 80%;
+    height: 80%;
+}
+
+.board-list-background {
+    background-color: #fff;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    // position: relative;
+    margin-left: 14px;
+    color: black;
+    width: 300px;
+    max-height: 400px;
+    overflow: hidden;
+    padding: 26px;
+}
+
+.board-list-title {
+        padding-top: 15px;
+        padding-bottom: 20px;
+}
+
+.board-list-title-h2 {
+    text-align: left;
+    font-size: 12px;
+    padding-left: 10px;
+    color: grey;
 }

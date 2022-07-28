@@ -32,6 +32,6 @@ export const createSaved = (saved) => dispatch => (
     SavedAPIUtil.createSaved(saved).then((saved) => dispatch(receiveSaved(saved)))
 )
 export const deleteSaved = (savedId) => dispatch => (
-    SavedAPIUtil.deleteSaved(savedId).then(()=> dispatch(removedSaved()))
+    SavedAPIUtil.deleteSaved(savedId).then(() => dispatch(removedSaved(savedId)))
 )
 

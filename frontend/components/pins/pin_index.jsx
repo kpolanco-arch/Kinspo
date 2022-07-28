@@ -8,28 +8,28 @@ class PinIndex extends React.Component {
         super(props)
     }
 
-componentDidMount(){
-// this.props.fetchPin(this.props.match.params.pinId)
-this.props.fetchPins();
-this.props.fetchBoards();
-this.props.fetchSaved();
-// this.props.createSaved();
-// this.props.fetchUsers();
-}
+    componentDidMount() {
+        // this.props.fetchPin(this.props.match.params.pinId)
+        this.props.fetchPins();
+        this.props.fetchBoards();
+        this.props.fetchSaved();
+        this.props.deleteSaved();
+        // this.props.createSaved();
+        // this.props.fetchUsers();
+    }
 
     render() {
-        const { pins, createSaved, deleteSaved, boards, saved} = this.props;
+        const { pins, createSaved, deleteSaved, boards, saved } = this.props;
         // console.log(boards)
         return (
             <div>
                 {/* <h2> Home Pins</h2> */}
                 <div className="gallery">
-                    {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards ={boards} saved ={saved}/>)}
+                    {pins.map(pin => <PinItem key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} />)}
                 </div>
-                <Link to= "pins/new" >
+                <Link to="pins/new" >
                     <button type="submit" className='create-pin-button'>+</button>
                 </Link>
-                {/* <Route path="/pins/:pinId" component={pin_index_item_container} /> */}
             </div>
         )
     }
