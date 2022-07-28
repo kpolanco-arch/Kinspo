@@ -43,7 +43,7 @@ class BoardItem extends React.Component {
                     <div className="board-description-text">{board.description}description</div>
                 </div>    
                    <div className="pins-length-text"> {pinsonBoard.length} {(pinsonBoard.length > 1)? "Pins" : "Pin"}</div>
-                    {pinsonBoard.map(pin => <SavedShowPin key={pin.title} pin={pin}/>)}
+                    {pinsonBoard.map(savedpin => <SavedShowPin key={savedpin.title} savedpin={savedpin}/>)}
                 
             </div>
         )

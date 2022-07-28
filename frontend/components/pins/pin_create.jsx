@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import SavePin from "./save_pin";
 
 class PinCreate extends React.Component {
     constructor(props){
@@ -53,6 +54,7 @@ class PinCreate extends React.Component {
                     </div>
                     <div className="pin-text-container">
                             <div className="pin-header-container"> 
+                            {/* <SavePin key={pin.title} pin={pin} createSaved={createSaved} currentUser={currentUser} deleteSaved={deleteSaved} boards={boards} saved={saved} /> */}
                                 <div>
                                     <span class="material-symbols-outlined">
                                         expand_more

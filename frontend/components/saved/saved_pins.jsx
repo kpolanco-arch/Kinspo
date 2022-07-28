@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createSaved } from '../../util/save_util';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+import SavePin from '../pins/save_pin';
 
 
 class SavedShowPin extends React.Component {
@@ -18,29 +19,18 @@ class SavedShowPin extends React.Component {
 
     render() {
         
-        const { pins, pin, user, deleteSaved } = this.props;
-        // debugger
-        // if (!saved) {
-        //     return null
-        // }
-        // pins.map(saved => )
-
-        // let pinsonBoard = pins.filter(savedpin => savedpin.board_id === pin.id)
-       
+        const { pins, pin, currentUser, deleteSaved, boards, saved, createSaved, savedpin} = this.props;
         return (
-            <div >
+            <div className='gallery'>
                 {/* <h2>Saved Pin</h2>
                 <button type="submit" className='save-button' onClick={() => createSaved({pin_id: pin.id, user_id: currentUser.id })} >Save</button> */}
                 <div className='grid-images'>
-                    {pins.map((saved) => 
-                    saved.id === pin.pin_id ? <div>
-                        {/* <h1>this is the pin</h1> */}
-                        <Link to={`/pins/${saved.id}`} className="pin-index-container" >
-                            <img src={saved.image_url} alt={saved.title} className="pin-index-img" />
+                    {pins.map((pin) => 
+                    pin.id === savedpin.pin_id ? <div>
+                        <Link to={`/pins/${pin.id}`} className="pin-index-container" >
+                            <SavePin key={pin.title} pin={pin} createSaved={createSaved} currentUser={currentUser} deleteSaved={deleteSaved} boards={boards} saved={saved} />
+                            <img src={pin.image_url} alt={pin.title} className="pin-index-img" />
                         </Link>
-                        <div className='gllery'>
-                            <button className='unsave-button' type="submit" onClick={() => deleteSaved(saved.id)} >Saved</button>
-                        </div>
                             
                     </div> : null)}
 

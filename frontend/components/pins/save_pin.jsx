@@ -32,6 +32,7 @@ class SavePin extends React.Component {
     render() {
         const { pin, currentUser, pins, createSaved, deleteSaved, boards, saved } = this.props;
         let userboards = boards.filter(board => board.creator_id === currentUser.id)
+        console.log(saved)
         let pinonBoards = saved.filter(pinsaved => pin.id === pinsaved.pin_id)
 
         const dropdownMenu = () => {

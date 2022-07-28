@@ -31,6 +31,7 @@ return (
             pin.creator_id === user.id ? <div>
                     
                     <Link to={`/pins/${pin.id}`} className="pin-index-container" >
+                        {/* <SavePin key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} /> */}
                         <img src={pin.image_url} alt={pin.title} className="pin-index-img" />
                     </Link>
                     <button type="submit" className='unsave-button' onClick={() => deletePin(pin.id)} >Delete
