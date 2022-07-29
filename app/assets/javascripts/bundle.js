@@ -1466,10 +1466,12 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
       image_url: '',
       creator_id: _this.props.currentUser.id,
       description: '',
-      board_id: null
+      board_id: null,
+      photoFile: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.navigateback = _this.navigateback.bind(_assertThisInitialized(_this));
+    _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1485,9 +1487,29 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleSubmit",
     value: function handleSubmit(e) {
+      e.preventDefault(); // const pin = Object.assign({}, this.state)
+
+      var formData = new FormData();
+      formData.append('pin[title]', this.state.title);
+      formData.append('pin[image_url]', this.state.image_url);
+      formData.append('pin[description]', this.state.description);
+      formData.append('pin[board_id]', this.state.board_id);
+
+      if (this.state.photoFile) {
+        formData.append('pin[photo]', this.state.photoFile);
+      }
+
+      this.props.createPin(formData);
+    }
+  }, {
+    key: "handleFile",
+    value: function handleFile(e) {
       e.preventDefault();
-      var pin = Object.assign({}, this.state);
-      this.props.createPin(pin);
+      var fileReader = new FileReader();
+      var file = e.currentTarget.files[0];
+      this.setState({
+        photoFile: e.currentTarget.files[0]
+      });
     }
   }, {
     key: "navigateback",
@@ -1503,6 +1525,12 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
           creator_id = _this$state.creator_id,
           description = _this$state.description,
           board_id = _this$state.board_id;
+      var _this$props = this.props,
+          pin = _this$props.pin,
+          saved = _this$props.saved,
+          boards = _this$props.boards,
+          createSaved = _this$props.createSaved,
+          deleteSaved = _this$props.deleteSaved;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "background-pin-create"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1521,7 +1549,10 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
         className: "create-pin-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
         className: "material-symbols-outlined"
-      }, "arrow_upward"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "arrow_upward"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        type: "file",
+        onChange: this.handleFile
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "upload-text"
       }, "Drag and drop or click to upload")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-text-container"
@@ -1593,13 +1624,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _pin_create__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pin_create */ "./frontend/components/pins/pin_create.jsx");
 /* harmony import */ var _actions_pin_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/pin_actions */ "./frontend/actions/pin_actions.js");
+/* harmony import */ var _actions_save_action__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/save_action */ "./frontend/actions/save_action.js");
 
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    boards: Object.values(state.entities.boards),
+    saved: Object.values(state.entities.saved),
+    pin: state.entities.pins[ownProps.match.params.pinId]
   };
 };
 
@@ -1607,6 +1643,12 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     createPin: function createPin(pin) {
       return dispatch((0,_actions_pin_actions__WEBPACK_IMPORTED_MODULE_2__.createPin)(pin));
+    },
+    createSaved: function createSaved(saved) {
+      return dispatch((0,_actions_save_action__WEBPACK_IMPORTED_MODULE_3__.createSaved)(saved));
+    },
+    deleteSaved: function deleteSaved(savedId) {
+      return dispatch((0,_actions_save_action__WEBPACK_IMPORTED_MODULE_3__.deleteSaved)(savedId));
     }
   };
 };
@@ -1891,6 +1933,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions_pin_actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/pin_actions */ "./frontend/actions/pin_actions.js");
+/* harmony import */ var _save_pin__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./save_pin */ "./frontend/components/pins/save_pin.jsx");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1914,7 +1957,8 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 
- // import pin_index_item_container from "./pin_index_item_container";
+
+
 
 var PinShowItem = /*#__PURE__*/function (_React$Component) {
   _inherits(PinShowItem, _React$Component);
@@ -1922,9 +1966,13 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(PinShowItem);
 
   function PinShowItem(props) {
+    var _this;
+
     _classCallCheck(this, PinShowItem);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.navigateback = _this.navigateback.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(PinShowItem, [{
@@ -1933,9 +1981,19 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
       this.props.fetchPin(this.props.match.params.pinId);
     }
   }, {
+    key: "navigateback",
+    value: function navigateback() {
+      this.props.history.push('/');
+    }
+  }, {
     key: "render",
     value: function render() {
-      var pin = this.props.pin;
+      var _this$props = this.props,
+          pin = _this$props.pin,
+          saved = _this$props.saved,
+          boards = _this$props.boards,
+          createSaved = _this$props.createSaved,
+          deleteSaved = _this$props.deleteSaved;
 
       if (!pin) {
         return null;
@@ -1945,8 +2003,10 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
         className: "background-pin-show"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "back-arrow"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        "class": "material-symbols-outlined"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: this.navigateback
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "material-symbols-outlined"
       }, "arrow_back"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "show-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1961,19 +2021,21 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
         className: "pin-text-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-header-container"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, pin.board, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        "class": "material-symbols-outlined"
-      }, "expand_more")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "save-button",
-        type: "submit"
-      }, "Save")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_save_pin__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        key: pin.title,
+        pin: pin,
+        createSaved: createSaved,
+        deleteSaved: deleteSaved,
+        boards: boards,
+        saved: saved
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-header-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pin.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-description"
       }, pin.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, pin.creator_id)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "edit-icon"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        "class": "material-symbols-outlined"
+        className: "material-symbols-outlined"
       }, "edit")))));
     }
   }]);
@@ -2007,7 +2069,9 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     pin: state.entities.pins[ownProps.match.params.pinId],
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    boards: Object.values(state.entities.boards),
+    saved: Object.values(state.entities.saved)
   };
 };
 
@@ -2015,7 +2079,33 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
   return {
     fetchPin: function fetchPin(pinId) {
       return dispatch((0,_actions_pin_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPin)(pinId));
-    }
+    },
+    createSaved: function (_createSaved) {
+      function createSaved(_x) {
+        return _createSaved.apply(this, arguments);
+      }
+
+      createSaved.toString = function () {
+        return _createSaved.toString();
+      };
+
+      return createSaved;
+    }(function (saved) {
+      return dispatch(createSaved(saved));
+    }),
+    deleteSaved: function (_deleteSaved) {
+      function deleteSaved(_x2) {
+        return _deleteSaved.apply(this, arguments);
+      }
+
+      deleteSaved.toString = function () {
+        return _deleteSaved.toString();
+      };
+
+      return deleteSaved;
+    }(function (savedId) {
+      return dispatch(deleteSaved(savedId));
+    })
   };
 };
 
@@ -2113,8 +2203,8 @@ var SavePin = /*#__PURE__*/function (_React$Component) {
           saved = _this$props.saved;
       var userboards = boards.filter(function (board) {
         return board.creator_id === currentUser.id;
-      });
-      console.log(saved);
+      }); // console.log(saved)
+
       var pinonBoards = saved.filter(function (pinsaved) {
         return pin.id === pinsaved.pin_id;
       });
@@ -2195,7 +2285,7 @@ var SavePin = /*#__PURE__*/function (_React$Component) {
         onClick: this.showMenu,
         className: "open-menu-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "All Boards"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        "class": "material-symbols-outlined"
+        className: "material-symbols-outlined"
       }, "expand_more"), pinonBoards.map(function (saved) {
         return saved.pin_id === pin.id;
       }).length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
@@ -2915,7 +3005,7 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       var cover1;
       var cover11;
       var savedArr = Object.values(saved); // console.log(saved[0].pin_id )
-      // cover1 = pins.map(pin => pin.id === (saved[0]).pin_id ? pin.image_url : null)
+      // cover1 = pins.filter(pin => pin.id === (saved[0]).pin_id ? pin.image_url : null)
       // if (!cover1 === null){
       //     cover11 = cover1}
       // console.log(cover11)

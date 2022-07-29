@@ -1,16 +1,25 @@
 import React from "react";
 import { fetchPin } from "../../actions/pin_actions";
-// import pin_index_item_container from "./pin_index_item_container";
+import SavePin from "./save_pin";
 
 class PinShowItem extends React.Component {
     constructor(props){
         super(props)
+
+        this.navigateback = this.navigateback.bind(this)
     }
 componentDidMount() {
     this.props.fetchPin(this.props.match.params.pinId)
+
+}
+
+navigateback() {
+        this.props.history.push('/')
 }
     render() {
-        let pin = this.props.pin
+        const { pin, saved, boards, createSaved, deleteSaved } = this.props;
+
+        
         if (!pin ){
         return null}
         
@@ -19,7 +28,7 @@ componentDidMount() {
         return (
             <div className="background-pin-show">
                 <div className="back-arrow">
-                    <button><span class="material-symbols-outlined">arrow_back</span></button>
+                    <button onClick={this.navigateback}><span className="material-symbols-outlined">arrow_back</span></button>
                 </div>
                 <div className="show-container">   
                     <div className="show-pin-wrapper">
@@ -30,13 +39,16 @@ componentDidMount() {
                     </div>
                     <div className="pin-text-container">
                             <div className="pin-header-container"> 
-                                <div>
-                                    {pin.board}
-                                    <span class="material-symbols-outlined">
+                            <SavePin key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} />
+
+
+                                {/* <div>
+                                    {pin.board_id}
+                                    <span className="material-symbols-outlined">
                                         expand_more
                                     </span>
                                 </div>
-                                <button className="save-button" type="submit">Save</button>
+                                <button className="save-button" type="submit">Saved</button> */}
                             </div>
                             <div className="pin-header-container">
                                 <h1>{pin.title}</h1> 
@@ -48,7 +60,7 @@ componentDidMount() {
                     </div>
                     <div className="edit-icon">
                         <button>
-                            <span class="material-symbols-outlined">
+                            <span className="material-symbols-outlined">
                             edit
                         </span>
                         </button>

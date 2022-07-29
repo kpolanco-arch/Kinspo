@@ -118,9 +118,10 @@ span.material-symbols-outlined{
 .pin-header-container {
     display: flex;
     flex-direction: row;
-    align-items: center;
+    // align-items: center;
     justify-content: flex-end;
-    padding: 10px;
+    padding: 20px;
+    color: black;
 }
 .show-pin-wrapper {
     float: left;

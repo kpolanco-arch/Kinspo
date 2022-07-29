@@ -32,7 +32,7 @@ class SavePin extends React.Component {
     render() {
         const { pin, currentUser, pins, createSaved, deleteSaved, boards, saved } = this.props;
         let userboards = boards.filter(board => board.creator_id === currentUser.id)
-        console.log(saved)
+        // console.log(saved)
         let pinonBoards = saved.filter(pinsaved => pin.id === pinsaved.pin_id)
 
         const dropdownMenu = () => {
@@ -93,7 +93,7 @@ class SavePin extends React.Component {
             <div className='open-menu'>
                 <div onClick={this.showMenu} className = "open-menu-container">
                     <div>All Boards</div>
-                    <span class="material-symbols-outlined">
+                    <span className="material-symbols-outlined">
                         expand_more
                     </span>
                     {pinonBoards.map(saved => saved.pin_id === pin.id).length > 0 ?

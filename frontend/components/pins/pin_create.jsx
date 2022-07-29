@@ -12,11 +12,13 @@ class PinCreate extends React.Component {
             image_url: '',
             creator_id: this.props.currentUser.id,
             description: '',
-            board_id: null
+            board_id: null,
+            photoFile: null
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.navigateback = this.navigateback.bind(this)
+        this.navigateback = this.navigateback.bind(this);
+        this.handleFile = this.handleFile.bind(this);
 
     }
 
@@ -26,8 +28,28 @@ class PinCreate extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const pin = Object.assign({}, this.state)
-        this.props.createPin(pin)
+        // const pin = Object.assign({}, this.state)
+        
+
+        const formData = new FormData();
+        formData.append('pin[title]', this.state.title);
+        formData.append('pin[image_url]', this.state.image_url);
+        formData.append('pin[description]', this.state.description);
+        formData.append('pin[board_id]', this.state.board_id);
+
+        if (this.state.photoFile) {
+
+            formData.append('pin[photo]', this.state.photoFile);
+    }
+        this.props.createPin(formData)
+}
+
+    handleFile(e) {
+        e.preventDefault();
+        const fileReader = new FileReader();
+        const file = e.currentTarget.files[0];
+
+        this.setState({ photoFile: e.currentTarget.files[0] })
     }
 
     navigateback(){
@@ -36,6 +58,7 @@ class PinCreate extends React.Component {
 
     render () {
         const {title, image_url, creator_id, description, board_id} = this.state;
+        const {pin, saved, boards, createSaved, deleteSaved } = this.props;
         return (
             <div className="background-pin-create">
                 <div className="back-arrow">
@@ -48,13 +71,14 @@ class PinCreate extends React.Component {
                                 <span className="material-symbols-outlined">
                                     arrow_upward
                                 </span>
+                                <input type="file" onChange={this.handleFile} />
                                 <div className="upload-text">Drag and drop or click to upload</div>
                             </div>
                         </div>    
                     </div>
                     <div className="pin-text-container">
                             <div className="pin-header-container"> 
-                            {/* <SavePin key={pin.title} pin={pin} createSaved={createSaved} currentUser={currentUser} deleteSaved={deleteSaved} boards={boards} saved={saved} /> */}
+                            {/* <SavePin key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} /> */}
                                 <div>
                                     <span className="material-symbols-outlined">
                                         expand_more

@@ -46,7 +46,7 @@ render () {
     
     let savedArr= Object.values(saved) 
             // console.log(saved[0].pin_id )
-            // cover1 = pins.map(pin => pin.id === (saved[0]).pin_id ? pin.image_url : null)
+            // cover1 = pins.filter(pin => pin.id === (saved[0]).pin_id ? pin.image_url : null)
             // if (!cover1 === null){
             //     cover11 = cover1}
 
