@@ -18,7 +18,7 @@ navigateback() {
 }
     render() {
         const { pin, saved, boards, createSaved, deleteSaved } = this.props;
-
+        const type = (pin.photoUrl) ? pin.photoUrl : pin.image_url
         
         if (!pin ){
         return null}
@@ -34,7 +34,7 @@ navigateback() {
                     <div className="show-pin-wrapper">
                         
                         <label className="pin-img-container">
-                            <img src={pin.image_url} alt={pin.title} className="pin-img" />
+                            <img src={type} alt={pin.title} className="pin-img" />
                         </label> 
                     </div>
                     <div className="pin-text-container">

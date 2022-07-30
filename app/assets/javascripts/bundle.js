@@ -1467,7 +1467,8 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
       creator_id: _this.props.currentUser.id,
       description: '',
       board_id: null,
-      photoFile: null
+      photoFile: null,
+      photoUrl: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.navigateback = _this.navigateback.bind(_assertThisInitialized(_this));
@@ -1494,6 +1495,7 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
       formData.append('pin[image_url]', this.state.image_url);
       formData.append('pin[description]', this.state.description);
       formData.append('pin[board_id]', this.state.board_id);
+      formData.append('pin[creator_id]', this.state.creator_id);
 
       if (this.state.photoFile) {
         formData.append('pin[photo]', this.state.photoFile);
@@ -1504,12 +1506,22 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "handleFile",
     value: function handleFile(e) {
+      var _this3 = this;
+
       e.preventDefault();
-      var fileReader = new FileReader();
       var file = e.currentTarget.files[0];
-      this.setState({
-        photoFile: e.currentTarget.files[0]
-      });
+      var fileReader = new FileReader();
+
+      fileReader.onloadend = function () {
+        _this3.setState({
+          photoFile: file,
+          photoUrl: fileReader.result
+        });
+      };
+
+      if (file) {
+        fileReader.readAsDataURL(file);
+      }
     }
   }, {
     key: "navigateback",
@@ -1531,6 +1543,13 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
           boards = _this$props.boards,
           createSaved = _this$props.createSaved,
           deleteSaved = _this$props.deleteSaved;
+      var preview = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "create-pin-template"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "photo-preview-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        src: this.state.photoUrl
+      })));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "background-pin-create"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1543,7 +1562,7 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
         className: "show-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "create-pin-wrapper"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, this.state.photoUrl ? preview : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "create-pin-template"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "create-pin-container"
@@ -1561,8 +1580,7 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
         className: "material-symbols-outlined"
       }, "expand_more")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-        className: "save-button",
-        type: "submit"
+        className: "save-button"
       }, "Save")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-header-container"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1582,7 +1600,7 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
         className: "pin-underline"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "text",
-        placeholder: "Image link",
+        placeholder: "Add a destination link",
         value: image_url,
         onChange: this.update('image_url')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -1592,11 +1610,6 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
         onChange: this.update('description')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-underline"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-        type: "text",
-        placeholder: "board",
-        value: board_id,
-        onChange: this.update('board_id')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         type: "submit"
       }, "Submit")))))));
@@ -1891,7 +1904,9 @@ var PinItem = /*#__PURE__*/function (_React$Component) {
           deleteSaved = _this$props.deleteSaved,
           board = _this$props.board,
           boards = _this$props.boards,
-          saved = _this$props.saved;
+          saved = _this$props.saved; // console.log(pin.photoUrl)
+
+      var type = pin.photoUrl ? pin.photoUrl : pin.image_url;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "grid-images"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
@@ -1905,7 +1920,7 @@ var PinItem = /*#__PURE__*/function (_React$Component) {
         boards: boards,
         saved: saved
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: pin.image_url,
+        src: type,
         alt: pin.title,
         className: "pin-index-img"
       })));
@@ -1994,6 +2009,7 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
           boards = _this$props.boards,
           createSaved = _this$props.createSaved,
           deleteSaved = _this$props.deleteSaved;
+      var type = pin.photoUrl ? pin.photoUrl : pin.image_url;
 
       if (!pin) {
         return null;
@@ -2014,7 +2030,7 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
         className: "pin-img-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: pin.image_url,
+        src: type,
         alt: pin.title,
         className: "pin-img"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3239,7 +3255,7 @@ var UserShowPin = /*#__PURE__*/function (_React$Component) {
           to: "/pins/".concat(pin.id),
           className: "pin-index-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          src: pin.image_url,
+          src: pin.photoUrl ? pin.photoUrl : pin.image_url,
           alt: pin.title,
           className: "pin-index-img"
         })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
@@ -3858,9 +3874,9 @@ var createPin = function createPin(pin) {
   return $.ajax({
     url: '/api/pins/',
     method: 'POST',
-    data: {
-      pin: pin
-    }
+    data: pin,
+    contentType: false,
+    processData: false
   });
 };
 var updatePin = function updatePin(pin) {

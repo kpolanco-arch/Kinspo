@@ -13,7 +13,8 @@ class PinCreate extends React.Component {
             creator_id: this.props.currentUser.id,
             description: '',
             board_id: null,
-            photoFile: null
+            photoFile: null,
+            photoUrl : null
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -36,6 +37,8 @@ class PinCreate extends React.Component {
         formData.append('pin[image_url]', this.state.image_url);
         formData.append('pin[description]', this.state.description);
         formData.append('pin[board_id]', this.state.board_id);
+        formData.append('pin[creator_id]', this.state.creator_id);
+
 
         if (this.state.photoFile) {
 
@@ -46,10 +49,18 @@ class PinCreate extends React.Component {
 
     handleFile(e) {
         e.preventDefault();
-        const fileReader = new FileReader();
+        
         const file = e.currentTarget.files[0];
+        const fileReader = new FileReader();
 
-        this.setState({ photoFile: e.currentTarget.files[0] })
+        fileReader.onloadend = () => {
+            this.setState({ photoFile: file, photoUrl: fileReader.result })
+        }
+
+        if (file) {
+            fileReader.readAsDataURL(file);
+        }
+
     }
 
     navigateback(){
@@ -59,6 +70,14 @@ class PinCreate extends React.Component {
     render () {
         const {title, image_url, creator_id, description, board_id} = this.state;
         const {pin, saved, boards, createSaved, deleteSaved } = this.props;
+        
+
+        const preview = <div className="create-pin-template">
+            <div className="photo-preview-container">
+            <img src={this.state.photoUrl}/>
+            </div>
+        </div>
+
         return (
             <div className="background-pin-create">
                 <div className="back-arrow">
@@ -66,6 +85,9 @@ class PinCreate extends React.Component {
                 </div>
                 <div className="show-container">   
                     <div className="create-pin-wrapper">
+
+                        {this.state.photoUrl? preview :
+
                         <div className="create-pin-template">
                             <div className="create-pin-container">
                                 <span className="material-symbols-outlined">
@@ -74,7 +96,8 @@ class PinCreate extends React.Component {
                                 <input type="file" onChange={this.handleFile} />
                                 <div className="upload-text">Drag and drop or click to upload</div>
                             </div>
-                        </div>    
+                        </div>}
+
                     </div>
                     <div className="pin-text-container">
                             <div className="pin-header-container"> 
@@ -85,7 +108,7 @@ class PinCreate extends React.Component {
                                     </span>
             
                                 </div>
-                                <button className="save-button" type="submit">Save</button>
+                                <button className="save-button">Save</button>
                             </div>
                             <div className="pin-header-container">
                             </div>
@@ -94,11 +117,12 @@ class PinCreate extends React.Component {
                                     <form className="create-pin-form" onSubmit={this.handleSubmit}>
                                         <input className="pin-create-title" type="text" placeholder="Add your title" value={title} onChange={this.update('title')} />
                                         <div className="pin-underline"></div>
-                                        <input type="text" placeholder="Image link" value={image_url} onChange={this.update('image_url')} />
+                                        <input type="text" placeholder="Add a destination link" value={image_url} onChange={this.update('image_url')} />
+                                          
 
                                         <input type="text" placeholder="Tell everyone what your Pin is about " value={description} onChange={this.update('description')} />
                                         <div className="pin-underline"></div>
-                                        <input type="text" placeholder="board" value={board_id} onChange={this.update('board_id')} />
+                                        {/* <input type="text" placeholder="board" value={board_id} onChange={this.update('board_id')} /> */}
                                         <button type="submit">Submit</button>
                                     </form>
                                 </div>
