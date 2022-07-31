@@ -29,7 +29,7 @@ handleSubmit(e){
 }
 
 render () {
-    const { pins, deletePin, boards, createSaved, fetchSaved, saved } = this.props;
+    const { pins, follows, deletePin, boards, createSaved, fetchSaved, saved } = this.props;
     let user = this.props.user
     if (!user) {
         return null
@@ -72,6 +72,9 @@ render () {
     //     cover3 = pins[savedArr[2].pin_id].image_url
     // }
 
+const followArr = Object.values(follows)
+const followers = followArr.filter(follow => follow.user_id === user.id)
+const following = followArr.filter(follow => follow.follower_id === user.id)
 
 
     return (
@@ -81,8 +84,8 @@ render () {
                 <h1>{this.props.user.username} User Profile</h1>
                 <h2>{this.props.user.email}</h2>
                 <div className='user-profile-followers'>
-                    <h2>followers</h2>
-                    <h2>following</h2>
+                    <h2>{followers.length} followers</h2>
+                    <h2>{following.length} following</h2>
                 </div>
                 <div className='type-board-container'>
                     <div className='type-board-text'>Created

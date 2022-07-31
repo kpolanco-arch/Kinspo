@@ -6,11 +6,13 @@ import { withRouter } from "react-router-dom";
 import { fetchPins, deletePin } from '../../actions/pin_actions';
 import { createSaved, fetchSaved } from '../../actions/save_action';
 import { fetchBoards } from '../../actions/board_actions';
+import { fetchFollows, createFollow, deleteFollow } from '../../actions/follow_actions';
+
 
 const mapStateToProps = (state, ownProps) => {
     return {
         user: state.entities.users[ownProps.match.params.userId],
-        // user: state.entities.users,
+        follows: state.entities.follows,
         currentUser: state.entities.users[state.session.id],
         pins: Object.values(state.entities.pins),
         boards: state.entities.boards,
@@ -25,8 +27,10 @@ const mapDispatchToProps = (dispatch) => {
         createSaved: (saved) => dispatch(createSaved(saved)),
         fetchSaved: () => dispatch(fetchSaved()),
         deletePin: (pinId) => dispatch(deletePin(pinId)),
-        fetchBoards: () => dispatch(fetchBoards())
-
+        fetchBoards: () => dispatch(fetchBoards()),
+        fetchFollows: () => dispatch(fetchFollows()),
+        createFollow: (follow) => dispatch(createFollow(follow)),
+        deleteFollow: (follow) => dispatch(deleteFollow(follow))
     }
 }
 

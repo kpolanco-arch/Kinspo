@@ -157,3 +157,22 @@ text-decoration: none;
     background-color: transparent;
 }
 
+//board
+
+.edit-icon-board button {
+    border: none;
+        background-color: transparent;
+}
+
+.edit-icon-board {
+    display: flex;
+    justify-content: right;
+    position: relative;
+    bottom: 35px;
+        right: 10px;
+    
+}
+
+.edit-icon-board span.material-symbols-outlined {
+    font-size: 25px;
+}

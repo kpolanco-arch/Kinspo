@@ -28,6 +28,14 @@ attr_reader :password
   foreign_key: :user_id, 
   class_name: :Savepin
 
+  has_many :followers,
+  foreign_key: :user_id,
+  class_name: :Follow
+
+  has_many :user_follows,
+  foreign_key: :follower_id,
+  class_name: :Follow
+
   def self.find_by_credentials(email, password)
     # debugger
     user = User.find_by(email: email)

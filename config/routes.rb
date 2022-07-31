@@ -6,6 +6,7 @@ Rails.application.routes.draw do
       resources :pins
       resources :savepins
       resources :boards
+      resources :follows, only:[:create, :destroy, :index]
 
   end
 root to: "static_pages#root"
