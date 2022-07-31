@@ -3,6 +3,7 @@ import { createPin } from "../../actions/pin_actions";
 import PinEdit from "./pin_edit";
 import { createSaved, deleteSaved } from "../../actions/save_action";
 import { fetchPin } from "../../actions/pin_actions";
+import { updatePin } from "../../actions/pin_actions";
 
 const mapStateToProps = (state, ownProps) => ({
     currentUser: state.entities.users[state.session.id],
@@ -16,7 +17,9 @@ const mapDispatchToProps = dispatch => ({
     createPin: (pin) => dispatch(createPin(pin)),
     createSaved: (saved) => dispatch(createSaved(saved)),
     deleteSaved: (savedId) => dispatch(deleteSaved(savedId)),
-    fetchPin: (pinId) => dispatch(fetchPin(pinId))
+    fetchPin: (pinId) => dispatch(fetchPin(pinId)),
+    updatePin: (pinId) => dispatch(updatePin(pinId))
+    
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PinEdit)

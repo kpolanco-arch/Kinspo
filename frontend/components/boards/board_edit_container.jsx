@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import { createBoard } from "../../actions/board_actions";
+import { createBoard, fetchBoard, fetchBoards, updateBoard } from "../../actions/board_actions";
 import { withRouter } from "react-router-dom";
 import BoardEdit from "./board_edit";
 
@@ -8,7 +8,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    createBoard: (board) => dispatch(createBoard(board))
+    createBoard: (board) => dispatch(createBoard(board)),
+    fetchBoard: (boardId) => dispatch(fetchBoard(boardId)),
+    fetchBoards: () => dispatch(fetchBoards()),
+    updateBoard:() => dispatch(updateBoard())
 })
 
 

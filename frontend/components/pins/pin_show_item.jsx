@@ -1,6 +1,7 @@
 import React from "react";
 import { fetchPin } from "../../actions/pin_actions";
 import SavePin from "./save_pin";
+import { Link } from "react-router-dom";
 
 class PinShowItem extends React.Component {
     constructor(props){
@@ -59,12 +60,13 @@ navigateback() {
                             <h3>{pin.creator_id}</h3>
                     </div>
                     <div className="edit-icon">
+                        <Link to={`/pins/${pin.id}/edit`}>
                         <button>
                             <span className="material-symbols-outlined">
                             edit
                         </span>
                         </button>
-                        
+                        </Link>
                     </div>
                 </div>
             </div>
