@@ -12,7 +12,7 @@ class PinCreate extends React.Component {
             image_url: '',
             creator_id: this.props.currentUser.id,
             description: '',
-            board_id: null,
+            board_id: 9,
             photoFile: null,
             photoUrl : null
         };
@@ -87,13 +87,13 @@ class PinCreate extends React.Component {
                     <div className="create-pin-wrapper">
 
                         {this.state.photoUrl? preview :
-
                         <div className="create-pin-template">
                             <div className="create-pin-container">
+                                <input className="input-file" type="file" onChange={this.handleFile} />
                                 <span className="material-symbols-outlined">
                                     arrow_upward
                                 </span>
-                                <input type="file" onChange={this.handleFile} />
+                                
                                 <div className="upload-text">Drag and drop or click to upload</div>
                             </div>
                         </div>}
@@ -102,13 +102,13 @@ class PinCreate extends React.Component {
                     <div className="pin-text-container">
                             <div className="pin-header-container"> 
                             {/* <SavePin key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} /> */}
-                                <div>
+                                {/* <div>
                                     <span className="material-symbols-outlined">
                                         expand_more
                                     </span>
             
                                 </div>
-                                <button className="save-button">Save</button>
+                                <button className="save-button">Save</button> */}
                             </div>
                             <div className="pin-header-container">
                             </div>
@@ -117,13 +117,15 @@ class PinCreate extends React.Component {
                                     <form className="create-pin-form" onSubmit={this.handleSubmit}>
                                         <input className="pin-create-title" type="text" placeholder="Add your title" value={title} onChange={this.update('title')} />
                                         <div className="pin-underline"></div>
-                                        <input type="text" placeholder="Add a destination link" value={image_url} onChange={this.update('image_url')} />
                                           
-
                                         <input type="text" placeholder="Tell everyone what your Pin is about " value={description} onChange={this.update('description')} />
                                         <div className="pin-underline"></div>
                                         {/* <input type="text" placeholder="board" value={board_id} onChange={this.update('board_id')} /> */}
-                                        <button type="submit">Submit</button>
+                                    <div className="destination">
+                                        <input className="destination-text" type="text" placeholder="Add a destination link (Optional)" value={image_url} onChange={this.update('image_url')} />
+                                        <div className="pin-underline"></div>
+                                    </div>
+                                    <button className="save-button" type="submit">Submit</button>
                                     </form>
                                 </div>
                             </div>

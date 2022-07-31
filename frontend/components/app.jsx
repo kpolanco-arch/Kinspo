@@ -16,6 +16,7 @@ import BoardItem from './boards/board_item_container';
 import UserShowPin from './users/user_show_pins_container';
 import SavedPinsContainer from './saved/saved_pins_container';
 import BoardCreateContainer from './boards/board_create_container';
+import PinEdit from './pins/pin_edit_container';
 
 
 export default () => (
@@ -24,7 +25,7 @@ export default () => (
          <Modal />
         <Switch>
             <Route path="/users/:userId/pins" component={UserShowPin}/>
-
+            <Route path= "/pins/:pinId/edit" component={PinEdit}/>
             <Route path="/boards/new" component={BoardCreateContainer} />
             
             <Route path="/pins/new" component={PinCreateContainer}/>

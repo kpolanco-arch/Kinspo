@@ -205,11 +205,14 @@ span.material-symbols-outlined {
 .create-pin-form .pin-underline {
     padding-top: 8px;
     border-bottom: 1px solid #c0bebe;
+    margin-bottom: 8px;
 }
 
 .create-pin-form input {
     border: none;
     padding-top: 5px;
+        font-size: 16px;
+    
 }
 
 // .create-pin-form input[type= "text"] {
@@ -352,4 +355,21 @@ span.material-symbols-outlined {
     width: 100%;
     height: 100%;
         justify-content: center;
+}
+
+.input-file {
+    height: 100px;
+    position: absolute;
+    opacity: 0;
+}
+
+.destination {
+    position: absolute;
+    bottom: 73px;
+    width: 400px;
+}
+
+.destination-text {
+    
+    width: 400px;
 }
