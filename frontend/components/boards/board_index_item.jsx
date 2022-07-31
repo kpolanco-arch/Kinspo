@@ -9,7 +9,7 @@ class BoardIndexItem extends React.Component {
 
     render() {
         const {board, pins, saved} = this.props;
-        console.log(saved)
+        // console.log(saved)
         if (!board) {
             return null
         }
@@ -38,12 +38,19 @@ class BoardIndexItem extends React.Component {
                         </div>
                         
                         {/* <BoardItem pins={pins} board={board} saved={saved} /> */}
-                     </Link>       
-                   
+                        </Link>  
+
+                        <div className="edit-icon-board">
+                            <Link to={`/boards/${board.id}/edit`}>
+                                <button>
+                                    <span className="material-symbols-outlined">
+                                        edit
+                                    </span>
+                                </button>
+                            </Link>
+                        </div>
                         
-                    
-                    {/* <div className="board-label">{board.name}</div> */}
-            </div>
+                 </div>
         )
     }
 }

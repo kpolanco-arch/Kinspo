@@ -94,14 +94,14 @@ class PinEdit extends React.Component {
                                     <input className="pin-create-title" type="text" defaultValue={pin.title} onChange={this.update('title')} />
                                     <div className="pin-underline"></div>
 
-                                    <input type="text" placeholder="Tell everyone what your Pin is about " value={pin.description} onChange={this.update('description')} />
+                                    <input type="text" placeholder="Tell everyone what your Pin is about " defaultValue={pin.description} onChange={this.update('description')} />
                                     <div className="pin-underline"></div>
                                     {/* <input type="text" placeholder="board" value={board_id} onChange={this.update('board_id')} /> */}
                                     <div className="destination">
-                                        <input className="destination-text" type="text" placeholder="Add a destination link (Optional)" value={pin.image_url} onChange={this.update('image_url')} />
+                                        <input className="destination-text" type="text" placeholder="Add a destination link (Optional)" defaultValue={pin.image_url} onChange={this.update('image_url')} />
                                         <div className="pin-underline"></div>
                                     </div>
-                                    <button className="save-button" type="submit">Submit</button>
+                                    <button className="save-button" type="submit">Update</button>
                                 </form>
                             </div>
                         </div>

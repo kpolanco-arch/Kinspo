@@ -3,15 +3,17 @@ import { createBoard, fetchBoard, fetchBoards, updateBoard } from "../../actions
 import { withRouter } from "react-router-dom";
 import BoardEdit from "./board_edit";
 
-const mapStateToProps = state => ({
-    currentUser: state.entities.users[state.session.id]
+const mapStateToProps = (state, ownProps) => ({
+    currentUser: state.entities.users[state.session.id],
+    board: state.entities.boards[ownProps.match.params.boardId]
+
 })
 
 const mapDispatchToProps = dispatch => ({
     createBoard: (board) => dispatch(createBoard(board)),
     fetchBoard: (boardId) => dispatch(fetchBoard(boardId)),
     fetchBoards: () => dispatch(fetchBoards()),
-    updateBoard:() => dispatch(updateBoard())
+    updateBoard:(boardId) => dispatch(updateBoard(boardId))
 })
 
 

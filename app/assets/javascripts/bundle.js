@@ -446,6 +446,9 @@ __webpack_require__.r(__webpack_exports__);
     path: "/users/:userId/pins",
     component: _users_user_show_pins_container__WEBPACK_IMPORTED_MODULE_12__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+    path: "/boards/:boardId/edit",
+    component: _boards_board_edit_container__WEBPACK_IMPORTED_MODULE_16__["default"]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
     path: "/pins/:pinId/edit",
     component: _pins_pin_edit_container__WEBPACK_IMPORTED_MODULE_15__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
@@ -658,6 +661,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -688,15 +693,80 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
   var _super = _createSuper(BoardEdit);
 
   function BoardEdit(props) {
+    var _this;
+
     _classCallCheck(this, BoardEdit);
 
-    return _super.call(this, props);
+    _this = _super.call(this, props);
+    _this.state = _this.props.board;
+    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.navigateback = _this.navigateback.bind(_assertThisInitialized(_this));
+    return _this;
   }
 
   _createClass(BoardEdit, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchBoard(this.props.match.params.boardId);
+    }
+  }, {
+    key: "update",
+    value: function update(val) {
+      var _this2 = this;
+
+      return function (e) {
+        return _this2.setState(_defineProperty({}, val, e.target.value));
+      };
+    }
+  }, {
+    key: "handleSubmit",
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      this.props.updateBoard(this.state);
+    }
+  }, {
+    key: "navigateback",
+    value: function navigateback() {
+      this.props.history.push('/');
+    }
+  }, {
     key: "render",
-    value: function render() {// return (
-      // )
+    value: function render() {
+      var board = this.props.board;
+      console.log(board);
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "modal-background"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "background-board-create"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-create-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "board-text-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "pin-show-description"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
+        className: "create-board-title"
+      }, "Create a Board"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "create-pin-form"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
+        className: "create-board-form",
+        onSubmit: this.handleSubmit
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", null, "Name")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        type: "text",
+        placeholder: "Like 'Places to Go' or 'Recipes to Make'",
+        defaultValue: board.name,
+        onChange: this.update('name')
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+        type: "text",
+        placeholder: "Description",
+        defaultValue: board.description,
+        onChange: this.update('description')
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "create-button-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "create-button",
+        type: "submit"
+      }, "Update")))))))));
     }
   }]);
 
@@ -727,9 +797,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    board: state.entities.boards[ownProps.match.params.boardId]
   };
 };
 
@@ -744,8 +815,8 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     fetchBoards: function fetchBoards() {
       return dispatch((0,_actions_board_actions__WEBPACK_IMPORTED_MODULE_1__.fetchBoards)());
     },
-    updateBoard: function updateBoard() {
-      return dispatch((0,_actions_board_actions__WEBPACK_IMPORTED_MODULE_1__.updateBoard)());
+    updateBoard: function updateBoard(boardId) {
+      return dispatch((0,_actions_board_actions__WEBPACK_IMPORTED_MODULE_1__.updateBoard)(boardId));
     }
   };
 };
@@ -954,8 +1025,7 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           board = _this$props.board,
           pins = _this$props.pins,
-          saved = _this$props.saved;
-      console.log(saved);
+          saved = _this$props.saved; // console.log(saved)
 
       if (!board) {
         return null;
@@ -985,7 +1055,13 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "third-cover"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-cover-title"
-      }, board.name))));
+      }, board.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "edit-icon-board"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        to: "/boards/".concat(board.id, "/edit")
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        className: "material-symbols-outlined"
+      }, "edit")))));
     }
   }]);
 
@@ -1955,7 +2031,7 @@ var PinEdit = /*#__PURE__*/function (_React$Component) {
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
         type: "text",
         placeholder: "Tell everyone what your Pin is about ",
-        value: pin.description,
+        defaultValue: pin.description,
         onChange: this.update('description')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-underline"
@@ -1965,14 +2041,14 @@ var PinEdit = /*#__PURE__*/function (_React$Component) {
         className: "destination-text",
         type: "text",
         placeholder: "Add a destination link (Optional)",
-        value: pin.image_url,
+        defaultValue: pin.image_url,
         onChange: this.update('image_url')
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-underline"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "save-button",
         type: "submit"
-      }, "Submit")))))));
+      }, "Update")))))));
     }
   }]);
 

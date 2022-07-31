@@ -26,7 +26,7 @@ export default () => (
          <Modal />
         <Switch>
             <Route path="/users/:userId/pins" component={UserShowPin}/>
-            {/* <Route path="/boards/:boardId/edit" component={BoardEdit} /> */}
+            <Route path="/boards/:boardId/edit" component={BoardEdit} />
             <Route path= "/pins/:pinId/edit" component={PinEdit}/>
             <Route path="/boards/new" component={BoardCreateContainer} />
             
