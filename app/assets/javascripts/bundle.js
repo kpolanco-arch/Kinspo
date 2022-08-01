@@ -2506,6 +2506,8 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
   _createClass(PinShowItem, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.fetchUsers();
+      this.props.fetchFollows();
       this.props.fetchPin(this.props.match.params.pinId);
     }
   }, {
@@ -2518,15 +2520,32 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           pin = _this$props.pin,
+          currentUser = _this$props.currentUser,
           saved = _this$props.saved,
           boards = _this$props.boards,
+          follows = _this$props.follows,
           createSaved = _this$props.createSaved,
-          deleteSaved = _this$props.deleteSaved;
-      var type = pin.photoUrl ? pin.photoUrl : pin.image_url;
+          deleteSaved = _this$props.deleteSaved,
+          users = _this$props.users,
+          createFollow = _this$props.createFollow; // const type = (!pin.photoUrl) ? pin.image_url : pin.photoUrl 
+
+      var followArr = Object.values(follows);
+      var followers = followArr.filter(function (follow) {
+        return follow.user_id === pin.creator_id;
+      }); // const following = followArr.filter(follow => follow.follower_id === user.id)
+
+      var theyfollow = followArr.filter(function (follow) {
+        return follow.user_id === currentUser.id && follow.follower_id === pin.creator_id;
+      });
 
       if (!pin) {
         return null;
       }
+
+      var owner = users[pin.creator_id];
+      var newvar = !owner.username ? owner.email : owner.username; // if (typeof (owner.username) === 'undefined' || (owner.username)=== null) {
+      //     var newvar = owner.email
+      // }
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "background-pin-show"
@@ -2543,7 +2562,7 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
         className: "pin-img-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: type,
+        src: !pin.photoUrl ? pin.image_url : pin.photoUrl,
         alt: pin.title,
         className: "pin-img"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -2561,7 +2580,16 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
         className: "pin-header-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pin.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-description"
-      }, pin.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, pin.creator_id)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, pin.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "user-avatar"
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, newvar), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, followers.length, " followers")), pin.creator_id === currentUser.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, theyfollow.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Unfollow") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        onClick: function onClick() {
+          return createFollow({
+            user_id: currentUser.id,
+            follower_id: pin.creator_id
+          });
+        }
+      }, "Follow"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "edit-icon"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/pins/".concat(pin.id, "/edit")
@@ -2592,6 +2620,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _pin_show_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pin_show_item */ "./frontend/components/pins/pin_show_item.jsx");
 /* harmony import */ var _actions_pin_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/pin_actions */ "./frontend/actions/pin_actions.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+/* harmony import */ var _actions_follow_actions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/follow_actions */ "./frontend/actions/follow_actions.js");
+
+
 
 
 
@@ -2600,9 +2632,11 @@ __webpack_require__.r(__webpack_exports__);
 var mapStateToProps = function mapStateToProps(state, ownProps) {
   return {
     pin: state.entities.pins[ownProps.match.params.pinId],
+    follows: state.entities.follows,
     currentUser: state.entities.users[state.session.id],
     boards: Object.values(state.entities.boards),
-    saved: Object.values(state.entities.saved)
+    saved: Object.values(state.entities.saved),
+    users: state.entities.users
   };
 };
 
@@ -2636,7 +2670,19 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
       return deleteSaved;
     }(function (savedId) {
       return dispatch(deleteSaved(savedId));
-    })
+    }),
+    fetchUsers: function fetchUsers() {
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_3__.fetchUsers)());
+    },
+    fetchFollows: function fetchFollows() {
+      return dispatch((0,_actions_follow_actions__WEBPACK_IMPORTED_MODULE_4__.fetchFollows)());
+    },
+    createFollow: function createFollow(follow) {
+      return dispatch((0,_actions_follow_actions__WEBPACK_IMPORTED_MODULE_4__.createFollow)(follow));
+    },
+    deleteFollow: function deleteFollow(follow) {
+      return dispatch((0,_actions_follow_actions__WEBPACK_IMPORTED_MODULE_4__.deleteFollow)(follow));
+    }
   };
 };
 

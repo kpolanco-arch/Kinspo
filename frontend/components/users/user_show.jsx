@@ -76,7 +76,6 @@ const followArr = Object.values(follows)
 const followers = followArr.filter(follow => follow.user_id === user.id)
 const following = followArr.filter(follow => follow.follower_id === user.id)
 
-
     return (
         <div>
             <div className='user-profile-info'>
