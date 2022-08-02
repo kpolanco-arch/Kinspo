@@ -21,7 +21,7 @@ class SavedShowPin extends React.Component {
         
         const { pins, pin, currentUser, deleteSaved, boards, saved, createSaved, savedpin} = this.props;
         return (
-            <div className='gallery'>
+            <div className=''>
                 {/* <h2>Saved Pin</h2>
                 <button type="submit" className='save-button' onClick={() => createSaved({pin_id: pin.id, user_id: currentUser.id })} >Save</button> */}
                 <div className='grid-images'>

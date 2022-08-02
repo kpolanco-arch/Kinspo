@@ -1237,12 +1237,14 @@ var BoardItem = /*#__PURE__*/function (_React$Component) {
         className: "board-description-text"
       }, board.description, "description")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pins-length-text"
-      }, " ", pinsonBoard.length, " ", pinsonBoard.length > 1 ? "Pins" : "Pin"), pinsonBoard.map(function (savedpin) {
+      }, " ", pinsonBoard.length, " ", pinsonBoard.length > 1 ? "Pins" : "Pin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "gallery"
+      }, pinsonBoard.map(function (savedpin) {
         return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_saved_saved_pins_container__WEBPACK_IMPORTED_MODULE_1__["default"], {
           key: savedpin.title,
           savedpin: savedpin
         });
-      }));
+      })));
     }
   }]);
 
@@ -2420,9 +2422,6 @@ var PinItem = /*#__PURE__*/function (_React$Component) {
       var type = pin.photoUrl ? pin.photoUrl : pin.image_url;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "grid-images"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
-        to: "pins/".concat(pin.id),
-        className: "pin-index-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_save_pin__WEBPACK_IMPORTED_MODULE_1__["default"], {
         key: pin.title,
         pin: pin,
@@ -2430,7 +2429,9 @@ var PinItem = /*#__PURE__*/function (_React$Component) {
         deleteSaved: deleteSaved,
         boards: boards,
         saved: saved
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+        to: "pins/".concat(pin.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         src: type,
         alt: pin.title,
         className: "pin-index-img"
@@ -2506,9 +2507,9 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
   _createClass(PinShowItem, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      this.props.fetchPin(this.props.match.params.pinId);
       this.props.fetchUsers();
       this.props.fetchFollows();
-      this.props.fetchPin(this.props.match.params.pinId);
     }
   }, {
     key: "navigateback",
@@ -2527,15 +2528,16 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
           createSaved = _this$props.createSaved,
           deleteSaved = _this$props.deleteSaved,
           users = _this$props.users,
-          createFollow = _this$props.createFollow; // const type = (!pin.photoUrl) ? pin.image_url : pin.photoUrl 
+          createFollow = _this$props.createFollow,
+          deleteFollow = _this$props.deleteFollow; // const type = (!pin.photoUrl) ? pin.image_url : pin.photoUrl 
 
-      var followArr = Object.values(follows);
+      var followArr = Object.values(follows); // const following = followArr.filter(follow => follow.user_id === pin.creator_id)
+
       var followers = followArr.filter(function (follow) {
-        return follow.user_id === pin.creator_id;
-      }); // const following = followArr.filter(follow => follow.follower_id === user.id)
-
+        return follow.follower_id === (pin === null || pin === void 0 ? void 0 : pin.creator_id);
+      });
       var theyfollow = followArr.filter(function (follow) {
-        return follow.user_id === currentUser.id && follow.follower_id === pin.creator_id;
+        return follow.user_id === currentUser.id && follow.follower_id === (pin === null || pin === void 0 ? void 0 : pin.creator_id);
       });
 
       if (!pin) {
@@ -2543,10 +2545,8 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
       }
 
       var owner = users[pin.creator_id];
-      var newvar = !owner.username ? owner.email : owner.username; // if (typeof (owner.username) === 'undefined' || (owner.username)=== null) {
-      //     var newvar = owner.email
-      // }
-
+      debugger;
+      var newvar = !(owner !== null && owner !== void 0 && owner.username) ? owner === null || owner === void 0 ? void 0 : owner.email : owner === null || owner === void 0 ? void 0 : owner.username;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "background-pin-show"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -2581,15 +2581,31 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, pin.title)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-description"
       }, pin.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "following-container"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "user-avatar"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, newvar), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, followers.length, " followers")), pin.creator_id === currentUser.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, theyfollow.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Unfollow") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "following-text"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
+        to: "/users/".concat(pin.creator_id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "following-text-title"
+      }, newvar)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", null, followers.length, " followers")), pin.creator_id === currentUser.id ? null : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "unfollow-button-container"
+      }, theyfollow.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "create-button",
+        onClick: function onClick() {
+          return deleteFollow(theyfollow[0]);
+        }
+      }, "Unfollow") : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "create-button",
         onClick: function onClick() {
           return createFollow({
             user_id: currentUser.id,
             follower_id: pin.creator_id
           });
         }
-      }, "Follow"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "Follow")))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "edit-icon"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_3__.Link, {
         to: "/pins/".concat(pin.id, "/edit")
@@ -2630,6 +2646,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
+  // debugger
   return {
     pin: state.entities.pins[ownProps.match.params.pinId],
     follows: state.entities.follows,
@@ -2704,7 +2721,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _pin_item__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./pin_item */ "./frontend/components/pins/pin_item.jsx");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions_save_action__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/save_action */ "./frontend/actions/save_action.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -2726,6 +2744,7 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf.bind() : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
 
 
 
@@ -2878,16 +2897,23 @@ var SavePin = /*#__PURE__*/function (_React$Component) {
 
 var mSTP = function mSTP(state) {
   return {
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    saved: Object.values(state.entities.saved)
   };
 };
 
 var mDTP = function mDTP(dispatch) {
-  return {// fetchBoards: () => dispatch(fetchBoards())
+  return {
+    createSaved: function createSaved(saved) {
+      return dispatch((0,_actions_save_action__WEBPACK_IMPORTED_MODULE_2__.createSaved)(saved));
+    },
+    deleteSaved: function deleteSaved(savedId) {
+      return dispatch((0,_actions_save_action__WEBPACK_IMPORTED_MODULE_2__.deleteSaved)(savedId));
+    }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_2__.connect)(mSTP, mDTP)(SavePin));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_3__.connect)(mSTP, mDTP)(SavePin));
 
 /***/ }),
 
@@ -2999,7 +3025,7 @@ var SavedShowPin = /*#__PURE__*/function (_React$Component) {
           createSaved = _this$props.createSaved,
           savedpin = _this$props.savedpin;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "gallery"
+        className: ""
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "grid-images"
       }, pins.map(function (pin) {
@@ -3046,8 +3072,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_save_action__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../actions/save_action */ "./frontend/actions/save_action.js");
 /* harmony import */ var _saved_pins__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./saved_pins */ "./frontend/components/saved/saved_pins.jsx");
 /* harmony import */ var _actions_pin_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/pin_actions */ "./frontend/actions/pin_actions.js");
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 
 
 
@@ -3055,12 +3079,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 var mapStateToProps = function mapStateToProps(state, ownProps) {
-  return _defineProperty({
+  return {
     currentUser: state.entities.users[state.session.id],
     saved: Object.values(state.entities.saved),
     pins: Object.values(state.entities.pins),
-    boards: Object.values(state.entities.boards)
-  }, "currentUser", state.entities.users[state.session.id]);
+    boards: Object.values(state.entities.boards) // currentUser: state.entities.users[state.session.id]
+    // pin: state.entities.pins[ownProps.match.params.pinId],
+
+  };
 };
 
 var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -3200,12 +3226,13 @@ var Login = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("form", {
         onSubmit: this.handleSubmit
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "close-button",
         onClick: function onClick() {
           _this3.props.closeModal();
         }
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
         "class": "material-symbols-outlined"
-      }, "close"), "// className=\"close-button\"X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "login-message"
       }, " Welcome to Kinspo "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
         className: "text-box"
@@ -3397,7 +3424,9 @@ var Signup = /*#__PURE__*/function (_React$Component) {
           _this3.props.closeModal();
         },
         className: "close-button"
-      }, "X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        "class": "material-symbols-outlined"
+      }, "close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "login-message"
       }, " Welcome to Kinspo "), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, "Find new ideas to try"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "text-box"
@@ -3541,7 +3570,11 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, UserShow);
 
     _this = _super.call(this, props);
+    _this.state = {
+      modalOpen: false
+    };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
+    _this.closeModal = _this.closeModal.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -3549,9 +3582,19 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       this.props.fetchUser(this.props.match.params.userId);
+      this.props.fetchUsers();
       this.props.fetchPins();
       this.props.fetchSaved();
-      this.props.fetchBoards(); // this.props.deletePin();
+      this.props.fetchBoards();
+      this.props.fetchFollows();
+    }
+  }, {
+    key: "closeModal",
+    value: function closeModal(e) {
+      e.preventDefault();
+      this.setState({
+        modalOpen: !this.state.modalOpen
+      });
     }
   }, {
     key: "handleSubmit",
@@ -3564,7 +3607,11 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
     value: function render() {
       var _this$props = this.props,
           pins = _this$props.pins,
+          users = _this$props.users,
           follows = _this$props.follows,
+          createFollow = _this$props.createFollow,
+          deleteFollow = _this$props.deleteFollow,
+          currentUser = _this$props.currentUser,
           deletePin = _this$props.deletePin,
           boards = _this$props.boards,
           createSaved = _this$props.createSaved,
@@ -3604,19 +3651,100 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       // }
 
       var followArr = Object.values(follows);
-      var followers = followArr.filter(function (follow) {
+      var following = followArr.filter(function (follow) {
         return follow.user_id === user.id;
       });
-      var following = followArr.filter(function (follow) {
+      var followers = followArr.filter(function (follow) {
         return follow.follower_id === user.id;
       });
+
+      var dropdownFollow = function dropdownFollow() {
+        var followArr = Object.values(follows);
+        var following = followArr.filter(function (follow) {
+          return follow.user_id === user.id;
+        });
+        var followers = followArr.filter(function (follow) {
+          return follow.follower_id === user.id;
+        }); // let userboards = boards.filter(board => board.creator_id === currentUser.id)
+        // let pinonBoards = saved.filter(pinsaved => pin.id === pinsaved.pin_id)
+        // let pinonBoardArr = Object.values(saved)
+
+        var saveFollow = function saveFollow(follow) {
+          var _loop = function _loop(i) {
+            var followobj = followArr[i];
+
+            if (followobj.user_id === currentUser.id && followobj.follower_id === follow.user_id) {
+              return {
+                v: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+                  className: "board-list-title"
+                }, "Follows", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+                  className: "board-list-item"
+                }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, users[follow.user_id].email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+                  className: "unsave-button",
+                  onClick: function onClick() {
+                    return deleteFollow(followobj);
+                  }
+                }, "Unfollow")))
+              };
+            }
+          };
+
+          for (var i = 0; i < followArr.length; i++) {
+            var _ret = _loop(i);
+
+            if (_typeof(_ret) === "object") return _ret.v;
+          }
+
+          var _loop2 = function _loop2(_i) {
+            var followobj = followArr[_i];
+
+            if (followobj.user_id === currentUser.id && followobj.follower_id === follow.follower_id) {
+              return {
+                v: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+                  className: "board-list-title"
+                }, "Following", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+                  className: "board-list-item"
+                }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, users[follow.follower_id].email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+                  className: "unsave-button",
+                  onClick: function onClick() {
+                    return deleteFollow(followobj);
+                  }
+                }, "Unfollow")))
+              };
+            }
+          };
+
+          for (var _i = 0; _i < followArr.length; _i++) {
+            var _ret2 = _loop2(_i);
+
+            if (_typeof(_ret2) === "object") return _ret2.v;
+          }
+
+          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            className: "board-list-item"
+          }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            className: "board-list-title"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+            className: "board-list-title-h2"
+          }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, users[follow.follower_id].email));
+        };
+
+        return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "board-list-background"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, followArr.map(function (follow, i) {
+          return saveFollow(follow, i);
+        })));
+      }; ////actual return
+
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "user-profile-info"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "user-profile-image-container"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, this.props.user.username, " User Profile"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, this.props.user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, this.props.user.username), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, this.props.user.email), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        onClick: this.closeModal,
         className: "user-profile-followers"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, followers.length, " followers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, following.length, " following")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, followers.length, " followers"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", null, following.length, " following")), this.state.modalOpen ? dropdownFollow() : null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "type-board-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "type-board-text"
@@ -3710,7 +3838,8 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     currentUser: state.entities.users[state.session.id],
     pins: Object.values(state.entities.pins),
     boards: state.entities.boards,
-    saved: Object.values(state.entities.saved)
+    saved: Object.values(state.entities.saved),
+    users: state.entities.users
   };
 };
 
@@ -3721,6 +3850,9 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchPins: function fetchPins() {
       return dispatch((0,_actions_pin_actions__WEBPACK_IMPORTED_MODULE_4__.fetchPins)());
+    },
+    fetchUsers: function fetchUsers() {
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_2__.fetchUsers)());
     },
     createSaved: function createSaved(saved) {
       return dispatch((0,_actions_save_action__WEBPACK_IMPORTED_MODULE_5__.createSaved)(saved));
@@ -3826,12 +3958,12 @@ var UserShowPin = /*#__PURE__*/function (_React$Component) {
 
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
         className: "all-pin-title"
-      }, "All Pins"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "My Pins"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "gallery"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "grid-images"
       }, pins.map(function (pin) {
-        return pin.creator_id === user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        return pin.creator_id === user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+          className: "grid-images"
+        }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
           to: "/pins/".concat(pin.id),
           className: "pin-index-container"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
@@ -3844,8 +3976,8 @@ var UserShowPin = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             return deletePin(pin.id);
           }
-        }, "Delete")) : null;
-      }))));
+        }, "Delete"))) : null;
+      })));
     }
   }]);
 
@@ -4047,7 +4179,7 @@ var FollowsReducer = function FollowsReducer() {
       return nextState;
 
     case _actions_follow_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_FOLLOW:
-      delete nextState[action.follow.id];
+      delete nextState[action.followId];
       return nextState;
 
     default:

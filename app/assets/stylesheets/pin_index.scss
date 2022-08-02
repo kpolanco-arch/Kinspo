@@ -5,26 +5,29 @@
 .gallery {
     display: grid;
     // grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 20px;
     // grid-column: 6;
     grid-template-columns: repeat(auto-fit, 250px);
-    grid-auto-flow: dense;
-    grid-auto-rows: auto;
-    grid-row-end: span 315;
+    height: 100%;
+    // grid-auto-flow: dense;
+    // grid-auto-rows: auto;
+    // grid-row-end: span 315;
     border: 10px;
     box-sizing: border-box;
     justify-content: center;
+    grid-auto-rows: 10px;
 }
 
 .grid-images {
     // width: 1765px;
-    min-height: 100px;
-    column-fill: balance;
+    // min-height: 100px;
+    // column-fill: balance;
     text-align: center;
     margin-bottom: 30px;
     color: white;
+    width: 230px;
+    // height: 100%;
 
-        &:nth-child(n) {
+        &:nth-child(n+2) {
                 grid-row-end: span 20;
             }
         
@@ -32,16 +35,16 @@
                 grid-row-end: span 25;
             }
         
-            &:nth-child(5n) {
+            &:nth-child(3n+1) {
                 grid-row-end: span 33;
+            }
+        
+            &:nth-child(3n+3) {
+                grid-row-end: span 38;
             }
         
             &:nth-child(4n) {
                 grid-row-end: span 40;
-            }
-        
-            &:nth-child(3n) {
-                grid-row-end: span 38;
             }
 }
 
@@ -57,7 +60,9 @@
 .pin-index-img {
     z-index: 10;
     display: flex;
-    width: 250px;
+    width: 230px;
+    height: 100%;
+    box-sizing: border-box;
     // height: 100%;
     object-fit: cover;
     border-radius: 18px;
@@ -358,6 +363,7 @@ ul a {
 
 .board-list-item .unsave-button {
     margin: 5px;
+    z-index: 1000;
 }
 
 button.board-list-item  {

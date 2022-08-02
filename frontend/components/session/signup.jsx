@@ -40,7 +40,11 @@ class Signup extends React.Component {
         return (
             <div className="session-form">
                 <form onSubmit={this.handleSubmit}>
-                    <div onClick={() => {this.props.closeModal();}} className="close-button">X</div>
+                    <div onClick={() => {this.props.closeModal();}} className="close-button">
+                        <span class="material-symbols-outlined">
+                            close
+                        </span>
+                    </div>
                     <div className='login-message'> Welcome to Kinspo </div>
                     <br />
                     <h2>Find new ideas to try</h2>

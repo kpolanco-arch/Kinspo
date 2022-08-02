@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 import PinItem from './pin_item';
+import { createSaved, deleteSaved } from '../../actions/save_action';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -111,11 +112,13 @@ class SavePin extends React.Component {
 }
 
 const mSTP = state => ({
-    currentUser: state.entities.users[state.session.id]
+    currentUser: state.entities.users[state.session.id],
+    saved: Object.values(state.entities.saved)
 })
 
 const mDTP = dispatch => ({
-    // fetchBoards: () => dispatch(fetchBoards())
+    createSaved: (saved) => dispatch(createSaved(saved)),
+    deleteSaved: (savedId) => dispatch(deleteSaved(savedId))
 })
 
 

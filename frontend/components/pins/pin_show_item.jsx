@@ -10,9 +10,9 @@ class PinShowItem extends React.Component {
         this.navigateback = this.navigateback.bind(this)
     }
 componentDidMount() {
+    this.props.fetchPin(this.props.match.params.pinId)
     this.props.fetchUsers();
     this.props.fetchFollows();
-    this.props.fetchPin(this.props.match.params.pinId)
 
 }
 
@@ -20,25 +20,23 @@ navigateback() {
         this.props.history.push('/')
 }
     render() {
-        const { pin, currentUser, saved, boards, follows, createSaved, deleteSaved, users, createFollow } = this.props;
+        const { pin, currentUser, saved, boards, follows, createSaved, deleteSaved, users, createFollow, deleteFollow } = this.props;
         // const type = (!pin.photoUrl) ? pin.image_url : pin.photoUrl 
         const followArr = Object.values(follows)
-        const followers = followArr.filter(follow => follow.user_id === pin.creator_id)
-        // const following = followArr.filter(follow => follow.follower_id === user.id)
-        const theyfollow = followArr.filter(follow => follow.user_id === currentUser.id && follow.follower_id === pin.creator_id)
+        // const following = followArr.filter(follow => follow.user_id === pin.creator_id)
+        const followers = followArr.filter(follow => follow.follower_id === pin?.creator_id)
+        const theyfollow = followArr.filter(follow => follow.user_id === currentUser.id && follow.follower_id === pin?.creator_id)
 
         if (!pin ){
         return null}
         
         
         
-
+               
         const owner = users[pin.creator_id]
+        debugger
+        let newvar = !owner?.username ?  owner?.email : owner?.username ;
         
-        var newvar = (!owner.username) ?  owner.email : owner.username ;
-        // if (typeof (owner.username) === 'undefined' || (owner.username)=== null) {
-        //     var newvar = owner.email
-        // }
 
         return (
             <div className="background-pin-show">
@@ -55,27 +53,32 @@ navigateback() {
                     <div className="pin-text-container">
                             <div className="pin-header-container"> 
                             <SavePin key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} />
-
                             </div>
                             <div className="pin-header-container">
                                 <h1>{pin.title}</h1> 
                             </div>
-                                <div className="pin-show-description">
+                            <div className="pin-show-description">
                                     {pin.description}
+                            </div>
+                            <div className="following-container">
+                                <div className="user-avatar"></div>
+                                <div className="following-text">
+                                    <Link to = {`/users/${pin.creator_id}`}>
+                                    <div className="following-text-title">{newvar}</div>
+                                    </Link>
+                                    {/* <span>{following.length} following</span> */}
+                                    <span>{followers.length} followers</span>
                                 </div>
-                            <div className="user-avatar"></div>
-                            <div>
-                                <h3>{newvar}</h3>
-                                <span>{followers.length} followers</span>
-                            </div>
+                            
                             {pin.creator_id === currentUser.id ? null :
-                            <div>
-                                {theyfollow.length > 0 ? 
-                                <button>Unfollow</button> :
-                                    <button onClick={() => createFollow({ user_id: currentUser.id , follower_id: pin.creator_id}) }>Follow</button> 
-                                }
-                            </div>
+                                <div className="unfollow-button-container">
+                                    {theyfollow.length > 0 ? 
+                                    <button className="create-button" onClick={()=> deleteFollow(theyfollow[0])}>Unfollow</button> :
+                                        <button className="create-button" onClick={() => createFollow({ user_id: currentUser.id , follower_id: pin.creator_id}) }>Follow</button> 
+                                    }
+                                </div>
                             }
+                            </div>
                     </div>
                     <div className="edit-icon">
                         <Link to={`/pins/${pin.id}/edit`}>

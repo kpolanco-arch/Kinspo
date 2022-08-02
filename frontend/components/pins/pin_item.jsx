@@ -20,10 +20,12 @@ class PinItem extends React.Component {
 
     return (
         <div className='grid-images'>
-                <Link to={`pins/${pin.id}`} className="pin-index-container" >
-                    <SavePin key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} />
+                {/* <div className="pin-index-container"> */}
+                <SavePin key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} />
+                <Link to={`pins/${pin.id}`} >    
                     <img src={type} alt={pin.title} className="pin-index-img" />
                 </Link>
+                {/* </div> */}
                 {/* {saved.map((save) => 
                 (pin.id === save.pin_id) ?   
                 <button type="submit" className='unsave-button' onClick={() => deleteSaved(pin.id)} >Saved</button>

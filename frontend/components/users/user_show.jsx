@@ -10,16 +10,27 @@ class UserShow extends React.Component {
     constructor(props){
         super(props)
 
+        this.state = {
+            modalOpen: false,
+        }
+
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.closeModal = this.closeModal.bind(this);
     }
 
 componentDidMount() {
     this.props.fetchUser(this.props.match.params.userId);
+    this.props.fetchUsers();
     this.props.fetchPins();
     this.props.fetchSaved();
     this.props.fetchBoards();
-    // this.props.deletePin();
+    this.props.fetchFollows();
 
+}
+
+closeModal(e) {
+    e.preventDefault();
+    this.setState({ modalOpen: !this.state.modalOpen })
 }
 
 handleSubmit(e){
@@ -29,7 +40,7 @@ handleSubmit(e){
 }
 
 render () {
-    const { pins, follows, deletePin, boards, createSaved, fetchSaved, saved } = this.props;
+    const { pins, users, follows, createFollow, deleteFollow, currentUser, deletePin, boards, createSaved, fetchSaved, saved } = this.props;
     let user = this.props.user
     if (!user) {
         return null
@@ -41,9 +52,6 @@ render () {
 
     let cover1
     let cover11
-   
-
-    
     let savedArr= Object.values(saved) 
             // console.log(saved[0].pin_id )
             // cover1 = pins.filter(pin => pin.id === (saved[0]).pin_id ? pin.image_url : null)
@@ -73,19 +81,83 @@ render () {
     // }
 
 const followArr = Object.values(follows)
-const followers = followArr.filter(follow => follow.user_id === user.id)
-const following = followArr.filter(follow => follow.follower_id === user.id)
+const following = followArr.filter(follow => follow.user_id === user.id)
+const followers = followArr.filter(follow => follow.follower_id === user.id)
 
+    const dropdownFollow = () => {
+        const followArr = Object.values(follows)
+        const following = followArr.filter(follow => follow.user_id === user.id)
+        const followers = followArr.filter(follow => follow.follower_id === user.id)
+
+        // let userboards = boards.filter(board => board.creator_id === currentUser.id)
+        // let pinonBoards = saved.filter(pinsaved => pin.id === pinsaved.pin_id)
+        // let pinonBoardArr = Object.values(saved)
+        const saveFollow = (follow) => {
+            for (let i = 0; i < followArr.length; i++) {
+                let followobj = followArr[i];
+
+                if (followobj.user_id === currentUser.id && followobj.follower_id === follow.user_id) {
+                    return (
+                        
+                        <div className='board-list-title'>Follows
+                            <div className='board-list-item'>
+                            <div>{users[follow.user_id].email}</div>
+                            <button className='unsave-button' onClick={() => deleteFollow(followobj)} >Unfollow</button>
+                            </div>
+                        </div>
+                    )
+
+                }
+
+        
+
+            }
+
+            
+            for (let i = 0; i < followArr.length; i++) {
+                    let followobj = followArr[i];
+                if (followobj.user_id === currentUser.id && followobj.follower_id === follow.follower_id) {
+                    return (
+                        <div className='board-list-title'>Following
+                            <div className='board-list-item'>
+                            <div>{users[follow.follower_id].email}</div>
+                                <button className='unsave-button' onClick={() => deleteFollow(followobj)} >Unfollow</button>
+                            {/* <button className='save-button' onClick={() => createFollow({ user_id: currentUser.id, follower_id: follow.follower_id })}>Follow</button> */}
+                            </div>
+                        </div>
+                    )
+                }
+            }
+
+            return (
+                <div className='board-list-item'>
+                    <div className='board-list-title'></div>
+                    <div className='board-list-title-h2'></div>
+                    <div>{users[follow.follower_id].email}</div>
+                    {/* <button className='save-button' onClick={() => createSaved({ pin_id: pin.id, user_id: currentUser.id, board_id: board.id })}>Save</button> */}
+                </div>
+            )
+
+        }
+        return (
+            <div className='board-list-background'>
+                <div>{followArr.map((follow, i) => saveFollow(follow, i))}</div>
+            </div>
+        )
+    }
+////actual return
     return (
         <div>
             <div className='user-profile-info'>
                 <div className='user-profile-image-container'></div>
-                <h1>{this.props.user.username} User Profile</h1>
+                <h1>{this.props.user.username}</h1>
                 <h2>{this.props.user.email}</h2>
-                <div className='user-profile-followers'>
+                <div onClick={this.closeModal} className='user-profile-followers'>
                     <h2>{followers.length} followers</h2>
                     <h2>{following.length} following</h2>
                 </div>
+                {this.state.modalOpen ? dropdownFollow() : null}
+
                 <div className='type-board-container'>
                     <div className='type-board-text'>Created
                         <div className='type-board-underline'></div>
@@ -124,8 +196,6 @@ const following = followArr.filter(follow => follow.follower_id === user.id)
             </div>
                 
              
-                {/* {pins.map(pin => <SavedShowPin key={pin.title} pin={pin} user={user} fetchSaved={fetchSaved} saved={saved} />)} */}
-
             
         </div>
         

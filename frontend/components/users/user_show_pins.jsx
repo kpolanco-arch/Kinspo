@@ -24,21 +24,18 @@ render() {
 
 return (
     <div>
-        <h1 className='all-pin-title'>All Pins</h1>
+        <h1 className='all-pin-title'>My Pins</h1>
         <div className="gallery">
-            <div className='grid-images'>
             {pins.map(pin =>
             pin.creator_id === user.id ? <div>
-                    
+                    <div className='grid-images'>
                     <Link to={`/pins/${pin.id}`} className="pin-index-container" >
                         {/* <SavePin key={pin.title} pin={pin} createSaved={createSaved} deleteSaved={deleteSaved} boards={boards} saved={saved} /> */}
                         <img src={(pin.photoUrl) ? pin.photoUrl : pin.image_url} alt={pin.title} className="pin-index-img" />
                     </Link>
-                    <button type="submit" className='unsave-button' onClick={() => deletePin(pin.id)} >Delete
-                    </button>
-                    
+                    <button type="submit" className='unsave-button' onClick={() => deletePin(pin.id)} >Delete</button>
+                    </div>
                 </div>: null )}
-            </div> 
         </div>
     </div >
 )

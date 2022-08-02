@@ -25,6 +25,7 @@ export default () => (
         <NavBarContainer />
          <Modal />
         <Switch>
+
             <Route path="/users/:userId/pins" component={UserShowPin}/>
             <Route path="/boards/:boardId/edit" component={BoardEdit} />
             <Route path= "/pins/:pinId/edit" component={PinEdit}/>

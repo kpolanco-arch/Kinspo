@@ -373,3 +373,34 @@ span.material-symbols-outlined {
     
     width: 400px;
 }
+
+.user-avatar {
+    background-color: #ecebeb;
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+}
+
+.following-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.following-text {
+    font-size: 14px;
+    padding: 8px;
+    font-family: system-ui;
+   
+}
+
+.following-text-title {
+    font-size: 14px;
+    font-family: system-ui;
+    font-weight: 600;
+}
+
+.unfollow-button-container {
+        margin-left: 100px;
+}
