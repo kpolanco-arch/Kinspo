@@ -8,9 +8,8 @@ import SplashContainer from '../splash/splash_container';
 const Home = ({ currentUser, logout, openModal }) => {
     const sessionlink = () => (
         <div> 
-
-            <h1 className='splash-body'>Get your next</h1>
-            <h2 className='splash'>home decor idea</h2>
+            {/* <h1 className='splash-body'>Get your next</h1>
+            <h2 className='splash'>home decor idea</h2> */}
             <SplashContainer />
         </div>
     )
