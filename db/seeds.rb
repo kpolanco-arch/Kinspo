@@ -28,7 +28,7 @@ user1 = User.create(email: 'hi@gmail.com', password: 'password')
 user2 = User.create(email: 'natalie@gmail.com', password: 'password')
 user3 = User.create(email: 'DEMO@gmail.com', password: 'password', username: 'demo_user')
 
-board1 = Board.create(name: "All the Dogs", creator_id: user3.id)
+board1 = Board.create(name: "Things I like...", creator_id: user3.id)
 board2 = Board.create(name: "All the Cats", creator_id: user3.id)
 
 pin1 = Pin.create(title: 'catpin', creator_id: user3.id, board_id: board2.id, description: "this is a cat pin", image_url: "https://i.natgeofe.com/n/3861de2a-04e6-45fd-aec8-02e7809f9d4e/02-cat-training-NationalGeographic_1484324_3x4.jpg")
@@ -37,11 +37,21 @@ pin3 = Pin.create(title: 'Daylight-Award 2010 pour les thermes de Vals - Prix da
 pin4 = Pin.create(title: 'Carlo Scarpa -- Gipsoteca Canoviana', creator_id: user3.id,  board_id: board1.id,description: ".", image_url: "https://i.pinimg.com/564x/f6/bd/8c/f6bd8c0bd1019faa794ff8a163bf3de0.jpg" )
 pin5 = Pin.create(title: 'Tate Modern · London, UK - IGNANT', creator_id: user2.id,  board_id: board1.id,description: "Two decades ago, Swiss architects Herzog & de Meuron converted a former power plant in London into the awe-inspiring gallery", image_url: "https://i.pinimg.com/564x/1d/81/25/1d81259c004a31aba5f8e01505f54584.jpg" )
 pin6 = Pin.create(title: 'Kunsthaus, Bregenz', creator_id: user2.id,  board_id: board2.id,description: "Two decades ago, Swiss architects Herzog & de Meuron converted a former power plant in London into the awe-inspiring gallery", image_url: "https://i.pinimg.com/564x/cb/e4/74/cbe474599dc195272ceff87c3a184032.jpg" )
-pin7 = Pin.create(title: 'new image', creator_id: user3.id, board_id: board2.id, description: "this is a new pin", image_url: '' )
-
 
 savepin1 = Savepin.create(board_id: board2.id, pin_id: pin1.id)
 
-
-file = open('https://kinspo-dev.s3.amazonaws.com/4ca801b1ffb1190f6b7b4999f20ca1ae.jpeg')
+pin7 = Pin.create(title: 'boxes and partitions', creator_id: user3.id, board_id: board2.id, description: "Image 11 of 13 from gallery of Huaxin Business Center / Scenic Architecture. Photograph by Scenic Architecture", image_url: '' )
+file = open('https://kinspo-dev.s3.amazonaws.com/131b747287785ee61e16010ec34f7101.jpeg')
 pin7.photo.attach(io: file, filename: 'some_file.jpg')
+
+pin8 = Pin.create(title: 'Life In Red Circle 1', creator_id: user3.id, board_id: board2.id, description: "Photo by Büşra Tüz on behance Illustration,Architecture,Graphic Design", image_url: '' )
+file = open('https://kinspo-dev.s3.amazonaws.com/26e4191984ba891215acc3ff2b8e4487.jpeg')
+pin8.photo.attach(io: file, filename: 'some_file.jpg')
+
+pin9 = Pin.create(title: '5 Stone Wall Textures Vol.2', creator_id: user3.id, board_id: board2.id, description: "I'm glad to introduce the second collection of high-resolution stone textures, perfect to use in either print or web projects...", image_url: '' )
+file = open('https://kinspo-dev.s3.amazonaws.com/284dfe5917fcbdf5fb23f50b48090c91.jpeg')
+pin9.photo.attach(io: file, filename: 'some_file.jpg')
+
+pin10 = Pin.create(title: 'KoozArch', creator_id: user3.id, board_id: board2.id, description: "Touched / Untouched - KooZA/rch", image_url: '' )
+file = open('https://kinspo-dev.s3.amazonaws.com/33fec67b4ad296d1e98f59bc2ef554ed.jpeg')
+pin10.photo.attach(io: file, filename: 'some_file.jpg')

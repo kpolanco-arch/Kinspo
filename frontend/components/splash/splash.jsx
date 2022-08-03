@@ -1,9 +1,28 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 class Splash extends React.Component {
     constructor(props){
         super(props)
     }
+
+        // componentDidMount() {
+        
+        // const backgroundimg = ['food', 'home', 'travel'];
+        // const [selected, setSelected] = useState('food');
+
+        // useEffect(()=> {
+        //     const interval = setInterval(() => {
+                
+        //         if (selected === 'food') {
+        //             setSelected = 'home'
+        //         } else {
+        //             setSelected = 'food'
+        //         }
+        //     }, 15000);
+        //     return () => clearInterval(interval);
+        // }, [selected])
+        
+        // }
 
     render () {
         return (
@@ -11,6 +30,9 @@ class Splash extends React.Component {
                 <div>
                     <h1 className='splash-body'>Get your next</h1>
                     <h2 className='splash'>home decor idea</h2>
+                    {/* <h2 className='splash'>weeknight dinner idea</h2> */}
+                    {/* <h2 className='splash'>travel plans </h2>*/}
+
                 </div>
                 <div className="splash-wrap-grid">
                     {/* food */}

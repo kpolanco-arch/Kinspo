@@ -51,7 +51,7 @@ class SavePin extends React.Component {
                         return (
                             <div className='board-list-item'>
                                 <div>{board.name}</div>
-                                <button className='unsave-button' onClick={() => deleteSaved(pin.id)} >Saved</button>
+                                <button className='unsave-button' onClick={() => deleteSaved(pinonBoard.id)} >Saved</button>
                             </div>
                         )
 

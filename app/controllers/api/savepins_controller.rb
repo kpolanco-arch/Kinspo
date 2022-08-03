@@ -33,7 +33,8 @@ class Api::SavepinsController < ApplicationController
         if @savepin && @savepin.destroy
             render :show
         else
-            flash[:error] = 'Something went wrong'
+            # debugger
+            render json: @savepin.errors.full_messages, status: 401
         end
     end
     

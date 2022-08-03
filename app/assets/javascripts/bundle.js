@@ -2817,19 +2817,27 @@ var SavePin = /*#__PURE__*/function (_React$Component) {
         var pinonBoardArr = Object.values(saved);
 
         var saveStatus = function saveStatus(board) {
-          for (var i = 0; i < pinonBoards.length; i++) {
+          var _loop = function _loop(i) {
             var pinonBoard = pinonBoards[i];
 
             if (pinonBoard.board_id === board.id) {
-              return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-                className: "board-list-item"
-              }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-                className: "unsave-button",
-                onClick: function onClick() {
-                  return deleteSaved(pin.id);
-                }
-              }, "Saved"));
+              return {
+                v: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+                  className: "board-list-item"
+                }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, board.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+                  className: "unsave-button",
+                  onClick: function onClick() {
+                    return deleteSaved(pinonBoard.id);
+                  }
+                }, "Saved"))
+              };
             }
+          };
+
+          for (var i = 0; i < pinonBoards.length; i++) {
+            var _ret = _loop(i);
+
+            if (_typeof(_ret) === "object") return _ret.v;
           }
 
           var selectedPin;
@@ -3559,7 +3567,21 @@ var Splash = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, Splash);
 
     return _super.call(this, props);
-  }
+  } // componentDidMount() {
+  // const backgroundimg = ['food', 'home', 'travel'];
+  // const [selected, setSelected] = useState('food');
+  // useEffect(()=> {
+  //     const interval = setInterval(() => {
+  //         if (selected === 'food') {
+  //             setSelected = 'home'
+  //         } else {
+  //             setSelected = 'food'
+  //         }
+  //     }, 15000);
+  //     return () => clearInterval(interval);
+  // }, [selected])
+  // }
+
 
   _createClass(Splash, [{
     key: "render",

@@ -37,7 +37,7 @@ class Api::PinsController < ApplicationController
         if @pin && @pin.destroy
             flash[:success] = 'Object was successfully deleted.'
         else
-            debugger
+            # debugger
              render json: @pin.errors.full_messages, status: 401
         end
     end
