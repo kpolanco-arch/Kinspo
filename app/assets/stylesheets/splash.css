@@ -79,3 +79,10 @@
     align-items: center;
 }
 
+.white-gradient {
+    position: fixed;
+    bottom: 0;
+    height: 200px;
+    width: 100%;
+    background: linear-gradient(to top, #fff, transparent);
+}
