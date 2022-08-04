@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
        //boards: Object.values(state.entities.boards),
   // currentUser: state.entities.users[state.session.id],
     // boards: state.entities.boards,
-    // pins: Object.values(state.entities.pins),
+    pins: state.entities.pins
     // saved: Object.values(state.entities.saved)
 
 })

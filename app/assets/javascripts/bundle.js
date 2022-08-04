@@ -623,7 +623,7 @@ var BoardCreate = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "navigateback",
     value: function navigateback() {
-      this.props.history.push('/');
+      this.props.history.push("/users/".concat(currentUser.id));
     }
   }, {
     key: "render",
@@ -641,6 +641,10 @@ var BoardCreate = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-text-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        onClick: this.navigateback
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        "class": "material-symbols-outlined"
+      }, "close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-description"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
         className: "create-board-title"
@@ -794,7 +798,7 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "navigateback",
     value: function navigateback() {
-      this.props.history.push('/');
+      this.props.history.push("/users/".concat(currentUser.id));
     }
   }, {
     key: "render",
@@ -810,6 +814,10 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-text-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        onClick: this.navigateback
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
+        "class": "material-symbols-outlined"
+      }, "close")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pin-show-description"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
         className: "create-board-title"
@@ -1008,11 +1016,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var mapStateToProps = function mapStateToProps(state) {
-  return {//boards: Object.values(state.entities.boards),
+  return {
+    //boards: Object.values(state.entities.boards),
     // currentUser: state.entities.users[state.session.id],
     // boards: state.entities.boards,
-    // pins: Object.values(state.entities.pins),
-    // saved: Object.values(state.entities.saved)
+    pins: state.entities.pins // saved: Object.values(state.entities.saved)
+
   };
 };
 
@@ -1092,7 +1101,7 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
       var _this$props = this.props,
           board = _this$props.board,
           pins = _this$props.pins,
-          saved = _this$props.saved; // console.log(saved)
+          saved = _this$props.saved;
 
       if (!board) {
         return null;
@@ -1106,6 +1115,29 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
+      var savedArr = Object.values(saved).filter(function (savedPin) {
+        return savedPin.board_id === board.id;
+      });
+      var cover1, cover2, cover3;
+
+      if (savedArr.length < 1) {
+        cover1 = null;
+      } else {
+        cover1 = pins[savedArr[0].pin_id].image_url ? pins[savedArr[0].pin_id].image_url : pins[savedArr[0].pin_id].photoUrl;
+      }
+
+      if (savedArr.length < 2) {
+        cover2 = null;
+      } else {
+        cover2 = pins[savedArr[1].pin_id].image_url || pins[savedArr[1].pin_id].photoUrl;
+      }
+
+      if (savedArr.length < 3) {
+        cover3 = null;
+      } else {
+        cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl;
+      }
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
         to: "/boards/".concat(board.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1114,13 +1146,25 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "board-cover-single"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "first-cover"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "image-cover",
+        src: cover1,
+        alt: ""
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "cover-column-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "second-cover"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "image-cover",
+        src: cover2,
+        alt: ""
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "third-cover"
-      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "image-cover",
+        src: cover3,
+        alt: ""
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-cover-title"
       }, board.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "edit-icon-board"
@@ -1338,11 +1382,7 @@ var Home = function Home(_ref) {
       openModal = _ref.openModal;
 
   var sessionlink = function sessionlink() {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-      className: "splash-body"
-    }, "Get your next"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-      className: "splash"
-    }, "home decor idea"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_splash_splash_container__WEBPACK_IMPORTED_MODULE_4__["default"], null));
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_splash_splash_container__WEBPACK_IMPORTED_MODULE_4__["default"], null));
   };
 
   var userGreeting = function userGreeting() {
@@ -1540,8 +1580,12 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
           logout = _this$props.logout,
           openModal = _this$props.openModal;
       var display = currentUser ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "nav-bar"
+        className: "nav-bar-new2"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
+        className: "logo"
+      }, "Kinspo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "home-button",
@@ -1566,16 +1610,26 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
         className: "fa fa-github"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "icon-navbar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
-        className: "material-symbols-outlined"
-      }, "location_home")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/users/".concat(currentUser.id)
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
+        href: "https://github.com/kpolanco-arch"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
+        className: "fas fa-smile"
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/users/".concat(currentUser.id),
+        className: "user-profile-letter"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         type: "submit"
-      }, currentUser.email)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      }, currentUser.email[0])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+        className: "logout-button-nav",
         onClick: logout
-      }, "Log Out"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
+      }, "Log Out"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
         className: "personal-links"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
+        className: "logo"
+      }, "Kinspo"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "personal-links-right"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "nav-bar"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
@@ -1598,14 +1652,10 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
         onClick: function onClick() {
           return openModal('signup');
         }
-      }, "Sign Up"));
+      }, "Sign Up"))));
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("header", {
-        className: "nav-bar"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
-        to: "/"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-        className: "logo"
-      }, "Kinspo")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, display));
+        className: "nav-bar-new1"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, display));
     }
   }]);
 
@@ -3051,7 +3101,7 @@ var SavedShowPin = /*#__PURE__*/function (_React$Component) {
           boards: boards,
           saved: saved
         }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-          src: pin.image_url,
+          src: pin.photoUrl ? pin.photoUrl : pin.image_url,
           alt: pin.title,
           className: "pin-index-img"
         }))) : null;
@@ -3780,10 +3830,14 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
   _createClass(UserShow, [{
     key: "componentDidMount",
     value: function componentDidMount() {
+      var _this2 = this;
+
       this.props.fetchUser(this.props.match.params.userId);
       this.props.fetchUsers();
-      this.props.fetchPins();
-      this.props.fetchSaved();
+      this.props.fetchPins().then(function () {
+        _this2.props.fetchSaved();
+      }); // this.props.fetchSaved();
+
       this.props.fetchBoards();
       this.props.fetchFollows();
     }
@@ -3826,28 +3880,33 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
-      var cover1;
-      var cover11;
-      var savedArr = Object.values(saved); // console.log(saved[0].pin_id )
-      // cover1 = pins.filter(pin => pin.id === (saved[0]).pin_id ? pin.image_url : null)
-      // if (!cover1 === null){
-      //     cover11 = cover1}
-      // console.log(cover11)
-      // if (savedArr.length < 1) {
-      //     cover1 = null
-      // } else {
-      //     cover1 = pins[savedArr[0].pin_id].image_url
-      // }
-      // if (savedArr.length < 2) {
-      //     cover2 = null
-      // } else {
-      //     cover2 = pins[savedArr[1].pin_id].image_url
-      // }
-      // if (savedArr.length < 3) {
-      //     cover3 = null
-      // } else {
-      //     cover3 = pins[savedArr[2].pin_id].image_url
-      // }
+      if (!pins) {
+        return null;
+      }
+
+      var savedArr = Object.values(saved).filter(function (savedPin) {
+        return savedPin.user_id === currentUser.id;
+      });
+      var cover1, cover2, cover3; // console.log(pins)
+
+      if (savedArr.length < 1) {
+        cover1 = null;
+      } else {
+        // console.log(pins[savedArr[0].pin_id])
+        cover1 = pins[savedArr[0].pin_id].image_url ? pins[savedArr[0].pin_id].image_url : pins[savedArr[0].pin_id].photoUrl;
+      }
+
+      if (savedArr.length < 2) {
+        cover2 = null;
+      } else {
+        cover2 = pins[savedArr[1].pin_id].image_url || pins[savedArr[1].pin_id].photoUrl;
+      }
+
+      if (savedArr.length < 3) {
+        cover3 = null;
+      } else {
+        cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl;
+      }
 
       var followArr = Object.values(follows);
       var following = followArr.filter(function (follow) {
@@ -3947,11 +4006,9 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
         className: "type-board-container"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "type-board-text"
-      }, "Created", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, "Saved", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "type-board-underline"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "type-board-text"
-      }, "Saved"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "gallery-user-profile"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_5__.Link, {
         to: "/users/".concat(user.id, "/pins")
@@ -3962,12 +4019,19 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "first-cover-pin"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        src: "#"
+        className: "image-cover",
+        src: cover1
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "second-cover-pin"
-      }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "third-cover-pin"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "image-cover",
+        src: cover2
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "third-cover-pin"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "image-cover",
+        src: cover3
+      }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-cover-title"
       }, "All Pins"))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_boards_board_index_container__WEBPACK_IMPORTED_MODULE_4__["default"], {
         key: user.username,
@@ -4035,7 +4099,7 @@ var mapStateToProps = function mapStateToProps(state, ownProps) {
     user: state.entities.users[ownProps.match.params.userId],
     follows: state.entities.follows,
     currentUser: state.entities.users[state.session.id],
-    pins: Object.values(state.entities.pins),
+    pins: state.entities.pins,
     boards: state.entities.boards,
     saved: Object.values(state.entities.saved),
     users: state.entities.users

@@ -21,8 +21,9 @@ class UserShow extends React.Component {
 componentDidMount() {
     this.props.fetchUser(this.props.match.params.userId);
     this.props.fetchUsers();
-    this.props.fetchPins();
-    this.props.fetchSaved();
+    this.props.fetchPins().then(() => {
+        this.props.fetchSaved(); })
+    // this.props.fetchSaved();
     this.props.fetchBoards();
     this.props.fetchFollows();
 
@@ -50,35 +51,37 @@ render () {
         return null
     }
 
-    let cover1
-    let cover11
-    let savedArr= Object.values(saved) 
-            // console.log(saved[0].pin_id )
-            // cover1 = pins.filter(pin => pin.id === (saved[0]).pin_id ? pin.image_url : null)
-            // if (!cover1 === null){
-            //     cover11 = cover1}
+    if (!pins) {
+        return null
+    }
 
-            // console.log(cover11)
-
-
-    // if (savedArr.length < 1) {
-    //     cover1 = null
-
-    // } else {
-    //     cover1 = pins[savedArr[0].pin_id].image_url
-    // }
+    let savedArr = Object.values(saved).filter(savedPin => savedPin.user_id === currentUser.id)
+    let cover1, cover2, cover3
+    // console.log(pins)
     
-    // if (savedArr.length < 2) {
-    //     cover2 = null
-    // } else {
-    //     cover2 = pins[savedArr[1].pin_id].image_url
-    // }
 
-    // if (savedArr.length < 3) {
-    //     cover3 = null
-    // } else {
-    //     cover3 = pins[savedArr[2].pin_id].image_url
-    // }
+    if (savedArr.length < 1) {
+        cover1 = null
+
+    } else {
+        // console.log(pins[savedArr[0].pin_id])
+        cover1 = (pins[savedArr[0].pin_id]).image_url ? (pins[savedArr[0].pin_id]).image_url : pins[savedArr[0].pin_id].photoUrl
+    }
+
+
+    if (savedArr.length < 2) {
+        cover2 = null
+    } else {
+        cover2 = pins[savedArr[1].pin_id].image_url || pins[savedArr[1].pin_id].photoUrl
+    }
+
+    if (savedArr.length < 3) {
+        cover3 = null
+    } else {
+        cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl
+    }
+
+    
 
 const followArr = Object.values(follows)
 const following = followArr.filter(follow => follow.user_id === user.id)
@@ -159,10 +162,13 @@ const followers = followArr.filter(follow => follow.follower_id === user.id)
                 {this.state.modalOpen ? dropdownFollow() : null}
 
                 <div className='type-board-container'>
-                    <div className='type-board-text'>Created
+                    {/* <div className='type-board-text'>Created
+                        <div className='type-board-underline'></div>
+                    </div> */}
+                    <div className='type-board-text'>Saved
                         <div className='type-board-underline'></div>
                     </div>
-                    <div className='type-board-text'>Saved</div>
+                    
                 </div>
                 
 
@@ -173,10 +179,14 @@ const followers = followArr.filter(follow => follow.follower_id === user.id)
                     <div className='board-cover-container'>
                         <div className='board-cover-single'>
                             <div className="first-cover-pin">
-                                <img src="#" />
+                                <img className="image-cover" src={cover1} />
                             </div>
-                                        <div className="second-cover-pin"></div>
-                                        <div className="third-cover-pin"></div>
+                                        <div className="second-cover-pin">
+                                            <img className="image-cover" src={cover2} />
+                                        </div>
+                                        <div className="third-cover-pin">
+                                            <img className="image-cover" src={cover3} />
+                                        </div>
                         </div>
                         <div className="board-cover-title">All Pins</div>
                     </div>    

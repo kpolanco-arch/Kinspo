@@ -72,7 +72,7 @@
 
 .pin-index-img:hover  {
     z-index: -1;
-    filter: brightness(70%)
+    filter: brightness(70%);
 }
 
 //save button
@@ -179,6 +179,7 @@
 }
 
 .dropdown-create {
+    display: none;
     position: fixed;
     right: 30px;
     bottom: 30px;
@@ -326,6 +327,15 @@ ul a {
         justify-content: center;
         align-items: center;
         min-height: 55px;
+        opacity: 0;
+}
+
+.grid-images:hover .open-menu-container {
+    opacity: 1;
+}
+
+.show-container .open-menu-container {
+    opacity: 1;
 }
 
 .open-menu {

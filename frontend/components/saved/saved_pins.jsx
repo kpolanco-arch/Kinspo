@@ -29,7 +29,7 @@ class SavedShowPin extends React.Component {
                     pin.id === savedpin.pin_id ? <div>
                         <Link to={`/pins/${pin.id}`} className="pin-index-container" >
                             <SavePin key={pin.title} pin={pin} createSaved={createSaved} currentUser={currentUser} deleteSaved={deleteSaved} boards={boards} saved={saved} />
-                            <img src={pin.image_url} alt={pin.title} className="pin-index-img" />
+                                <img src={(pin.photoUrl) ? pin.photoUrl : pin.image_url} alt={pin.title} className="pin-index-img" />
                         </Link>
                             
                     </div> : null)}

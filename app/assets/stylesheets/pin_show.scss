@@ -260,6 +260,7 @@ span.material-symbols-outlined {
 .create-board-title {
     text-align: center;
     font-weight: 500;
+    margin-top: -27px;
 }
 
 .create-button-container {
@@ -403,4 +404,10 @@ span.material-symbols-outlined {
 
 .unfollow-button-container {
         margin-left: 100px;
+}
+
+
+.image-cover {
+    width: 100%;
+    object-fit: cover;
 }

@@ -28,7 +28,7 @@ class BoardCreate extends React.Component {
     }
 
     navigateback() {
-        this.props.history.push('/')
+        this.props.history.push(`/users/${currentUser.id}`)
     }
 
     render() {
@@ -37,10 +37,13 @@ class BoardCreate extends React.Component {
             <div className="modal-background">
                 <div className="background-board-create">
                     <div className="board-create-container">
-                         {/* <div>
-                            <button onClick={this.navigateback}>X</button>
-                        </div> */}
+                         
                         <div className="board-text-container">
+                            <div onClick={this.navigateback}>
+                                <span class="material-symbols-outlined">
+                                    close
+                                </span>
+                            </div>
                             <div className="pin-show-description">
                                 <h1 className="create-board-title">Create a Board</h1>
                                 <div className="create-pin-form">

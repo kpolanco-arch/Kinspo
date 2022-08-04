@@ -7,9 +7,10 @@ class BoardIndexItem extends React.Component {
         super(props)
     }
 
+
     render() {
         const {board, pins, saved} = this.props;
-        // console.log(saved)
+        
         if (!board) {
             return null
         }
@@ -21,15 +22,45 @@ class BoardIndexItem extends React.Component {
             return null
         }
 
+        let savedArr= Object.values(saved).filter(savedPin => savedPin.board_id === board.id )
+        let cover1, cover2, cover3
+
+        if (savedArr.length < 1) {
+            cover1 = null
+
+        } else {
+            
+            cover1 = (pins[savedArr[0].pin_id]).image_url ? (pins[savedArr[0].pin_id]).image_url : pins[savedArr[0].pin_id].photoUrl
+        }
+        
+        
+        if (savedArr.length < 2) {
+            cover2 = null
+        } else {
+            cover2 = pins[savedArr[1].pin_id].image_url || pins[savedArr[1].pin_id].photoUrl
+        }
+
+        if (savedArr.length < 3) {
+            cover3 = null
+        } else {
+            cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl
+        }
+
         return (
             <div>
                     <Link to={`/boards/${board.id}`}>
                         <div className='board-cover-container'>
                             <div className='board-cover-single'>
-                                <div className="first-cover"></div>
+                                <div className="first-cover">
+                                    <img className="image-cover" src={cover1} alt=""/>
+                                </div>
                                 <div className="cover-column-container" >
-                                    <div className="second-cover"></div>
-                                    <div className="third-cover"></div>
+                                    <div className="second-cover">
+                                    <img className="image-cover" src={cover2} alt="" />
+                                    </div>
+                                    <div className="third-cover">
+                                    <img className="image-cover" src={cover3} alt="" />
+                                    </div>
                                 </div>
                                 
                             </div>
