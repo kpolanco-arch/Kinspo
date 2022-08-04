@@ -45,6 +45,9 @@ class Signup extends React.Component {
                             close
                         </span>
                     </div>
+                    <div>
+                        <img className='modal-asset' src="https://kinspo-dev.s3.amazonaws.com/Asset+1.svg" alt="" />
+                    </div>
                     <div className='login-message'> Welcome to Kinspo </div>
                     <br />
                     <h2>Find new ideas to try</h2>

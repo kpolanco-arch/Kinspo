@@ -262,3 +262,19 @@ button.logout-button-nav {
 
 .fa-smile {
 font-size: 30px;}
+
+.logo-link {
+display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo-src {
+    height: 28px;
+    padding-right: 6px;
+}
+
+.modal-asset {
+    width: 15%;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { open, close } from '../../actions/modal';
-
+// import Asset from './asset_1.svg'
 class Login extends React.Component {
     constructor(props) {
         super(props);
@@ -61,9 +61,14 @@ class Login extends React.Component {
                 <form  onSubmit={this.handleSubmit} >
                     <br />                
                     <div className="close-button" onClick={() => { this.props.closeModal()}} >
-                        <span class="material-symbols-outlined">
+                        <span className="material-symbols-outlined">
                             close
                         </span>
+                    </div>
+                    <div>
+                        <img className='modal-asset' src= "https://kinspo-dev.s3.amazonaws.com/Asset+1.svg" alt=""  />
+                        {/* <img className='modal-asset' src='asset_1.svg' alt="" /> */}
+
                     </div>
                     <div className='login-message'> Welcome to Kinspo </div>
                     <br />

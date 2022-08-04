@@ -51,7 +51,8 @@ const { currentUser, logout, openModal } = this.props;
                 
                 <nav className='personal-links'>
                     <div>
-                    <Link to="/" >
+                    <Link className='logo-link' to="/" >
+                        <img className='logo-src' src="https://kinspo-dev.s3.amazonaws.com/Asset+1.svg" alt="" />
                         <h1 className="logo">Kinspo</h1>
                     </Link>
                     </div>
