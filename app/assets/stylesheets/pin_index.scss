@@ -159,6 +159,13 @@
     background-color: #f1f1f1
 }
 
+.board-head-title:hover .dropdown-content-delete {
+    display: block;
+}
+.dropdown-content-delete {
+    display: none;
+}
+
 .dropdown:hover .dropdown-content {
     display: block;
 }

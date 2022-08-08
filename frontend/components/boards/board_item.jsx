@@ -12,10 +12,11 @@ class BoardItem extends React.Component {
         // this.props.fetchBoards();
         this.props.fetchPins();
         this.props.fetchSaved();
+        this.props.fetchUser(this.props.currentUser.id);
     }
 
     render() {
-        const { board, pins, saved } = this.props;
+        const { board, pins, saved, deleteBoard } = this.props;
         console.log(saved)
         if (!board) {
             return null
@@ -35,9 +36,14 @@ class BoardItem extends React.Component {
             <div>
                 <div className="board-item-layout-container">
                     <div className="board-head-title">{board.name}
-                        <div><span class="material-symbols-outlined">
+                        <div ><span className="material-symbols-outlined">
                             more_horiz
                         </span></div>
+                            <div className="dropdown-content-delete">
+                                    <Link to={`/users/${currentUser.id}`}>
+                                <button className='unsave-button'onClick={() => deleteBoard(board.id)}>delete</button>
+                                    </Link>
+                            </div>  
                     </div>
                     <div className="user-profile-small-container"></div>
                     <div className="board-description-text">{board.description}description</div>
