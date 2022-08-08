@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { withRouter } from "react-router-dom";
+import { fetchUser } from "../../actions/user_actions";
 
 class BoardCreate extends React.Component {
     constructor(props) {
@@ -15,6 +16,9 @@ class BoardCreate extends React.Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.navigateback = this.navigateback.bind(this)
 
+    }
+    componentDidMount() {
+        this.props.fetchUser(this.props.currentUser.id);
     }
 
     update(val) {

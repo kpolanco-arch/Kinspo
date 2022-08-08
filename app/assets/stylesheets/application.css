@@ -14,11 +14,11 @@
  *= require_self
  */
 
-@import url(app/assets/stylesheets/splash.css);
-@import url(app/assets/stylesheets/app.scss);
-@import url(app/assets/stylesheets/nav_bar.scss); 
-@import url(app/assets/stylesheets/test.scss); 
-@import url(app/assets/stylesheets/pin_index.scss);
-@import url(app/assets/stylesheets/pin_show.scss);
-@import url(app/assets/stylesheets/users.scss);
+@import url(splash.css);
+@import url(app.scss);
+@import url(nav_bar.scss); 
+@import url(test.scss); 
+@import url(pin_index.scss);
+@import url(pin_show.scss);
+@import url(users.scss);
 @import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css");
