@@ -37,7 +37,8 @@ const { currentUser, logout, openModal } = this.props;
             </div>
             <div className='icon-navbar'>
                 <a href="https://github.com/kpolanco-arch">
-                    <i className='fas fa-smile'></i>
+                    <i className="fa-solid fa-face-smile"></i>
+                    {/* <i className='fas fa-smile'></i> */}
                 </a>
             </div>
             <Link to={`/users/${currentUser.id}`} className='user-profile-letter'>

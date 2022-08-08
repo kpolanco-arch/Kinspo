@@ -67,7 +67,7 @@ class Splash extends React.Component {
                         </div>
                     </div> */}
                     {/* travel */}
-                    {/* <div className="splash-container-grid">
+                    <div className="splash-container-grid">
                         <div className="column">
                             <img className="splash-image" src="https://kinspo-dev.s3.amazonaws.com/home6plant.jpeg" alt="home6" />
                             <img className="splash-image" src="https://kinspo-dev.s3.amazonaws.com/home3library.jpeg" alt="home3" />
@@ -96,9 +96,9 @@ class Splash extends React.Component {
                             <img className="splash-image" src="https://kinspo-dev.s3.amazonaws.com/home8living.jpeg" alt="home8" />
                             <img className="splash-image" src="https://kinspo-dev.s3.amazonaws.com/homebath.jpeg" alt="bath" />
                         </div>
-                    </div> */}
+                    </div>
                     {/* lifestyle */}
-                    <div className="splash-container-grid">
+                    {/* <div className="splash-container-grid">
                         <div className="column">
                             <img className="splash-image" src="https://kinspo-dev.s3.amazonaws.com/travelsantorini.jpeg" alt="travel" />
                             <img className="splash-image" src="https://kinspo-dev.s3.amazonaws.com/travel10.jpeg" alt="travel" />
@@ -127,7 +127,7 @@ class Splash extends React.Component {
                             <img className="splash-image" src="https://kinspo-dev.s3.amazonaws.com/travel.jpeg" alt="travel" />
                             <img className="splash-image" src="https://kinspo-dev.s3.amazonaws.com/travel8france.jpeg" alt="france" />
                         </div>
-                    </div>
+                    </div> */}
 
 
                     {/* <div className="splash-container-grid">

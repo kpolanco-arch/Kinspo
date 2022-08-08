@@ -1613,7 +1613,7 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("a", {
         href: "https://github.com/kpolanco-arch"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("i", {
-        className: "fas fa-smile"
+        className: "fa-solid fa-face-smile"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         to: "/users/".concat(currentUser.id),
         className: "user-profile-letter"
@@ -3661,72 +3661,72 @@ var Splash = /*#__PURE__*/function (_React$Component) {
         className: "column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travelsantorini.jpeg",
-        alt: "travel"
+        src: "https://kinspo-dev.s3.amazonaws.com/home6plant.jpeg",
+        alt: "home6"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travel10.jpeg",
-        alt: "travel"
+        src: "https://kinspo-dev.s3.amazonaws.com/home3library.jpeg",
+        alt: "home3"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travelswitz.jpeg",
-        alt: "travel"
+        src: "https://kinspo-dev.s3.amazonaws.com/home1frames.jpeg",
+        alt: "home1"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travel11turkey.jpeg",
-        alt: "turkey"
+        src: "https://kinspo-dev.s3.amazonaws.com/arch2exterior.jpeg",
+        alt: "pavilion"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travelmountain.jpeg",
-        alt: "mntn"
+        src: "https://kinspo-dev.s3.amazonaws.com/home2bath.jpeg",
+        alt: "home2"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travel12camel.jpeg",
-        alt: "camel"
+        src: "https://kinspo-dev.s3.amazonaws.com/arch3green.jpeg",
+        alt: "planting"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travelhike.jpeg",
-        alt: "hike"
+        src: "https://kinspo-dev.s3.amazonaws.com/home4kitchen.jpeg",
+        alt: "home4"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travel9boat.jpeg",
-        alt: "boat"
+        src: "https://kinspo-dev.s3.amazonaws.com/greenplant.jpeg",
+        alt: "plant"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/traveleater.jpeg",
-        alt: "travel"
+        src: "https://kinspo-dev.s3.amazonaws.com/home5decor.jpeg",
+        alt: "home5"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travel13moher.jpeg",
-        alt: "moher"
+        src: "https://kinspo-dev.s3.amazonaws.com/green.jpeg",
+        alt: "green"
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "column"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travelbeach.jpeg",
-        alt: "beach"
+        src: "https://kinspo-dev.s3.amazonaws.com/home7dessert.jpeg",
+        alt: "home7"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
-        className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travel14tuscany.jpeg",
-        alt: "tuscany"
-      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-        className: "column"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
         src: "https://kinspo-dev.s3.amazonaws.com/travel.jpeg",
         alt: "travel"
+      })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "column"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
+        className: "splash-image",
+        src: "https://kinspo-dev.s3.amazonaws.com/home8living.jpeg",
+        alt: "home8"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("img", {
         className: "splash-image",
-        src: "https://kinspo-dev.s3.amazonaws.com/travel8france.jpeg",
-        alt: "france"
+        src: "https://kinspo-dev.s3.amazonaws.com/homebath.jpeg",
+        alt: "bath"
       }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "white-gradient"
       })));
