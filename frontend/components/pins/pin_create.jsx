@@ -12,14 +12,16 @@ class PinCreate extends React.Component {
             image_url: '',
             creator_id: this.props.currentUser.id,
             description: '',
-            board_id: 9,
             photoFile: null,
-            photoUrl : null
+            photoUrl : null,
+            errors: null,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.navigateback = this.navigateback.bind(this);
         this.handleFile = this.handleFile.bind(this);
+        this.renderErrors = this.renderErrors.bind(this);
+
 
     }
 
@@ -30,13 +32,13 @@ class PinCreate extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         // const pin = Object.assign({}, this.state)
-        
+        const errors = this.renderErrors();
+        if (errors.length < 1) {
 
         const formData = new FormData();
         formData.append('pin[title]', this.state.title);
         formData.append('pin[image_url]', this.state.image_url);
         formData.append('pin[description]', this.state.description);
-        formData.append('pin[board_id]', this.state.board_id);
         formData.append('pin[creator_id]', this.state.creator_id);
 
 
@@ -45,6 +47,11 @@ class PinCreate extends React.Component {
             formData.append('pin[photo]', this.state.photoFile);
     }
         this.props.createPin(formData)
+            .then(this.props.history.push("/"))}else {
+                this.setState({
+                    errors: errors
+                })
+            }
 }
 
     handleFile(e) {
@@ -61,6 +68,16 @@ class PinCreate extends React.Component {
             fileReader.readAsDataURL(file);
         }
 
+    }
+
+    renderErrors() {
+        this.setState({
+            errors: null
+        })
+        let errors = [];
+        this.state.title ? null : errors.push("Pin must have a title")
+        this.state.photoFile ? null : errors.push("Pin must have a photo")
+        return errors;
     }
 
     navigateback(){
@@ -126,6 +143,8 @@ class PinCreate extends React.Component {
                                         <div className="pin-underline"></div>
                                     </div>
                                     <button className="save-button" type="submit">Submit</button>
+                                    <div className="error-text">{this.state.errors} </div>
+                                    
                                     </form>
                                 </div>
                             </div>

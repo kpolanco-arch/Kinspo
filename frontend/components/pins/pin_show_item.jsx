@@ -34,7 +34,7 @@ navigateback() {
         
                
         const owner = users[pin.creator_id]
-        debugger
+        // debugger
         let newvar = !owner?.username ?  owner?.email : owner?.username ;
         
 

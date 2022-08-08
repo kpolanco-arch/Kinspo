@@ -56,29 +56,36 @@ render () {
     }
 
     let savedArr = Object.values(saved).filter(savedPin => savedPin.user_id === currentUser.id)
+    let pinsArr = Object.values(pins).filter(pin => pin.creator_id === currentUser.id)
+
+    
     let cover1, cover2, cover3
     // console.log(pins)
     
 
-    if (savedArr.length < 1) {
+    if (pinsArr.length < 1) {
         cover1 = null
 
     } else {
-        // console.log(pins[savedArr[0].pin_id])
-        cover1 = (pins[savedArr[0].pin_id]).image_url ? (pins[savedArr[0].pin_id]).image_url : pins[savedArr[0].pin_id].photoUrl
+        // cover1 = (pins[savedArr[0].pin_id]).image_url ? (pins[savedArr[0].pin_id]).image_url : pins[savedArr[0].pin_id].photoUrl
+        cover1 = (pins[pinsArr[0].id]).image_url ? (pins[pinsArr[0].id]).image_url : pins[pinsArr[0].id].photoUrl
     }
 
 
-    if (savedArr.length < 2) {
+    if (pinsArr.length < 2) {
         cover2 = null
     } else {
-        cover2 = pins[savedArr[1].pin_id].image_url || pins[savedArr[1].pin_id].photoUrl
+        // cover2 = pins[savedArr[1].pin_id].image_url || pins[savedArr[1].pin_id].photoUrl
+        cover2 = (pins[pinsArr[1].id]).image_url ? (pins[pinsArr[1].id]).image_url : pins[pinsArr[1].id].photoUrl
+
     }
 
-    if (savedArr.length < 3) {
+    if (pinsArr.length < 3) {
         cover3 = null
     } else {
-        cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl
+        // cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl
+        cover3 = (pins[pinsArr[2].id]).image_url ? (pins[pinsArr[2].id]).image_url : pins[pinsArr[2].id].photoUrl
+
     }
 
     

@@ -10,15 +10,18 @@ class BoardCreate extends React.Component {
         this.state = {
             title: '',
             creator_id: this.props.currentUser.id,
-            description: ''
+            description: '',
+            errors: null,
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.navigateback = this.navigateback.bind(this)
+        this.navigateback = this.navigateback.bind(this),
+        this.renderErrors = this.renderErrors.bind(this);
 
     }
     componentDidMount() {
         this.props.fetchUser(this.props.currentUser.id);
+            
     }
 
     update(val) {
@@ -27,8 +30,24 @@ class BoardCreate extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        const errors = this.renderErrors();
+        if (errors.length < 1) {
         const board = Object.assign({}, this.state)
-        this.props.createBoard(board)
+        this.props.createBoard(board).then(this.props.history.push(`/users/${currentUser.id}`))}
+        else {
+            this.setState({
+                errors: errors
+            })
+        }
+    }
+
+    renderErrors() {
+        this.setState({
+            errors: null
+        })
+        let errors = [];
+        this.state.name ? null : errors.push("Board must have a name")
+        return errors;
     }
 
     navigateback() {
@@ -64,7 +83,7 @@ class BoardCreate extends React.Component {
                                         <div className="create-button-container">
                                            <button className="create-button" type="submit">Create</button> 
                                         </div>
-                                        
+                                        <div className="error-text">{this.state.errors} </div>
                                     </form>
                                 </div>
                             </div>

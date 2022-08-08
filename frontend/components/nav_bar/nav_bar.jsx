@@ -44,7 +44,9 @@ const { currentUser, logout, openModal } = this.props;
             <Link to={`/users/${currentUser.id}`} className='user-profile-letter'>
                <button  type="submit">{(currentUser.email)[0]}</button>
             </Link>
-            <button className='logout-button-nav' onClick = {logout}>Log Out</button>
+            <Link to="/">
+            <button className='logout-button-nav' onClick = {() => logout()}>Log Out</button>
+            </Link>
             <br />
             
         </div>

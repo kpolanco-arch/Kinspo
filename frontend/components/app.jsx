@@ -26,16 +26,16 @@ export default () => (
          <Modal />
         <Switch>
 
-            <Route path="/users/:userId/pins" component={UserShowPin}/>
-            <Route path="/boards/:boardId/edit" component={BoardEdit} />
-            <Route path= "/pins/:pinId/edit" component={PinEdit}/>
-            <Route path="/boards/new" component={BoardCreateContainer} />
+            <AuthRoute path="/users/:userId/pins" component={UserShowPin}/>
+            <AuthRoute path="/boards/:boardId/edit" component={BoardEdit} />
+            <AuthRoute path= "/pins/:pinId/edit" component={PinEdit}/>
+            <AuthRoute path="/boards/new" component={BoardCreateContainer} />
             
-            <Route path="/pins/new" component={PinCreateContainer}/>
-            <Route path="/users/:userId" component={UserShowContainer} />
-            <Route path="/boards/:boardId" component={BoardItem} />
+            <AuthRoute path="/pins/new" component={PinCreateContainer}/>
+            <AuthRoute path="/users/:userId" component={UserShowContainer} />
+            <AuthRoute path="/boards/:boardId" component={BoardItem} />
 
-            <Route path="/pins/:pinId" component={pin_show_item_container} />
+            <AuthRoute path="/pins/:pinId" component={pin_show_item_container} />
             
             <Route path="/" component={HomeContainer} />
         </Switch>

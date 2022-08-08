@@ -509,28 +509,28 @@ __webpack_require__.r(__webpack_exports__);
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (function () {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_nav_bar_nav_bar_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_home_modal__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_nav_bar_nav_bar_container__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_home_modal__WEBPACK_IMPORTED_MODULE_7__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Switch, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     path: "/users/:userId/pins",
     component: _users_user_show_pins_container__WEBPACK_IMPORTED_MODULE_12__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     path: "/boards/:boardId/edit",
     component: _boards_board_edit_container__WEBPACK_IMPORTED_MODULE_16__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     path: "/pins/:pinId/edit",
     component: _pins_pin_edit_container__WEBPACK_IMPORTED_MODULE_15__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     path: "/boards/new",
     component: _boards_board_create_container__WEBPACK_IMPORTED_MODULE_14__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     path: "/pins/new",
     component: _pins_pin_create_container__WEBPACK_IMPORTED_MODULE_10__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     path: "/users/:userId",
     component: _users_user_show_container__WEBPACK_IMPORTED_MODULE_9__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     path: "/boards/:boardId",
     component: _boards_board_item_container__WEBPACK_IMPORTED_MODULE_11__["default"]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_util_route_utils__WEBPACK_IMPORTED_MODULE_6__.AuthRoute, {
     path: "/pins/:pinId",
     component: _pins_pin_show_item_container__WEBPACK_IMPORTED_MODULE_8__["default"]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_17__.Route, {
@@ -599,10 +599,11 @@ var BoardCreate = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       title: '',
       creator_id: _this.props.currentUser.id,
-      description: ''
+      description: '',
+      errors: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
-    _this.navigateback = _this.navigateback.bind(_assertThisInitialized(_this));
+    _this.navigateback = _this.navigateback.bind(_assertThisInitialized(_this)), _this.renderErrors = _this.renderErrors.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -624,8 +625,26 @@ var BoardCreate = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      var board = Object.assign({}, this.state);
-      this.props.createBoard(board);
+      var errors = this.renderErrors();
+
+      if (errors.length < 1) {
+        var board = Object.assign({}, this.state);
+        this.props.createBoard(board).then(this.props.history.push("/users/".concat(currentUser.id)));
+      } else {
+        this.setState({
+          errors: errors
+        });
+      }
+    }
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      this.setState({
+        errors: null
+      });
+      var errors = [];
+      this.state.name ? null : errors.push("Board must have a name");
+      return errors;
     }
   }, {
     key: "navigateback",
@@ -675,7 +694,9 @@ var BoardCreate = /*#__PURE__*/function (_React$Component) {
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "create-button",
         type: "submit"
-      }, "Create")))))))));
+      }, "Create")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "error-text"
+      }, this.state.errors, " "))))))));
     }
   }]);
 
@@ -1631,10 +1652,14 @@ var NavBar = /*#__PURE__*/function (_React$Component) {
         className: "user-profile-letter"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         type: "submit"
-      }, currentUser.email[0])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+      }, currentUser.email[0])), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
+        to: "/"
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "logout-button-nav",
-        onClick: logout
-      }, "Log Out"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
+        onClick: function onClick() {
+          return logout();
+        }
+      }, "Log Out")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("nav", {
         className: "personal-links"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
         className: "logo-link",
@@ -1798,13 +1823,14 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
       image_url: '',
       creator_id: _this.props.currentUser.id,
       description: '',
-      board_id: 9,
       photoFile: null,
-      photoUrl: null
+      photoUrl: null,
+      errors: null
     };
     _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.navigateback = _this.navigateback.bind(_assertThisInitialized(_this));
     _this.handleFile = _this.handleFile.bind(_assertThisInitialized(_this));
+    _this.renderErrors = _this.renderErrors.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -1822,18 +1848,25 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
     value: function handleSubmit(e) {
       e.preventDefault(); // const pin = Object.assign({}, this.state)
 
-      var formData = new FormData();
-      formData.append('pin[title]', this.state.title);
-      formData.append('pin[image_url]', this.state.image_url);
-      formData.append('pin[description]', this.state.description);
-      formData.append('pin[board_id]', this.state.board_id);
-      formData.append('pin[creator_id]', this.state.creator_id);
+      var errors = this.renderErrors();
 
-      if (this.state.photoFile) {
-        formData.append('pin[photo]', this.state.photoFile);
+      if (errors.length < 1) {
+        var formData = new FormData();
+        formData.append('pin[title]', this.state.title);
+        formData.append('pin[image_url]', this.state.image_url);
+        formData.append('pin[description]', this.state.description);
+        formData.append('pin[creator_id]', this.state.creator_id);
+
+        if (this.state.photoFile) {
+          formData.append('pin[photo]', this.state.photoFile);
+        }
+
+        this.props.createPin(formData).then(this.props.history.push("/"));
+      } else {
+        this.setState({
+          errors: errors
+        });
       }
-
-      this.props.createPin(formData);
     }
   }, {
     key: "handleFile",
@@ -1854,6 +1887,17 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
       if (file) {
         fileReader.readAsDataURL(file);
       }
+    }
+  }, {
+    key: "renderErrors",
+    value: function renderErrors() {
+      this.setState({
+        errors: null
+      });
+      var errors = [];
+      this.state.title ? null : errors.push("Pin must have a title");
+      this.state.photoFile ? null : errors.push("Pin must have a photo");
+      return errors;
     }
   }, {
     key: "navigateback",
@@ -1947,7 +1991,9 @@ var PinCreate = /*#__PURE__*/function (_React$Component) {
       })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
         className: "save-button",
         type: "submit"
-      }, "Submit")))))));
+      }, "Submit"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        className: "error-text"
+      }, this.state.errors, " ")))))));
     }
   }]);
 
@@ -2613,8 +2659,8 @@ var PinShowItem = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
-      var owner = users[pin.creator_id];
-      debugger;
+      var owner = users[pin.creator_id]; // debugger
+
       var newvar = !(owner !== null && owner !== void 0 && owner.username) ? owner === null || owner === void 0 ? void 0 : owner.email : owner === null || owner === void 0 ? void 0 : owner.username;
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "background-pin-show"
@@ -3912,25 +3958,30 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       var savedArr = Object.values(saved).filter(function (savedPin) {
         return savedPin.user_id === currentUser.id;
       });
+      var pinsArr = Object.values(pins).filter(function (pin) {
+        return pin.creator_id === currentUser.id;
+      });
       var cover1, cover2, cover3; // console.log(pins)
 
-      if (savedArr.length < 1) {
+      if (pinsArr.length < 1) {
         cover1 = null;
       } else {
-        // console.log(pins[savedArr[0].pin_id])
-        cover1 = pins[savedArr[0].pin_id].image_url ? pins[savedArr[0].pin_id].image_url : pins[savedArr[0].pin_id].photoUrl;
+        // cover1 = (pins[savedArr[0].pin_id]).image_url ? (pins[savedArr[0].pin_id]).image_url : pins[savedArr[0].pin_id].photoUrl
+        cover1 = pins[pinsArr[0].id].image_url ? pins[pinsArr[0].id].image_url : pins[pinsArr[0].id].photoUrl;
       }
 
-      if (savedArr.length < 2) {
+      if (pinsArr.length < 2) {
         cover2 = null;
       } else {
-        cover2 = pins[savedArr[1].pin_id].image_url || pins[savedArr[1].pin_id].photoUrl;
+        // cover2 = pins[savedArr[1].pin_id].image_url || pins[savedArr[1].pin_id].photoUrl
+        cover2 = pins[pinsArr[1].id].image_url ? pins[pinsArr[1].id].image_url : pins[pinsArr[1].id].photoUrl;
       }
 
-      if (savedArr.length < 3) {
+      if (pinsArr.length < 3) {
         cover3 = null;
       } else {
-        cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl;
+        // cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl
+        cover3 = pins[pinsArr[2].id].image_url ? pins[pinsArr[2].id].image_url : pins[pinsArr[2].id].photoUrl;
       }
 
       var followArr = Object.values(follows);
@@ -4249,7 +4300,7 @@ var UserShowPin = /*#__PURE__*/function (_React$Component) {
       }, "My Pins"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "gallery"
       }, pins.map(function (pin) {
-        return pin.creator_id === user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+        return pin.creator_id === user.id ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
           className: "grid-images"
         }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_1__.Link, {
           to: "/pins/".concat(pin.id),
@@ -4264,7 +4315,7 @@ var UserShowPin = /*#__PURE__*/function (_React$Component) {
           onClick: function onClick() {
             return deletePin(pin.id);
           }
-        }, "Delete"))) : null;
+        }, "Delete")) : null;
       })));
     }
   }]);
