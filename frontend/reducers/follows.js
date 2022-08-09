@@ -10,7 +10,8 @@ const FollowsReducer = (state = {}, action) => {
             nextState[action.follow.id] = action.follow
             return nextState;
         case REMOVE_FOLLOW:
-            delete nextState[action.followId]
+            // debugger
+            delete nextState[action.followId.id]
             return nextState;
         default:
             return state;

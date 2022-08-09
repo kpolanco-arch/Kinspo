@@ -10,6 +10,8 @@ class BoardIndex extends React.Component {
         this.props.fetchBoards();
         this.props.fetchPins();
         this.props.fetchSaved();
+        this.props.fetchUsers();    
+
     }
    
     render(){

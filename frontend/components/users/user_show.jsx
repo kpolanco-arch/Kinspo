@@ -14,15 +14,14 @@ class UserShow extends React.Component {
             modalOpen: false,
         }
 
-    this.handleSubmit = this.handleSubmit.bind(this);
     this.closeModal = this.closeModal.bind(this);
     }
 
 componentDidMount() {
     this.props.fetchUser(this.props.match.params.userId);
-    this.props.fetchUsers();
     this.props.fetchPins().then(() => {
-        this.props.fetchSaved(); })
+    this.props.fetchSaved(); });
+    this.props.fetchUsers();    
     // this.props.fetchSaved();
     this.props.fetchBoards();
     this.props.fetchFollows();
@@ -34,11 +33,6 @@ closeModal(e) {
     this.setState({ modalOpen: !this.state.modalOpen })
 }
 
-handleSubmit(e){
-    e.preventDefault();
-    // const pinId = Object.assign({}, this.state)
-    // this.props.deletePin(pinId)
-}
 
 render () {
     const { pins, users, follows, createFollow, deleteFollow, currentUser, deletePin, boards, createSaved, fetchSaved, saved } = this.props;

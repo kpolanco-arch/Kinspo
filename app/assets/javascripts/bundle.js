@@ -989,6 +989,7 @@ var BoardIndex = /*#__PURE__*/function (_React$Component) {
       this.props.fetchBoards();
       this.props.fetchPins();
       this.props.fetchSaved();
+      this.props.fetchUsers();
     }
   }, {
     key: "render",
@@ -1040,7 +1041,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions_board_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/board_actions */ "./frontend/actions/board_actions.js");
 /* harmony import */ var _actions_pin_actions__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/pin_actions */ "./frontend/actions/pin_actions.js");
 /* harmony import */ var _actions_save_action__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../actions/save_action */ "./frontend/actions/save_action.js");
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router/esm/react-router.js");
+/* harmony import */ var _actions_user_actions__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../actions/user_actions */ "./frontend/actions/user_actions.js");
+
 
 
 
@@ -1068,11 +1071,14 @@ var mapDispatchToProps = function mapDispatchToProps(dispatch) {
     },
     fetchSaved: function fetchSaved() {
       return dispatch((0,_actions_save_action__WEBPACK_IMPORTED_MODULE_4__.fetchSaved)());
+    },
+    fetchUsers: function fetchUsers() {
+      return dispatch((0,_actions_user_actions__WEBPACK_IMPORTED_MODULE_5__.fetchUsers)());
     }
   };
 };
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_board_index__WEBPACK_IMPORTED_MODULE_1__["default"])));
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_router_dom__WEBPACK_IMPORTED_MODULE_6__.withRouter)((0,react_redux__WEBPACK_IMPORTED_MODULE_0__.connect)(mapStateToProps, mapDispatchToProps)(_board_index__WEBPACK_IMPORTED_MODULE_1__["default"])));
 
 /***/ }),
 
@@ -1089,8 +1095,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
+/* harmony import */ var react_router_dom__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-router-dom */ "./node_modules/react-router-dom/esm/react-router-dom.js");
 /* harmony import */ var _board_item_container__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./board_item_container */ "./frontend/components/boards/board_item_container.jsx");
+/* harmony import */ var _actions_pin_actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../actions/pin_actions */ "./frontend/actions/pin_actions.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1117,6 +1125,8 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 
 
+
+
 var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
   _inherits(BoardIndexItem, _React$Component);
 
@@ -1129,6 +1139,11 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
   }
 
   _createClass(BoardIndexItem, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.fetchPins();
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this$props = this.props,
@@ -1140,7 +1155,7 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
         return null;
       }
 
-      if (!pins) {
+      if (Object.values(pins).length < 1) {
         return null;
       }
 
@@ -1150,12 +1165,14 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
 
       var savedArr = Object.values(saved).filter(function (savedPin) {
         return savedPin.board_id === board.id;
-      });
+      }); // debugger
+
       var cover1, cover2, cover3;
 
       if (savedArr.length < 1) {
         cover1 = null;
       } else {
+        // debugger
         cover1 = pins[savedArr[0].pin_id].image_url ? pins[savedArr[0].pin_id].image_url : pins[savedArr[0].pin_id].photoUrl;
       }
 
@@ -1171,7 +1188,7 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
         cover3 = pins[savedArr[2].pin_id].image_url || pins[savedArr[2].pin_id].photoUrl;
       }
 
-      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
         to: "/boards/".concat(board.id)
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-cover-container"
@@ -1201,7 +1218,7 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
         className: "board-cover-title"
       }, board.name))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "edit-icon-board"
-      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_2__.Link, {
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_router_dom__WEBPACK_IMPORTED_MODULE_4__.Link, {
         to: "/boards/".concat(board.id, "/edit")
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("span", {
         className: "material-symbols-outlined"
@@ -1212,7 +1229,21 @@ var BoardIndexItem = /*#__PURE__*/function (_React$Component) {
   return BoardIndexItem;
 }((react__WEBPACK_IMPORTED_MODULE_0___default().Component));
 
-/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (BoardIndexItem);
+var mapStateToProps = function mapStateToProps(state) {
+  return {
+    pins: state.entities.pins
+  };
+};
+
+var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+  return {
+    fetchPins: function fetchPins() {
+      return dispatch((0,_actions_pin_actions__WEBPACK_IMPORTED_MODULE_2__.fetchPins)());
+    }
+  };
+};
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ((0,react_redux__WEBPACK_IMPORTED_MODULE_3__.connect)(mapStateToProps, mapDispatchToProps)(BoardIndexItem));
 
 /***/ }),
 
@@ -3915,7 +3946,6 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
     _this.state = {
       modalOpen: false
     };
-    _this.handleSubmit = _this.handleSubmit.bind(_assertThisInitialized(_this));
     _this.closeModal = _this.closeModal.bind(_assertThisInitialized(_this));
     return _this;
   }
@@ -3926,10 +3956,10 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       var _this2 = this;
 
       this.props.fetchUser(this.props.match.params.userId);
-      this.props.fetchUsers();
       this.props.fetchPins().then(function () {
         _this2.props.fetchSaved();
-      }); // this.props.fetchSaved();
+      });
+      this.props.fetchUsers(); // this.props.fetchSaved();
 
       this.props.fetchBoards();
       this.props.fetchFollows();
@@ -3941,12 +3971,6 @@ var UserShow = /*#__PURE__*/function (_React$Component) {
       this.setState({
         modalOpen: !this.state.modalOpen
       });
-    }
-  }, {
-    key: "handleSubmit",
-    value: function handleSubmit(e) {
-      e.preventDefault(); // const pinId = Object.assign({}, this.state)
-      // this.props.deletePin(pinId)
     }
   }, {
     key: "render",
@@ -4540,7 +4564,8 @@ var FollowsReducer = function FollowsReducer() {
       return nextState;
 
     case _actions_follow_actions__WEBPACK_IMPORTED_MODULE_0__.REMOVE_FOLLOW:
-      delete nextState[action.followId];
+      // debugger
+      delete nextState[action.followId.id];
       return nextState;
 
     default:

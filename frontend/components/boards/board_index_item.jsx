@@ -1,20 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import BoardItem from "./board_item_container";
+import { fetchPins } from "../../actions/pin_actions";
+import { connect } from "react-redux";
 
 class BoardIndexItem extends React.Component {
     constructor(props){
         super(props)
     }
 
-
+componentDidMount() {
+    this.props.fetchPins();
+}
     render() {
         const {board, pins, saved} = this.props;
-        
         if (!board) {
             return null
         }
-        if(!pins) {
+
+        if (Object.values(pins).length < 1) {
             return null
         }
 
@@ -23,14 +27,15 @@ class BoardIndexItem extends React.Component {
         }
 
         let savedArr= Object.values(saved).filter(savedPin => savedPin.board_id === board.id )
+        // debugger
         let cover1, cover2, cover3
 
         if (savedArr.length < 1) {
             cover1 = null
 
         } else {
-            
-            cover1 = (pins[savedArr[0].pin_id]).image_url ? (pins[savedArr[0].pin_id]).image_url : pins[savedArr[0].pin_id].photoUrl
+            // debugger
+            cover1 = pins[savedArr[0].pin_id].image_url ? pins[savedArr[0].pin_id].image_url : pins[savedArr[0].pin_id].photoUrl
         }
         
         
@@ -86,4 +91,13 @@ class BoardIndexItem extends React.Component {
     }
 }
 
-export default BoardIndexItem;
+
+const mapStateToProps = state => ({
+    pins: state.entities.pins
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchPins: () => dispatch(fetchPins())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BoardIndexItem);
