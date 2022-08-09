@@ -156,7 +156,8 @@ const followers = followArr.filter(follow => follow.follower_id === user.id)
                 <div className='user-profile-image-container'></div>
                 <h1>{this.props.user.username}</h1>
                 <h2>{this.props.user.email}</h2>
-                <div onClick={this.closeModal} className='user-profile-followers'>
+                <div  className='user-profile-followers'>
+                    {/* onClick={this.closeModal} */}
                     <h2>{followers.length} followers</h2>
                     <h2>{following.length} following</h2>
                 </div>
