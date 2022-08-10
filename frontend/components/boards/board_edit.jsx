@@ -33,7 +33,7 @@ class BoardEdit extends React.Component {
 
     render() {
         const {board} = this.props;
-        console.log(board)
+        // console.log(board)
         return (
             <div className="modal-background">
                 <div className="background-board-create">

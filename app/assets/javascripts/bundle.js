@@ -836,8 +836,8 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      var board = this.props.board;
-      console.log(board);
+      var board = this.props.board; // console.log(board)
+
       return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "modal-background"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -1315,8 +1315,7 @@ var BoardItem = /*#__PURE__*/function (_React$Component) {
           board = _this$props.board,
           pins = _this$props.pins,
           saved = _this$props.saved,
-          deleteBoard = _this$props.deleteBoard;
-      console.log(saved);
+          deleteBoard = _this$props.deleteBoard; // console.log(saved)
 
       if (!board) {
         return null;
@@ -2177,7 +2176,7 @@ var PinEdit = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.updatePin(this.state);
+      this.props.updatePin(this.state).then(this.props.history.push("/pins/".concat(this.state.id)));
     }
   }, {
     key: "update",
@@ -2222,8 +2221,8 @@ var PinEdit = /*#__PURE__*/function (_React$Component) {
           saved = _this$props.saved,
           boards = _this$props.boards,
           createSaved = _this$props.createSaved,
-          deleteSaved = _this$props.deleteSaved;
-      console.log(pin);
+          deleteSaved = _this$props.deleteSaved; // console.log(pin)
+
       var preview = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "create-pin-template"
       }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {

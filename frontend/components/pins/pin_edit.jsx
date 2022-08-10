@@ -19,7 +19,7 @@ class PinEdit extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.updatePin(this.state)
+        this.props.updatePin(this.state).then(this.props.history.push(`/pins/${this.state.id}`))
     }
 
     update(val) {
@@ -50,7 +50,7 @@ class PinEdit extends React.Component {
         // const { title, image_url, creator_id, description, board_id } = this.props;
         const { pin, saved, boards, createSaved, deleteSaved } = this.props;
 
-        console.log(pin)
+        // console.log(pin)
 
         const preview = <div className="create-pin-template">
             <div className="photo-preview-container">

@@ -17,7 +17,7 @@ class BoardItem extends React.Component {
 
     render() {
         const { board, pins, saved, deleteBoard } = this.props;
-        console.log(saved)
+        // console.log(saved)
         if (!board) {
             return null
         }
