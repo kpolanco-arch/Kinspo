@@ -46,7 +46,7 @@ class BoardItem extends React.Component {
                             </div>  
                     </div>
                     <div className="user-profile-small-container"></div>
-                    <div className="board-description-text">{board.description}description</div>
+                    <div className="board-description-text">{board.description}</div>
                 </div>    
                    <div className="pins-length-text"> {pinsonBoard.length} {(pinsonBoard.length > 1)? "Pins" : "Pin"}</div>
                    <div className="gallery">

@@ -23,7 +23,7 @@ class BoardEdit extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        this.props.updateBoard(this.state)
+        this.props.updateBoard(this.state).then(this.props.history.push(`/users/${currentUser.id}`))
     }
 
     navigateback() {

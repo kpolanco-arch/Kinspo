@@ -826,7 +826,7 @@ var BoardEdit = /*#__PURE__*/function (_React$Component) {
     key: "handleSubmit",
     value: function handleSubmit(e) {
       e.preventDefault();
-      this.props.updateBoard(this.state);
+      this.props.updateBoard(this.state).then(this.props.history.push("/users/".concat(currentUser.id)));
     }
   }, {
     key: "navigateback",
@@ -1354,7 +1354,7 @@ var BoardItem = /*#__PURE__*/function (_React$Component) {
         className: "user-profile-small-container"
       }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "board-description-text"
-      }, board.description, "description")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+      }, board.description)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "pins-length-text"
       }, " ", pinsonBoard.length, " ", pinsonBoard.length > 1 ? "Pins" : "Pin"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
         className: "gallery"
