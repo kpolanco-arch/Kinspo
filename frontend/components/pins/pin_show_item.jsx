@@ -61,7 +61,9 @@ navigateback() {
                                     {pin.description}
                             </div>
                             <div className="following-container">
-                                <div className="user-avatar"></div>
+                                <div className="user-avatar">
+                                    <div className='avatar-letter'>{(owner.email)[0]}</div>
+                                </div>
                                 <div className="following-text">
                                     <Link to = {`/users/${pin.creator_id}`}>
                                     <div className="following-text-title">{newvar}</div>

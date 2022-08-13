@@ -153,7 +153,9 @@ const followers = followArr.filter(follow => follow.follower_id === user.id)
     return (
         <div>
             <div className='user-profile-info'>
-                <div className='user-profile-image-container'></div>
+                <div className='user-profile-image-container'>
+                    <div className='avatar-letter'>{(currentUser.email)[0]}</div>
+                </div>
                 <h1>{this.props.user.username}</h1>
                 <h2>{this.props.user.email}</h2>
                 <div  className='user-profile-followers'>
@@ -200,8 +202,8 @@ const followers = followArr.filter(follow => follow.follower_id === user.id)
                     <div className="dropdown-create" >
                         <ul>Create</ul>
                         <div className="create-button-options">
-                            <ul><Link to="/boards/new" >Board </Link></ul>
-                            <ul><Link to="/pins/new" >Pin </Link> </ul>
+                            <Link to="/boards/new"><ul>Board</ul></Link>
+                            <Link to="/pins/new"><ul>Pin</ul></Link> 
                         </div>  
                     </div>  
                 </div>

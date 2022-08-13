@@ -26,17 +26,17 @@ const { currentUser, logout, openModal } = this.props;
                     placeholder= "Search" />
             </div>
             <div className='icon-navbar'>
-                <a target="_blank" rel="noopener noreferrer" href="http://linkedin.com/in/karen-polanco-374721180/">
+                <a className='link-nav' target="_blank" rel="noopener noreferrer" href="http://linkedin.com/in/karen-polanco-374721180/">
                 <i className="fa fa-linkedin-square"></i></a>
             </div>
             <div className='icon-navbar'>
                 
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/kpolanco-arch/Kinspo">
+                <a className='link-nav' target="_blank" rel="noopener noreferrer" href="https://github.com/kpolanco-arch/Kinspo">
                     <i className="fa fa-github"></i>
                 </a>
             </div>
             <div className='icon-navbar'>
-                <a target="_blank" rel="noopener noreferrer" href="https://github.com/kpolanco-arch">
+                <a className='link-nav' target="_blank" rel="noopener noreferrer" href="https://github.com/kpolanco-arch">
                     <i className="fa-solid fa-face-smile"></i>
                     {/* <i className='fas fa-smile'></i> */}
                 </a>

@@ -140,3 +140,21 @@
     display: flex;
     width: 62px;
 }
+
+.avatar-letter {
+    display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        font-size: 45px;
+        font-weight: 600;
+            text-transform: uppercase;
+}
+
+.user-avatar .avatar-letter {
+    font-size: 25px;
+    color: grey;
+    font-family: system-ui;
+    text-transform: uppercase;
+}
