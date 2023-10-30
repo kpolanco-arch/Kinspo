@@ -20,5 +20,3 @@ Images can be uploaded and saved to a users homepage, additionally users can fol
 * Front-end: React-Redux
 * Database: PostgreSQL
 * Hosting: Heroku
-
-## Preview
